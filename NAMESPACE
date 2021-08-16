@@ -2,9 +2,10 @@
 
 export("%>%")
 export(add_raster_cell)
-export(clustering_summarise)
+export(changeClass)
+export(create_env)
 export(get_or_make)
-export(make_clusters)
+export(numbers2words)
 export(prop_cpu)
 export(prop_mem)
 export(vec_to_sentence)

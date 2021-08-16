@@ -53,6 +53,7 @@
 #' @param x Raster* object.
 #' @param df Dataframe. Must have a column called 'cell' that corresponds to
 #' the cell numbers in x.
+#' @param cores Numeric. Number of cores to use in snowfall::sfInit.
 #' @param outfile Character. Path to save outputs.
 #'
 #' @return Dataframe with 'sites' column, plus columns equal to the length of x.
@@ -92,7 +93,7 @@
       snowfall::sfLibrary(sp)
 
       # run the extract
-      envExtract <- snowfall::sfSapply(rasList, raster::extract, y=toDo) %>%
+      envExtract <- snowfall::sfSapply(raslist, raster::extract, y=toDo) %>%
         {if(is.null(nrow(.))) (.) %>% tibble::as_tibble_row() else (.) %>% tibble::as_tibble()}
 
       # close the cluster
@@ -115,7 +116,7 @@
 
     } else NULL
 
-    toCheckCols <- names(rasList)
+    toCheckCols <- names(raslist)
 
     toDo <- setdiff(toCheckCols,colsDone)
 
@@ -132,7 +133,7 @@
       snowfall::sfLibrary(sp)
 
       # run the extract
-      envExtract <- snowfall::sfSapply(rasList[toDo], raster::extract, y=toCheck) %>%
+      envExtract <- snowfall::sfSapply(raslist[toDo], raster::extract, y=toCheck) %>%
         {if(is.null(nrow(.))) (.) %>% tibble::as_tibble_row() else (.) %>% tibble::as_tibble()}
 
       # close the cluster
@@ -148,7 +149,7 @@
     }
 
     rio::import(outfile) %>%
-      dplyr::select(1,names(rasList)) %>%
+      dplyr::select(1,names(raslist)) %>%
       tibble::as_tibble()
 
   }

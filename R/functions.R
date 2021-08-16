@@ -1,4 +1,47 @@
+# ----------------------------------------------------------------------
+# Change type of multiple variables
+# ----------------------------------------------------------------------
+#' Change classes of multiple variables/columns in a data frame in one go.
+#'
+#' Changing classes of many variables in the data frame simultaneously. The function also checks if one is converting a factor to numeric variable and it will make a correct conversion without loss of digits. From https://github.com/hstojic/hfunk.
+#'
+#' @param df A data frame.
+#' @param new A character vector which specifies desired class of each
+#' variable in \code{df}.
+#' @return The data frame \code{df} where each column has a class as specified
+#' in \code{new}.
+#' @seealso \code{\link{as.numeric}}, \code{\link{as.character}}, \code{\link{as.factor}} which this function wraps
+#' @export
+#' @examples
+#' # check the classes of variables in mtcars dataset
+#' sapply(mtcars, class)
+#'
+#' # change them to something else
+#' changeClass(mtcars, c("fac", rep("char",10)))
 
+
+changeClass <- function(df, new) {
+  # assert that input is of appropriate format
+  stopifnot(is.data.frame(df), dim(df)[2]==length(new), is.character(new))
+  if (!all(new %in% c("num", "char", "fac", "e"))) stop("One or more of new classes is not defined appropriately as either 'num', 'char', 'fac' or 'e'.")
+
+  for(i in 1:length(new)) {
+    if (new[i] == "num") {
+      if(is.factor(df[,i])) {
+        df[,i] <- as.numeric(levels(df[,i]))[df[,i]]
+      } else {
+        df[,i] <- as.numeric(df[,i])
+      }
+    } else if (new[i] == "char") {
+      df[,i] <- as.character(df[,i])
+    } else if (new[i] == "fac") {
+      df[,i] <- as.factor(df[,i])
+    } else {
+      df[,i] <- df[,i]
+    }
+  }
+  return(df)
+}
 
 
 #' Make an object if it is not available from provided file
@@ -6,7 +49,9 @@
 #'
 #' @param saveFile Character. Path to file. This will be loaded to object if it
 #' exists
-#' @param fn Function. Function to make the object if it the file does not
+#' @param forceNew Logical. If TRUE, run function irrespective of existence of
+#' saveFile. Otherwise, only run fn if saveFile does not exist.
+#' @param fn Function. Function to make the object if it saveFile does not
 #' exist
 #' @param ... Arguments to function.
 #'
@@ -14,7 +59,7 @@
 #' @export
 #'
 #' @examples
-  get_or_make <- function(saveFile = outFile, forceNew = FALSE, fn, ...) {
+  get_or_make <- function(saveFile, forceNew = FALSE, fn, ...) {
 
     make_and_save <- function(.saveFile = saveFile, .fn = fn) {
 
@@ -665,7 +710,7 @@ unscale_data <- function(scaledData) {
 #' @examples
 #' x <- c("apples", "bannanas", "pears", "grapes")
 #' vec_to_sentence(x)
-#' vec_to_setence(x,end = "&")
+#' vec_to_sentence(x,end = "&")
   vec_to_sentence <- function(x,sep=",",end="and") {
 
     x[!is.na(x)] %>%
@@ -673,20 +718,30 @@ unscale_data <- function(scaledData) {
       (function(x) if(sep == ";") {
 
         stringi::stri_replace_last_regex(x,"JOINSRUS", paste0(sep," and ")) %>%
-          str_replace_all("JOINSRUS",paste0(sep," "))
+          stringr::str_replace_all("JOINSRUS",paste0(sep," "))
 
       } else {
 
         stringi::stri_replace_last_regex(x,"JOINSRUS",paste0(" ",end," ")) %>%
-          str_replace_all("JOINSRUS",paste0(sep," "))
+          stringr::str_replace_all("JOINSRUS",paste0(sep," "))
 
       }
       )
 
   }
 
-# https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r
 
+
+#' Convert a numeric to its corresponding english character.
+#'
+#' From https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r
+#'
+#' @param x Numeric
+#'
+#' @return 'spelled out' (in english) x.
+#' @export
+#'
+#' @examples
   numbers2words <- function(x){
     ## Function by John Fox found here:
     ## http://tolstoy.newcastle.edu.au/R/help/05/04/2715.html
@@ -836,7 +891,7 @@ unscale_data <- function(scaledData) {
         taxGBIF$Taxa <- taxGBIF %>%
           tidyr::pivot_longer(where(is.numeric),names_to = "key") %>%
           dplyr::mutate(key = map_chr(key,~gsub("Key","",.))
-                        , key = str_to_sentence(key)
+                        , key = stringr::str_to_sentence(key)
                         ) %>%
           dplyr::filter(key %in% luRank$Rank) %>%
           dplyr::left_join(luRank, by = c("key" = "Rank")) %>%
@@ -897,7 +952,7 @@ unscale_data <- function(scaledData) {
       dplyr::select(where(is.numeric)) %>%
       tidyr::pivot_longer(1:ncol(.),names_to = "key") %>%
       dplyr::mutate(key = map_chr(key,~gsub("Key","",.))
-                    , key = str_to_sentence(key)
+                    , key = stringr::str_to_sentence(key)
                     ) %>%
       dplyr::filter(key %in% luRank$Rank) %>%
       dplyr::left_join(luRank, by = c("key" = "Rank")) %>%

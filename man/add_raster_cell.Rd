@@ -4,19 +4,21 @@
 \alias{add_raster_cell}
 \title{Add cell to df with lat/long}
 \usage{
-add_raster_cell(df, ras = aoiRaster, x = "long", y = "lat", crsDf = 4326)
+add_raster_cell(ras, df, x = "long", y = "lat", crsdf = 4326)
 }
 \arguments{
-\item{df}{Dataframe with lat/long columns}
+\item{ras}{Raster object with cell numbers to extract}
 
-\item{ras}{Raster from which cell IDs will be extracted}
+\item{df}{Dataframe with lat/long columns}
 
 \item{x}{Character. Name of latitude column}
 
 \item{y}{Character. Name of longitude column}
+
+\item{crsdf}{Single length vector. What crs are x and y?}
 }
 \value{
-
+df with additional column 'cell' of cell numbers from ras.
 }
 \description{
 Add cell to df with lat/long

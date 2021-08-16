@@ -23,5 +23,5 @@ or other separator.
 \examples{
 x <- c("apples", "bannanas", "pears", "grapes")
 vec_to_sentence(x)
-vec_to_setence(x,end = "&")
+vec_to_sentence(x,end = "&")
 }

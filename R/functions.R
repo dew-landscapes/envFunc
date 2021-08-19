@@ -164,7 +164,7 @@ changeClass <- function(df, new) {
 
 # get next 'RN' number to use
 
-  next_bib_no <- function(bibPath = fs::path("..","template","toCommon","refs.bib")) {
+  next_bib_no <- function(bibPath = fs::path("..","template","tocommon","refs.bib")) {
 
     as_tibble(read_lines(bibPath)) %>%
       dplyr::filter(grepl("^@",value)) %>%
@@ -176,7 +176,7 @@ changeClass <- function(df, new) {
   }
 
 # get a bib entry from a DOI
-  get_bib <- function(DOI,outFile = NULL){
+  get_bib <- function(DOI,outfile = NULL){
 
     # https://stackoverflow.com/questions/57340204/r-convert-list-of-dois-to-bibtex
 
@@ -188,7 +188,7 @@ changeClass <- function(df, new) {
       try(
         curl::curl(doi,handle=h) %>%
         readLines(warn = FALSE) %>%
-        {if(is.character(outFile)) write(.,file=outFile,append = TRUE) else (.)}
+        {if(is.character(outfile)) write(.,file=outfile,append = TRUE) else (.)}
       )
 
     }
@@ -390,19 +390,19 @@ unscale_data <- function(scaledData) {
 #--------Random Forests----------
 
   # Iteratively add trees to a random forest with tibble output
-  add_row_rf_simple <- function(resDf,rowGrow = 499) {
+  add_row_rf_simple <- function(resdf,rowGrow = 499) {
 
-    prevRf <- resDf$rf[nrow(resDf)][[1]]
+    prevRf <- resdf$rf[nrow(resdf)][[1]]
 
     nextRf <- rf_simple(rowGrow)
 
     newRf <- combine(prevRf,nextRf)
 
-    resDf %>%
+    resdf %>%
       dplyr::bind_rows(tibble(start = Sys.time()
-                              , run = max(resDf$run) + 1
+                              , run = max(resdf$run) + 1
                               ) %>%
-                         dplyr::mutate(trees = max(resDf$trees) + rowGrow
+                         dplyr::mutate(trees = max(resdf$trees) + rowGrow
                                        , rf = list(newRf)
                                        #, rfProbCell = map(rf,rf_prob_cell)
                                        #, meanVotesCell = map_dbl(rfProbCell,~mean(.$votes))
@@ -455,12 +455,12 @@ unscale_data <- function(scaledData) {
 
   # Get some rf results
   rf_prob_cell <- function(rf
-                     , envDf = predSample
+                     , envdf = predSample
                      , classes = levels(envData$cluster)
                      , targetVotes = 0.5
                      ) {
 
-    predict(rf,envDf,type = "prob") %>%
+    predict(rf,envdf,type = "prob") %>%
       as_tibble() %>%
       dplyr::mutate(id = row_number()
                     , across(where(is.matrix),as.numeric)
@@ -487,7 +487,7 @@ unscale_data <- function(scaledData) {
                           , envCols = names(patchesEnvSelect)[-1]
                           , idCol = "cell"
                           , doFolds = folds
-                          , outFile
+                          , outfile
                           , saveModel = FALSE
                           , saveImp = FALSE
                           , ...
@@ -506,9 +506,9 @@ unscale_data <- function(scaledData) {
 
     fold_rf_mod <- function(fold) {
 
-      outFile <- gsub("_conf",paste0("_fold",fold,"_conf"),outFile)
+      outfile <- gsub("_conf",paste0("_fold",fold,"_conf"),outfile)
 
-      if(!file.exists(outFile)) {
+      if(!file.exists(outfile)) {
 
         if(doFolds > 1) {
 
@@ -558,11 +558,11 @@ unscale_data <- function(scaledData) {
 
         }
 
-        feather::write_feather(rfPred,outFile)
+        feather::write_feather(rfPred,outfile)
 
-        if(saveImp) {feather::write_feather(as_tibble(rfMod$importance, rownames = "att"),gsub("_rfPred","_rfImp",outFile))}
+        if(saveImp) {feather::write_feather(as_tibble(rfMod$importance, rownames = "att"),gsub("_rfPred","_rfImp",outfile))}
 
-        if(saveModel) {feather::write_feather(rfMod,gsub("_rfPred","",outFile))}
+        if(saveModel) {feather::write_feather(rfMod,gsub("_rfPred","",outfile))}
 
       }
 
@@ -576,7 +576,7 @@ unscale_data <- function(scaledData) {
                           , clustCol
                           , envCols
                           , idCol
-                          , outFile
+                          , outfile
                           , saveModel = FALSE
                           , saveImp = FALSE
                           , ...
@@ -604,11 +604,11 @@ unscale_data <- function(scaledData) {
                          as_tibble()
                        )
 
-    feather::write_feather(rfPred,outFile)
+    feather::write_feather(rfPred,outfile)
 
-    if(saveImp) {feather::write_feather(as_tibble(rfMod$importance, rownames = "att"),gsub("_rfPred","_rfImp",outFile))}
+    if(saveImp) {feather::write_feather(as_tibble(rfMod$importance, rownames = "att"),gsub("_rfPred","_rfImp",outfile))}
 
-    if(saveModel) {feather::write_feather(rfMod,gsub("_rfPred","",outFile))}
+    if(saveModel) {feather::write_feather(rfMod,gsub("_rfPred","",outfile))}
 
   }
 
@@ -802,16 +802,16 @@ unscale_data <- function(scaledData) {
 
   gbif_tax <- function(df
                        , sppCol=1
-                       , outFile="data/luGBIF.feather"
-                       , kingType="Plantae"
-                       , getCommon = FALSE
-                       , targetRank = "Species"
+                       , outfile="data/luGBIF.feather"
+                       , kingtype="Plantae"
+                       , getcommon = FALSE
+                       , targetrank = "Species"
                        ){
 
-    tmpFile <- paste0(gsub(".feather","",outFile),"_temp.feather")
+    tmpfile <- paste0(gsub(".feather","",outfile),"_temp.feather")
 
-    luRank <- tribble(
-      ~Rank, ~sort
+    lurank <- tribble(
+      ~rank, ~sort
       , "Kingdom", 1
       , "Phylum", 2
       , "Class", 3
@@ -824,100 +824,100 @@ unscale_data <- function(scaledData) {
       , "Form", 10
     )
 
-    assign("luRank",luRank,envir = .GlobalEnv)
+    assign("lurank",lurank,envir = .GlobalEnv)
 
-    targetSort <- luRank %>%
-      dplyr::filter(Rank == targetRank) %>%
+    targetSort <- lurank %>%
+      dplyr::filter(rank == targetrank) %>%
       dplyr::pull(sort)
 
-    alreadyDone01 <- if(file.exists(outFile)) read_feather(outFile) %>%
-      dplyr::distinct(originalName) %>%
+    alreadydone01 <- if(file.exists(outfile)) read_feather(outfile) %>%
+      dplyr::distinct(originalname) %>%
       dplyr::pull()
 
-    alreadyDone02 <- if(file.exists(tmpFile)) read_feather(tmpFile) %>%
-      dplyr::distinct(originalName) %>%
+    alreadydone02 <- if(file.exists(tmpfile)) read_feather(tmpfile) %>%
+      dplyr::distinct(originalname) %>%
       dplyr::pull()
 
-    alreadyDone <- c(get0("alreadyDone01"),get0("alreadyDone02"))
+    alreadydone <- c(get0("alreadydone01"),get0("alreadydone02"))
 
-    toCheck <- df %>%
+    tocheck <- df %>%
       dplyr::select(all_of(sppCol)) %>%
       dplyr::distinct() %>%
       dplyr::pull()
 
-    taxa <- tibble(originalName = setdiff(toCheck,alreadyDone)) %>%
-      dplyr::filter(!grepl("BOLD:.*\\d{4}",originalName)
-                    , !is.na(originalName)
+    taxa <- tibble(originalname = setdiff(tocheck,alreadydone)) %>%
+      dplyr::filter(!grepl("BOLD:.*\\d{4}",originalname)
+                    , !is.na(originalname)
                     ) %>%
-      dplyr::mutate(searchedName = gsub("\\s*\\(.*\\).*|\\'|\\?| spp\\.| sp\\.| ssp\\.| var\\.| ex| [A-Z].*|#|\\s^"
+      dplyr::mutate(searchedname = gsub("\\s*\\(.*\\).*|\\'|\\?| spp\\.| sp\\.| ssp\\.| var\\.| ex| [A-Z].*|#|\\s^"
                                 ,""
-                                ,originalName
+                                ,originalname
                                 )
-                    , searchedName = gsub(" x .*$| X .*$","",searchedName)
-                    , searchedName = gsub("\\s{2,}"," ",searchedName)
-                    , searchedName = str_squish(searchedName)
+                    , searchedname = gsub(" x .*$| X .*$","",searchedname)
+                    , searchedname = gsub("\\s{2,}"," ",searchedname)
+                    , searchedname = str_squish(searchedname)
                     )
 
     taxas <- taxa %>%
-      dplyr::distinct(searchedName) %>%
-      dplyr::arrange(searchedName)
+      dplyr::distinct(searchedname) %>%
+      dplyr::arrange(searchedname)
 
-    if(length(taxas$searchedName)>0){
+    if(length(taxas$searchedname)>0){
 
-      for (i in taxas$searchedName){
+      for (i in taxas$searchedname){
 
         print(i)
 
-        taxGBIF <- name_backbone(i, kingdom = kingType) %>%
-          dplyr::mutate(searchedName = i)
+        taxgbif <- name_backbone(i, kingdom = kingtype) %>%
+          dplyr::mutate(searchedname = i)
 
-        taxGBIF <- if(sum(grepl("acceptedUsageKey",names(taxGBIF)))>0) {
+        taxgbif <- if(sum(grepl("acceptedUsageKey",names(taxgbif)))>0) {
 
-          name_usage(taxGBIF$acceptedUsageKey,return="data")$data %>%
+          name_usage(taxgbif$acceptedUsageKey,return="data")$data %>%
             dplyr::mutate(matchType = "Synonym") %>%
             dplyr::rename(usageKey = key
                           , status = taxonomicStatus
                           ) %>%
-            dplyr::mutate(searchedName = i)
+            dplyr::mutate(searchedname = i)
 
         } else {
 
-          taxGBIF
+          taxgbif
 
         }
 
-        if(getCommon) taxGBIF$Common <- get_gbif_common(taxGBIF$usageKey)
+        if(getcommon) taxgbif$common <- get_gbif_common(taxgbif$usageKey)
 
-        taxGBIF$Taxa <- taxGBIF %>%
+        taxgbif$taxa <- taxgbif %>%
           tidyr::pivot_longer(where(is.numeric),names_to = "key") %>%
           dplyr::mutate(key = map_chr(key,~gsub("Key","",.))
                         , key = stringr::str_to_sentence(key)
                         ) %>%
-          dplyr::filter(key %in% luRank$Rank) %>%
-          dplyr::left_join(luRank, by = c("key" = "Rank")) %>%
+          dplyr::filter(key %in% lurank$rank) %>%
+          dplyr::left_join(lurank, by = c("key" = "rank")) %>%
           dplyr::filter(sort <= targetSort) %>%
           dplyr::filter(sort == max(sort)) %>%
-          dplyr::select(tolower(luRank$Rank[luRank$sort == .$sort])) %>%
+          dplyr::select(tolower(lurank$rank[lurank$sort == .$sort])) %>%
           dplyr::pull()
 
-        taxGBIF$Stamp <- Sys.time()
+        taxgbif$stamp <- Sys.time()
 
-        taxGBIF <- taxa %>%
-          dplyr::inner_join(taxGBIF)
+        taxgbif <- taxa %>%
+          dplyr::inner_join(taxgbif)
 
-        if(file.exists(tmpFile)) {
+        if(file.exists(tmpfile)) {
 
-          write_feather(taxGBIF %>%
-                          dplyr::bind_rows(read_feather(tmpFile)) %>%
-                          dplyr::select(1,2,Taxa,everything())
-                        , paste0(gsub(".feather","",outFile),"_temp.feather")
+          write_feather(taxgbif %>%
+                          dplyr::bind_rows(read_feather(tmpfile)) %>%
+                          dplyr::select(1,2,taxa,everything())
+                        , paste0(gsub(".feather","",outfile),"_temp.feather")
                         )
 
         } else {
 
-          write_feather(taxGBIF %>%
-                          dplyr::select(1,2,Taxa,everything())
-                        , paste0(gsub(".feather","",outFile),"_temp.feather")
+          write_feather(taxgbif %>%
+                          dplyr::select(1,2,taxa,everything())
+                        , paste0(gsub(".feather","",outfile),"_temp.feather")
                         )
 
           }
@@ -925,14 +925,14 @@ unscale_data <- function(scaledData) {
       }
 
       # Clean up results
-      read_feather(tmpFile) %>%
-        {if(!file.exists(outFile)) (.) else (.) %>% dplyr::bind_rows(read_feather(outFile))} %>%
-        dplyr::group_by(originalName) %>%
-        dplyr::filter(Stamp == max(Stamp)) %>%
+      read_feather(tmpfile) %>%
+        {if(!file.exists(outfile)) (.) else (.) %>% dplyr::bind_rows(read_feather(outfile))} %>%
+        dplyr::group_by(originalname) %>%
+        dplyr::filter(stamp == max(stamp)) %>%
         dplyr::ungroup() %>%
-        write_feather(outFile)
+        write_feather(outfile)
 
-      file.remove(tmpFile)
+      file.remove(tmpfile)
 
     } else {
 
@@ -947,20 +947,20 @@ unscale_data <- function(scaledData) {
 
     print(key)
 
-    commonNames <- name_usage(key)$data %>%
+    commonnames <- name_usage(key)$data %>%
       dplyr::select(contains("Key")) %>%
       dplyr::select(where(is.numeric)) %>%
       tidyr::pivot_longer(1:ncol(.),names_to = "key") %>%
       dplyr::mutate(key = map_chr(key,~gsub("Key","",.))
                     , key = stringr::str_to_sentence(key)
                     ) %>%
-      dplyr::filter(key %in% luRank$Rank) %>%
-      dplyr::left_join(luRank, by = c("key" = "Rank")) %>%
+      dplyr::filter(key %in% lurank$rank) %>%
+      dplyr::left_join(lurank, by = c("key" = "rank")) %>%
       dplyr::filter(sort == max(sort)) %>%
       dplyr::pull(value) %>%
       name_usage(data="vernacularNames")
 
-    df <- commonNames$data %>%
+    df <- commonnames$data %>%
       dplyr::select(any_of(c("vernacularName","language","preferred")))
 
     hasAny <- nrow(df) > 0
@@ -1021,11 +1021,11 @@ unscale_data <- function(scaledData) {
   # Add common name to existing taxonomic data frame
   add_gbif_common <- function(path = "data/luGBIF.feather") {
 
-    gbifTaxDf <- read_feather(path) %>%
+    gbifTaxdf <- read_feather(path) %>%
       #(if(testing) {. %>% dplyr::sample_n(5)} else {.}) %>%
-      dplyr::mutate(Common = future_map_chr(key,get_gbif_common))
+      dplyr::mutate(common = future_map_chr(key,get_gbif_common))
 
-    write_feather(gbifTaxDf,path)
+    write_feather(gbifTaxdf,path)
 
   }
 

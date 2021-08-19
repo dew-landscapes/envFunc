@@ -1,13 +1,16 @@
 Package: envFunc
-Title: What the Package Does (One Line, Title Case)
+Title: Functions to help with Environmental Science
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Nigel",
            family = "Willoughby",
            role = c("aut", "cre"),
-           email = "nige.willoughby@gmail.com")
-Description: What the package does (one paragraph).
-License: CC BY 4.0
+           email = "nigel.willoughby@sa.gov.au")
+Description: A collection of functions to help with creating ecosystems,
+    determining trends in individual taxa and other common environmental science
+    tasks. These are generic functions, those more specific to each task live in
+    appropriate `envBlah` packages.
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

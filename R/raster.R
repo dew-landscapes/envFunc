@@ -74,13 +74,13 @@
 
     } else NULL
 
-    toCheck <- df %>%
+    tocheck <- df %>%
       dplyr::distinct(cell) %>%
       pull(cell)
 
-    toDo <- setdiff(toCheck,cellsDone)
+    todo <- setdiff(tocheck,cellsDone)
 
-    if(length(toDo) > 0) {
+    if(length(todo) > 0) {
 
       library("snow")
 
@@ -93,16 +93,16 @@
       snowfall::sfLibrary(sp)
 
       # run the extract
-      envExtract <- snowfall::sfSapply(raslist, raster::extract, y=toDo) %>%
+      envExtract <- snowfall::sfSapply(raslist, raster::extract, y=todo) %>%
         {if(is.null(nrow(.))) (.) %>% tibble::as_tibble_row() else (.) %>% tibble::as_tibble()}
 
       # close the cluster
       snowfall::sfStop()
 
       # Fix result
-      resEnv <- tibble(cell = toDo) %>%
+      resEnv <- tibble(cell = todo) %>%
         dplyr::bind_cols(envExtract) %>%
-        {if(file.exists(outfile)) (.) %>% dplyr::bind_rows(cellsEnvDf) else (.)}
+        {if(file.exists(outfile)) (.) %>% dplyr::bind_rows(envdf) else (.)}
 
       rio::export(resEnv,outfile)
 
@@ -110,17 +110,17 @@
 
     colsDone <- if(file.exists(outfile)) {
 
-      cellsEnvDf <- rio::import(outfile)
+      envdf <- rio::import(outfile)
 
-      names(cellsEnvDf)
+      names(envdf)
 
     } else NULL
 
-    toCheckCols <- names(raslist)
+    tocheckCols <- names(raslist)
 
-    toDo <- setdiff(toCheckCols,colsDone)
+    todo <- setdiff(tocheckCols,colsDone)
 
-    if(length(toDo) > 0) {
+    if(length(todo) > 0) {
 
       library("snow")
 
@@ -133,16 +133,16 @@
       snowfall::sfLibrary(sp)
 
       # run the extract
-      envExtract <- snowfall::sfSapply(raslist[toDo], raster::extract, y=toCheck) %>%
+      envExtract <- snowfall::sfSapply(raslist[todo], raster::extract, y=tocheck) %>%
         {if(is.null(nrow(.))) (.) %>% tibble::as_tibble_row() else (.) %>% tibble::as_tibble()}
 
       # close the cluster
       snowfall::sfStop()
 
       # Fix result
-      resEnv <- tibble::tibble(cell = toCheck) %>%
+      resEnv <- tibble::tibble(cell = tocheck) %>%
         dplyr::bind_cols(envExtract) %>%
-        {if(file.exists(outfile)) (.) %>% dplyr::left_join(cellsEnvDf) else (.)}
+        {if(file.exists(outfile)) (.) %>% dplyr::left_join(envdf) else (.)}
 
       rio::export(resEnv,outfile)
 

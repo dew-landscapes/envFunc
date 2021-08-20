@@ -4,7 +4,7 @@
 \alias{create_env}
 \title{Create dataframe of 'cells' and their associated env data}
 \usage{
-create_env(x, df, cores = 1, outfile = tempfile())
+create_env(x, df, cores = 1, out_file = tempfile())
 }
 \arguments{
 \item{x}{Raster* object.}
@@ -14,7 +14,7 @@ the cell numbers in x.}
 
 \item{cores}{Numeric. Number of cores to use in snowfall::sfInit.}
 
-\item{outfile}{Character. Path to save outputs.}
+\item{out_file}{Character. Path to save outputs.}
 }
 \value{
 Dataframe with 'sites' column, plus columns equal to the length of x.

@@ -54,31 +54,31 @@
 #' @param df Dataframe. Must have a column called 'cell' that corresponds to
 #' the cell numbers in x.
 #' @param cores Numeric. Number of cores to use in snowfall::sfInit.
-#' @param outfile Character. Path to save outputs.
+#' @param out_file Character. Path to save outputs.
 #'
 #' @return Dataframe with 'sites' column, plus columns equal to the length of x.
 #' @export
 #'
 #' @examples
-  create_env <- function(x, df, cores = 1, outfile = tempfile()) {
+  create_env <- function(x, df, cores = 1, out_file = tempfile()) {
 
-    raslist <- raster::unstack(x) %>%
+    ras_list <- raster::unstack(x) %>%
       stats::setNames(names(x))
 
-    cellsDone <- if(file.exists(outfile)) {
+    cells_done <- if(file.exists(out_file)) {
 
-      envdf <- rio::import(outfile)
+      env_df <- rio::import(out_file)
 
-      done <- envdf %>%
+      done <- env_df %>%
         dplyr::pull(cell)
 
     } else NULL
 
-    tocheck <- df %>%
+    to_check <- df %>%
       dplyr::distinct(cell) %>%
       pull(cell)
 
-    todo <- setdiff(tocheck,cellsDone)
+    todo <- setdiff(to_check,cells_done)
 
     if(length(todo) > 0) {
 
@@ -93,32 +93,32 @@
       snowfall::sfLibrary(sp)
 
       # run the extract
-      envExtract <- snowfall::sfSapply(raslist, raster::extract, y=todo) %>%
+      env_extract <- snowfall::sfSapply(ras_list, raster::extract, y=todo) %>%
         {if(is.null(nrow(.))) (.) %>% tibble::as_tibble_row() else (.) %>% tibble::as_tibble()}
 
       # close the cluster
       snowfall::sfStop()
 
       # Fix result
-      resEnv <- tibble(cell = todo) %>%
-        dplyr::bind_cols(envExtract) %>%
-        {if(file.exists(outfile)) (.) %>% dplyr::bind_rows(envdf) else (.)}
+      res_env <- tibble(cell = todo) %>%
+        dplyr::bind_cols(env_extract) %>%
+        {if(file.exists(out_file)) (.) %>% dplyr::bind_rows(env_df) else (.)}
 
-      rio::export(resEnv,outfile)
+      rio::export(res_env,out_file)
 
     }
 
-    colsDone <- if(file.exists(outfile)) {
+    cols_done <- if(file.exists(out_file)) {
 
-      envdf <- rio::import(outfile)
+      env_df <- rio::import(out_file)
 
-      names(envdf)
+      names(env_df)
 
     } else NULL
 
-    tocheckCols <- names(raslist)
+    to_check_cols <- names(ras_list)
 
-    todo <- setdiff(tocheckCols,colsDone)
+    todo <- setdiff(to_check_cols,cols_done)
 
     if(length(todo) > 0) {
 
@@ -133,23 +133,23 @@
       snowfall::sfLibrary(sp)
 
       # run the extract
-      envExtract <- snowfall::sfSapply(raslist[todo], raster::extract, y=tocheck) %>%
+      env_extract <- snowfall::sfSapply(ras_list[todo], raster::extract, y=to_check) %>%
         {if(is.null(nrow(.))) (.) %>% tibble::as_tibble_row() else (.) %>% tibble::as_tibble()}
 
       # close the cluster
       snowfall::sfStop()
 
       # Fix result
-      resEnv <- tibble::tibble(cell = tocheck) %>%
-        dplyr::bind_cols(envExtract) %>%
-        {if(file.exists(outfile)) (.) %>% dplyr::left_join(envdf) else (.)}
+      res_env <- tibble::tibble(cell = to_check) %>%
+        dplyr::bind_cols(env_extract) %>%
+        {if(file.exists(outfile)) (.) %>% dplyr::left_join(env_df) else (.)}
 
-      rio::export(resEnv,outfile)
+      rio::export(res_env,out_file)
 
     }
 
-    rio::import(outfile) %>%
-      dplyr::select(1,names(raslist)) %>%
+    rio::import(out_file) %>%
+      dplyr::select(1,names(ras_list)) %>%
       tibble::as_tibble()
 
   }

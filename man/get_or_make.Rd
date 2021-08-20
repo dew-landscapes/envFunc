@@ -4,13 +4,13 @@
 \alias{get_or_make}
 \title{Make an object if it is not available from provided file}
 \usage{
-get_or_make(saveFile, forceNew = FALSE, fn, ...)
+get_or_make(save_file, force_new = FALSE, fn, ...)
 }
 \arguments{
-\item{saveFile}{Character. Path to file. This will be loaded to object if it
+\item{save_file}{Character. Path to file. This will be loaded to object if it
 exists}
 
-\item{forceNew}{Logical. If TRUE, run function irrespective of existence of
+\item{force_new}{Logical. If TRUE, run function irrespective of existence of
 saveFile. Otherwise, only run fn if saveFile does not exist.}
 
 \item{fn}{Function. Function to make the object if it saveFile does not

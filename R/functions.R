@@ -47,9 +47,9 @@ changeClass <- function(df, new) {
 #' Make an object if it is not available from provided file
 #'
 #'
-#' @param saveFile Character. Path to file. This will be loaded to object if it
+#' @param save_file Character. Path to file. This will be loaded to object if it
 #' exists
-#' @param forceNew Logical. If TRUE, run function irrespective of existence of
+#' @param force_new Logical. If TRUE, run function irrespective of existence of
 #' saveFile. Otherwise, only run fn if saveFile does not exist.
 #' @param fn Function. Function to make the object if it saveFile does not
 #' exist
@@ -59,25 +59,25 @@ changeClass <- function(df, new) {
 #' @export
 #'
 #' @examples
-  get_or_make <- function(saveFile, forceNew = FALSE, fn, ...) {
+  get_or_make <- function(save_file, force_new = FALSE, fn, ...) {
 
-    make_and_save <- function(.saveFile = saveFile, .fn = fn) {
+    make_and_save <- function(.save_file = save_file, .fn = fn) {
 
       temp <- do.call(.fn,list(...))
 
-      feather::write_feather(temp,.saveFile)
+      rio::export(temp,.save_file)
 
     }
 
-    if(forceNew) {
+    if(force_new) {
 
       make_and_save()
 
-    } else if(!file.exists(saveFile)) {
+    } else if(!file.exists(save_file)) {
 
       make_and_save()
 
-    } else rio::import(saveFile)
+    } else rio::import(save_file)
 
 
   }

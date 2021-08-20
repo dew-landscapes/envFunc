@@ -9,8 +9,8 @@ create_env(x, df, cores = 1, out_file = tempfile())
 \arguments{
 \item{x}{Raster* object.}
 
-\item{df}{Dataframe. Must have a column called 'cell' that corresponds to
-the cell numbers in x.}
+\item{df}{Dataframe. Must have a column called 'cell' that corresponds to the
+cell numbers in x.}
 
 \item{cores}{Numeric. Number of cores to use in snowfall::sfInit.}
 
@@ -20,5 +20,6 @@ the cell numbers in x.}
 Dataframe with 'sites' column, plus columns equal to the length of x.
 }
 \description{
-Create dataframe of 'cells' and their associated env data
+Multicore \code{raster::extract} adapted from the \href{https://gis.stackexchange.com/questions/253618/r-multicore-approach-to-extract-raster-values-using-spatial-points}{Stack Exchange Nework}
+post by \href{https://gis.stackexchange.com/users/41623/thiagoveloso}{thiagoveloso}.
 }

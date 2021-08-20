@@ -2,7 +2,6 @@
 
 export("%>%")
 export(add_raster_cell)
-export(changeClass)
 export(create_env)
 export(get_or_make)
 export(numbers2words)

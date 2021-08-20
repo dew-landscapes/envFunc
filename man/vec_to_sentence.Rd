@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{vec_to_sentence}
 \alias{vec_to_sentence}
-\title{Vector to sentence}
+\title{Vector to text list}
 \usage{
 vec_to_sentence(x, sep = ",", end = "and")
 }
@@ -14,7 +14,7 @@ vec_to_sentence(x, sep = ",", end = "and")
 \item{end}{Character. Last separator.}
 }
 \value{
-
+Character.
 }
 \description{
 Turn a vector into a comma separated list of values with a penultimate 'and'

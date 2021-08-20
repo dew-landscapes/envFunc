@@ -22,24 +22,24 @@
     points <- df %>%
       dplyr::select(x = !!ensym(x), y = !!ensym(y)) %>%
       dplyr::distinct() %>%
-      st_as_sf(coords = c("x","y")
+      sf::st_as_sf(coords = c("x","y")
                , crs = crsdf
                , remove = FALSE
                ) %>%
-      st_transform(crs = st_crs(ras))
+      sf::st_transform(crs = st_crs(ras))
 
     latlong <- points %>%
-      as_Spatial()
+      sf::as_Spatial()
 
     cells <- raster::cellFromXY(object = ras
                                 , xy = latlong
                                 )
 
     dfresult <- points %>%
-      st_set_geometry(NULL) %>%
+      sf::st_set_geometry(NULL) %>%
       dplyr::mutate(cell = cells) %>%
       dplyr::rename(!!ensym(x) := x, !!ensym(y) := y) %>%
-      as_tibble()
+      tibble::as_tibble()
 
     df %>%
       dplyr::left_join(dfresult) %>%
@@ -50,9 +50,12 @@
 
 #' Create dataframe of 'cells' and their associated env data
 #'
+#' Multicore `raster::extract` adapted from the [Stack Exchange Nework](https://gis.stackexchange.com/questions/253618/r-multicore-approach-to-extract-raster-values-using-spatial-points)
+#' post by [thiagoveloso](https://gis.stackexchange.com/users/41623/thiagoveloso).
+#'
 #' @param x Raster* object.
-#' @param df Dataframe. Must have a column called 'cell' that corresponds to
-#' the cell numbers in x.
+#' @param df Dataframe. Must have a column called 'cell' that corresponds to the
+#' cell numbers in x.
 #' @param cores Numeric. Number of cores to use in snowfall::sfInit.
 #' @param out_file Character. Path to save outputs.
 #'
@@ -76,15 +79,13 @@
 
     to_check <- df %>%
       dplyr::distinct(cell) %>%
-      pull(cell)
+      dplyr::pull(cell)
 
     todo <- setdiff(to_check,cells_done)
 
     if(length(todo) > 0) {
 
-      library("snow")
-
-      # mulitcore extract - https://gis.stackexchange.com/questions/253618/r-multicore-approach-to-extract-raster-values-using-spatial-points
+      # mulitcore extract -
       # create a cluster of cores
       snowfall::sfInit(parallel=TRUE, cpus=cores)
 
@@ -100,7 +101,7 @@
       snowfall::sfStop()
 
       # Fix result
-      res_env <- tibble(cell = todo) %>%
+      res_env <- tibble::tibble(cell = todo) %>%
         dplyr::bind_cols(env_extract) %>%
         {if(file.exists(out_file)) (.) %>% dplyr::bind_rows(env_df) else (.)}
 
@@ -121,8 +122,6 @@
     todo <- setdiff(to_check_cols,cols_done)
 
     if(length(todo) > 0) {
-
-      library("snow")
 
       # mulitcore extract - https://gis.stackexchange.com/questions/253618/r-multicore-approach-to-extract-raster-values-using-spatial-points
       # create a cluster of cores

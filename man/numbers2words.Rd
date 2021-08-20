@@ -13,5 +13,10 @@ numbers2words(x)
 'spelled out' (in english) x.
 }
 \description{
-From https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r
+Edited from the \href{https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r}{Github}
+file by \href{https://github.com/ateucher}{ateucher}.
+}
+\examples{
+numbers2words(10)
+numbers2words(floor(sample(1:1000,1)))
 }

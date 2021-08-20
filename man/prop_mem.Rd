@@ -10,5 +10,8 @@ prop_mem()
 Numeric. Proportion
 }
 \description{
-Proportion of current memory usage
+Edited from various posts on the \href{https://stackoverflow.com/questions/27788968/how-would-one-check-the-system-memory-available-using-r-on-a-windows-machine}{Stack Exchange Network}.
+}
+\examples{
+if(.Platform$OS.type == "windows") prop_mem()
 }

@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' freq_class(c(2,20,40,60,100))
+#' add_freq_class(c(2,20,40,60,100))
 add_freq_class <- function(per_pres) {
 
   if_else(per_pres == 100

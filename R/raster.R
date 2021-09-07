@@ -50,20 +50,20 @@
 
 #' Create dataframe of 'cells' and their associated env data
 #'
-#' Multicore `raster::extract` adapted from the [Stack Exchange Nework](https://gis.stackexchange.com/questions/253618/r-multicore-approach-to-extract-raster-values-using-spatial-points)
-#' post by [thiagoveloso](https://gis.stackexchange.com/users/41623/thiagoveloso).
+#' Multicore `raster::extract` adapted from the Stack Exchange Network [post](https://gis.stackexchange.com/questions/253618/r-multicore-approach-to-extract-raster-values-using-spatial-points)
+#' by [thiagoveloso](https://gis.stackexchange.com/users/41623/thiagoveloso).
 #'
 #' @param x Raster* object.
 #' @param df Dataframe. Must have a column called 'cell' that corresponds to the
 #' cell numbers in x.
-#' @param cores Numeric. Number of cores to use in snowfall::sfInit.
+#' @param cores Numeric. Number of cores to use in `snowfall::sfInit()`.
 #' @param out_file Character. Path to save outputs.
 #'
-#' @return Dataframe with 'sites' column, plus columns equal to the length of x.
+#' @return Dataframe with column `cell` plus columns equal to the length of x.
 #' @export
 #'
 #' @examples
-  create_env <- function(x, df, cores = 1, out_file = tempfile()) {
+  make_env <- function(x, df, cores = 1, out_file = tempfile()) {
 
     ras_list <- raster::unstack(x) %>%
       stats::setNames(names(x))

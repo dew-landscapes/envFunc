@@ -16,5 +16,5 @@ Factor with levels always, often, frequent, occasional, and infrequent
 Convert percentages to frequency classes
 }
 \examples{
-freq_class(c(2,20,40,60,100))
+add_freq_class(c(2,20,40,60,100))
 }

@@ -58,12 +58,18 @@
 #' cell numbers in x.
 #' @param cores Numeric. Number of cores to use in `snowfall::sfInit()`.
 #' @param out_file Character. Path to save outputs.
+#' @param limit Logical. If TRUE, only cells in `df` will be returned.
 #'
 #' @return Dataframe with column `cell` plus columns equal to the length of x.
 #' @export
 #'
 #' @examples
-  make_env <- function(x, df, cores = 1, out_file = tempfile()) {
+  make_env <- function(x
+                       , df
+                       , cores = 1
+                       , out_file = tempfile()
+                       , limit = TRUE
+                       ) {
 
     ras_list <- raster::unstack(x) %>%
       stats::setNames(names(x))
@@ -149,6 +155,7 @@
 
     rio::import(out_file) %>%
       dplyr::select(1,names(ras_list)) %>%
+      {if(limit) (.) %>% dplyr::inner_join(df) else (.)} %>%
       tibble::as_tibble()
 
   }

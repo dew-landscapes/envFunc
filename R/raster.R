@@ -214,7 +214,7 @@ summarise_env <- function(env_df
 
     rio::import(out_file) %>%
       dplyr::select(1,names(ras_list)) %>%
-      {if(limit) (.) %>% dplyr::inner_join(df %>% dplyr::distinct(cell)) else (.)} %>%
+      {if(limit) (.) %>% dplyr::filter(cell %in% to_check) else (.)} %>%
       tibble::as_tibble()
 
   }

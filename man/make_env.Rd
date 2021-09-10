@@ -4,7 +4,7 @@
 \alias{make_env}
 \title{Create dataframe of 'cells' and their associated env data}
 \usage{
-make_env(x, df, cores = 1, out_file = tempfile())
+make_env(x, df, cores = 1, out_file = tempfile(), limit = TRUE)
 }
 \arguments{
 \item{x}{Raster* object.}
@@ -15,6 +15,8 @@ cell numbers in x.}
 \item{cores}{Numeric. Number of cores to use in \code{snowfall::sfInit()}.}
 
 \item{out_file}{Character. Path to save outputs.}
+
+\item{limit}{Logical. If TRUE, only cells in \code{df} will be returned.}
 }
 \value{
 Dataframe with column \code{cell} plus columns equal to the length of x.

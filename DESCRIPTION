@@ -28,6 +28,7 @@ Imports:
     snowfall,
     stringi,
     stringr,
-    tibble
+    tibble,
+    tidyr
 URL: https://github.com/Acanthiza/envFunc
 BugReports: https://github.com/Acanthiza/envFunc/issues

@@ -4,9 +4,15 @@
 \alias{mirror_directory}
 \title{Mirror a directory}
 \usage{
-mirror_directory(from_dir, to_dir, ...)
+mirror_directory(from_dir, to_dir, delete = FALSE, ...)
 }
 \arguments{
+\item{from_dir}{Path to directory to mirror.}
+
+\item{to_dir}{Path to directory you wish to mirror \code{from_dir}.}
+
+\item{delete}{Delete extra files in \code{to_dir}}
+
 \item{...}{Arguments to \link[fs]{dir_ls}.}
 }
 \value{
@@ -14,5 +20,5 @@ mirror_directory(from_dir, to_dir, ...)
 }
 \description{
 Check for any new/updated files on \code{from_dir} and copy them to \code{to_dir}.
-Check for any extra files in \code{to_dir} and delete them.
+Check for any extra files in \code{to_dir} and, optionally, delete them.
 }

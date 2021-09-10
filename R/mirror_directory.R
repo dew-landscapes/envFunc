@@ -2,17 +2,22 @@
 #' Mirror a directory
 #'
 #' Check for any new/updated files on `from_dir` and copy them to `to_dir`.
-#' Check for any extra files in `to_dir` and delete them.
+#' Check for any extra files in `to_dir` and, optionally, delete them.
 #'
 #' @param from_dir Path to directory to mirror.
 #' @param to_dir Path to directory you wish to mirror `from_dir`.
+#' @param delete Delete extra files in `to_dir`. USE WITH CAUTION.
 #' @param ... Arguments to \link[fs]{dir_ls}.
 #'
 #' @return `to_dir` will mirror `from_dir`
 #' @export
 #'
 #' @examples
-mirror_directory <- function(from_dir, to_dir, ...) {
+mirror_directory <- function(from_dir
+                             , to_dir
+                             , delete = FALSE
+                             , ...
+                             ) {
 
   if(file.exists(from_dir)) {
 
@@ -53,18 +58,41 @@ mirror_directory <- function(from_dir, to_dir, ...) {
 
     if(length(to_remove) > 0){
 
-      cat(paste0("deleting "
-                 , paste0(fs::path_file(del$path)
-                          , collapse = "; "
-                          )
-                 , " from "
-                 , to_dir
-                 )
-          )
+      if(delete) {
 
-      purrr::walk(del$path
-                  , fs::file_delete
-                  )
+        cat(paste0("You are about to delete - "
+                   , paste0(fs::path_file(del$path)
+                            , collapse = "; "
+                            )
+                   , " - from "
+                   , to_dir
+                   , ". Respond 'yes' (case-sensitive) to confirm. Any other response will abort."
+                   )
+            )
+
+        confirm <- readline(prompt = "response: ")
+
+        if(confirm == "yes") {
+
+          purrr::walk(del$path
+                      , fs::file_delete
+                      )
+
+          }
+
+        } else {
+
+        cat(paste0("extra files - "
+                   , paste0(fs::path_file(del$path)
+                            , collapse = "; "
+                            )
+                   , " - in "
+                   , to_dir
+                   , " were not deleted."
+                   )
+            )
+
+        }
 
       }
 

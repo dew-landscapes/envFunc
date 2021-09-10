@@ -11,7 +11,7 @@ mirror_directory(from_dir, to_dir, delete = FALSE, ...)
 
 \item{to_dir}{Path to directory you wish to mirror \code{from_dir}.}
 
-\item{delete}{Delete extra files in \code{to_dir}}
+\item{delete}{Delete extra files in \code{to_dir}. USE WITH CAUTION.}
 
 \item{...}{Arguments to \link[fs]{dir_ls}.}
 }

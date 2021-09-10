@@ -17,7 +17,7 @@ summarise_env <- function(env_df
                           , luenv_df = NULL
                           ) {
 
-  res <- envDf %>%
+  res <- env_df %>%
     tidyr::pivot_longer(grep(paste0(context, collapse = "|")
                              , names(.)
                              , invert = TRUE
@@ -128,6 +128,8 @@ summarise_env <- function(env_df
                        , limit = TRUE
                        ) {
 
+    out_file <- paste0(gsub("\\..*$","",out_file),".feather")
+
     ras_list <- raster::unstack(x) %>%
       stats::setNames(names(x))
 
@@ -212,7 +214,7 @@ summarise_env <- function(env_df
 
     rio::import(out_file) %>%
       dplyr::select(1,names(ras_list)) %>%
-      {if(limit) (.) %>% dplyr::inner_join(df) else (.)} %>%
+      {if(limit) (.) %>% dplyr::inner_join(df %>% dplyr::distinct(cell)) else (.)} %>%
       tibble::as_tibble()
 
   }

@@ -62,9 +62,11 @@ summarise_env <- function(env_df
 #' @param df Dataframe with lat/long columns
 #' @param x Character. Name of latitude column
 #' @param y Character. Name of longitude column
-#' @param crsdf Single length vector. What crs are x and y?
+#' @param crs_df Single length vector. What crs are x and y?
+#' @param add_xy Logical. Generate (central) x and y coords from cell?
 #'
-#' @return df with additional column 'cell' of cell numbers from ras.
+#' @return df with additional column 'cell' of cell numbers from ras and,
+#' dependent on `add_xy` columns `x` and `y`.
 #' @export
 #'
 #' @examples
@@ -72,35 +74,56 @@ summarise_env <- function(env_df
                               , df
                               , x = "long"
                               , y = "lat"
-                              , crsdf = 4326
+                              , crs_df = 4326
+                              , add_xy = FALSE
                               ) {
 
-    # Needs lat and long to work with
-    points <- df %>%
-      dplyr::select(x = !!ensym(x), y = !!ensym(y)) %>%
-      dplyr::distinct() %>%
-      sf::st_as_sf(coords = c("x","y")
-               , crs = crsdf
+    df <- df %>%
+      dplyr::rename(old_x = !!ensym(x), old_y = !!ensym(y))
+
+    df_xy <- df %>%
+      dplyr::distinct(old_x, old_y)
+
+    points <- df_xy %>%
+      sf::st_as_sf(coords = c("old_x","old_y")
+               , crs = crs_df
                , remove = FALSE
                ) %>%
       sf::st_transform(crs = st_crs(ras))
 
-    latlong <- points %>%
+    sp_points <- points %>%
       sf::as_Spatial()
 
     cells <- raster::cellFromXY(object = ras
-                                , xy = latlong
+                                , xy = sp_points
                                 )
 
-    dfresult <- points %>%
+    res <- points %>%
       sf::st_set_geometry(NULL) %>%
-      dplyr::mutate(cell = cells) %>%
-      dplyr::rename(!!ensym(x) := x, !!ensym(y) := y) %>%
-      tibble::as_tibble()
+      dplyr::mutate(cell = cells)
 
-    df %>%
-      dplyr::left_join(dfresult) %>%
-      dplyr::select(names(df),cell,-!!ensym(x),-!!ensym(y)) %>%
+    if(add_xy) {
+
+      xy_res <- raster::xyFromCell(ras,cells) %>%
+        tibble::as_tibble() %>%
+        sf::st_as_sf(coords = c("x","y")
+                     , crs = sf::st_crs(ras)
+                     ) %>%
+        sf::st_transform(crs = crs_df) %>%
+        sf::st_coordinates() %>%
+        tibble::as_tibble() %>%
+        dplyr::rename(!!ensym(x) := "X"
+                      , !!ensym(y) := "Y"
+                      )
+
+      res <- res %>%
+        dplyr::bind_cols(xy_res)
+
+    }
+
+    res <- res %>%
+      dplyr::right_join(df) %>%
+      dplyr::select(cell,everything(),-(contains("old"))) %>%
       dplyr::distinct()
 
   }

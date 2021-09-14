@@ -17,4 +17,6 @@
 
     attr(obj, "ctime") <- Sys.time()
 
+    return(obj)
+
   }

@@ -3,6 +3,7 @@
 export("%>%")
 export(add_freq_class)
 export(add_raster_cell)
+export(add_time_stamp)
 export(get_or_make)
 export(make_env)
 export(mirror_directory)

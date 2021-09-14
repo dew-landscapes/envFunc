@@ -4,7 +4,7 @@
 \alias{add_raster_cell}
 \title{Add cell to df with lat/long}
 \usage{
-add_raster_cell(ras, df, x = "long", y = "lat", crsdf = 4326)
+add_raster_cell(ras, df, x = "long", y = "lat", crs_df = 4326, add_xy = FALSE)
 }
 \arguments{
 \item{ras}{Raster object with cell numbers to extract}
@@ -15,10 +15,13 @@ add_raster_cell(ras, df, x = "long", y = "lat", crsdf = 4326)
 
 \item{y}{Character. Name of longitude column}
 
-\item{crsdf}{Single length vector. What crs are x and y?}
+\item{crs_df}{Single length vector. What crs are x and y?}
+
+\item{add_xy}{Logical. Generate (central) x and y coords from cell?}
 }
 \value{
-df with additional column 'cell' of cell numbers from ras.
+df with additional column 'cell' of cell numbers from ras and,
+dependent on \code{add_xy} columns \code{x} and \code{y}.
 }
 \description{
 Add cell to df with lat/long

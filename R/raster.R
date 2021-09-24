@@ -106,18 +106,21 @@ summarise_env <- function(env_df
 
       xy_res <- raster::xyFromCell(ras,cells) %>%
         tibble::as_tibble() %>%
+        dplyr::bind_cols(cell = cells) %>%
+        dplyr::filter(!is.na(x)
+                      , !is.na(y)
+                      ) %>%
         sf::st_as_sf(coords = c("x","y")
                      , crs = sf::st_crs(ras)
                      ) %>%
         sf::st_transform(crs = crs_df) %>%
-        sf::st_coordinates() %>%
-        tibble::as_tibble() %>%
-        dplyr::rename(!!ensym(x) := "X"
-                      , !!ensym(y) := "Y"
-                      )
+        dplyr::mutate(!!ensym(x) := sf::st_coordinates(.)[,1]
+                      , !!ensym(y) := sf::st_coordinates(.)[,2]
+                      ) %>%
+        sf::st_set_geometry(NULL)
 
       res <- res %>%
-        dplyr::bind_cols(xy_res)
+        dplyr::left_join(xy_res)
 
     }
 

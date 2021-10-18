@@ -128,7 +128,8 @@ summarise_env <- function(env_df
     res <- res %>%
       dplyr::right_join(df) %>%
       dplyr::select(cell,everything(),-(contains("old"))) %>%
-      dplyr::distinct()
+      dplyr::distinct() %>%
+      tibble::as_tibble()
 
   }
 

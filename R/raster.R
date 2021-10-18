@@ -96,7 +96,8 @@ summarise_env <- function(env_df
 
     cells <- raster::cellFromXY(object = ras
                                 , xy = sp_points
-                                )
+                                ) %>%
+      as.integer()
 
     res <- points %>%
       sf::st_set_geometry(NULL) %>%
@@ -117,10 +118,10 @@ summarise_env <- function(env_df
         dplyr::mutate(!!ensym(x) := sf::st_coordinates(.)[,1]
                       , !!ensym(y) := sf::st_coordinates(.)[,2]
                       ) %>%
-        sf::st_set_geometry(NULL)
+        sf::st_set_geometry(NULL) %>%
+        unique()
 
-      res <- res %>%
-        dplyr::left_join(xy_res)
+      res <- merge(res, xy_res)
 
     }
 

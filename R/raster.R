@@ -82,7 +82,10 @@ summarise_env <- function(env_df
       dplyr::rename(old_x = !!ensym(x), old_y = !!ensym(y))
 
     df_xy <- df %>%
-      dplyr::distinct(old_x, old_y)
+      dplyr::distinct(old_x, old_y) %>%
+      dplyr::filter(!is.na(old_x)
+                    , !is.na(old_y)
+                    )
 
     points <- df_xy %>%
       sf::st_as_sf(coords = c("old_x","old_y")
@@ -105,7 +108,9 @@ summarise_env <- function(env_df
 
     if(add_xy) {
 
-      xy_res <- raster::xyFromCell(ras,cells) %>%
+      xy_res <- raster::xyFromCell(ras
+                                   , cells
+                                   ) %>%
         tibble::as_tibble() %>%
         dplyr::bind_cols(cell = cells) %>%
         dplyr::filter(!is.na(x)

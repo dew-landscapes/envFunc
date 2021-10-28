@@ -79,7 +79,7 @@ summarise_env <- function(env_df
                               ) {
 
     df <- df %>%
-      dplyr::rename(old_x = !!ensym(x), old_y = !!ensym(y))
+      dplyr::rename(old_x = !!rlang::ensym(x), old_y = !!rlang::ensym(y))
 
     df_xy <- df %>%
       dplyr::distinct(old_x, old_y) %>%
@@ -120,8 +120,8 @@ summarise_env <- function(env_df
                      , crs = sf::st_crs(ras)
                      ) %>%
         sf::st_transform(crs = crs_df) %>%
-        dplyr::mutate(!!ensym(x) := sf::st_coordinates(.)[,1]
-                      , !!ensym(y) := sf::st_coordinates(.)[,2]
+        dplyr::mutate(!!rlang::ensym(x) := sf::st_coordinates(.)[,1]
+                      , !!rlang::ensym(y) := sf::st_coordinates(.)[,2]
                       ) %>%
         sf::st_set_geometry(NULL) %>%
         unique()

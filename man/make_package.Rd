@@ -4,12 +4,12 @@
 \alias{make_package}
 \title{Make package workflow}
 \usage{
-make_package(do_commit = FALSE, commit_message)
+make_package(do_commit = FALSE, m)
 }
 \arguments{
 \item{do_commit}{Logical. Commit to github?}
 
-\item{commit_message}{Character. Commit message to include.}
+\item{m}{Character. Commit message to include.}
 }
 \value{
 Called for side effect of running \code{devtools::document()},

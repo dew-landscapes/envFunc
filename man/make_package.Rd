@@ -7,10 +7,14 @@
 make_package(do_commit = FALSE, commit_message)
 }
 \arguments{
-\item{commit_message}{}
+\item{do_commit}{Logical. Commit to github?}
+
+\item{commit_message}{Character. Commit message to include.}
 }
 \value{
-
+Called for side effect of running \code{devtools::document()},
+\code{devtools::install()}, \code{knitr::knit("README.Rmd")}, \code{pkgdown::build_site()}
+and, optionally, \code{envFunc::git_commit_env()}.
 }
 \description{
 document, install, knit README.Rmd, build_site, commit

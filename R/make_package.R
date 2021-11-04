@@ -17,7 +17,12 @@ make_package <- function(do_commit = FALSE
                          , commit_message
                          ) {
 
-  rm(list = ls())
+  rm(list = ls() %>%
+       grep("do_commit|commit_message"
+            , .
+            , value = TRUE
+            )
+     )
 
   devtools::document()
 

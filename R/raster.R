@@ -148,7 +148,8 @@ summarise_env <- function(env_df
 #' cell numbers in x.
 #' @param cores Numeric. Number of cores to use in `snowfall::sfInit()`.
 #' @param out_file Character. Path to save outputs.
-#' @param limit Logical. If TRUE, only cells in `df` will be returned.
+#' @param limit Logical. If TRUE, only cells in `df` will be returned. Can be
+#' useful if cells already in `out_file` have been orphaned.
 #'
 #' @return Dataframe with column `cell` plus columns equal to the length of x.
 #' @export

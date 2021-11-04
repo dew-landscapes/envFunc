@@ -16,7 +16,8 @@ cell numbers in x.}
 
 \item{out_file}{Character. Path to save outputs.}
 
-\item{limit}{Logical. If TRUE, only cells in \code{df} will be returned.}
+\item{limit}{Logical. If TRUE, only cells in \code{df} will be returned. Can be
+useful if cells already in \code{out_file} have been orphaned.}
 }
 \value{
 Dataframe with column \code{cell} plus columns equal to the length of x.

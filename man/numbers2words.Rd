@@ -10,7 +10,7 @@ numbers2words(x)
 \item{x}{Numeric}
 }
 \value{
-'spelled out' (in english) x.
+Character. 'spelled out' (in english) x.
 }
 \description{
 Edited from the \href{https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r}{Github}

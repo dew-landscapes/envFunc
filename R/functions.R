@@ -80,7 +80,7 @@
 #'
 #' @param x Numeric
 #'
-#' @return 'spelled out' (in english) x.
+#' @return Character. 'spelled out' (in english) x.
 #' @export
 #'
 #' @examples

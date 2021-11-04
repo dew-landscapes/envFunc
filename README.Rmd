@@ -1,0 +1,93 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+
+  library(magrittr)
+
+```
+
+# `envFunc`: an R package of tools to help with other `env`Packages
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of `envFunc` is to store functions that help across the other `env`Packages.
+
+## Installation
+
+`envFunc` is not on [CRAN](https://CRAN.R-project.org).
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("Acanthiza/envFunc")
+```
+
+Load `envFunc`
+
+```{r}
+library("envFunc")
+```
+
+## Add time stamp
+
+`add_time_stamp` adds the creation time of an object as an attribute.
+
+```{r}
+
+  temp <- cars %>%
+    envFunc::add_time_stamp()
+
+  attr(temp, "ctime")
+
+```
+
+## What else is in `envFunc`
+
+The following functions and data sets are provided in `envFunc`. See https://acanthiza.github.io/envFunc/ for more examples.
+
+```{r, echo = FALSE, warning = FALSE}
+
+  get_name_title <- function(text) {
+    
+    tibble::enframe(text
+                    , name = NULL
+                    , value = "description"
+                    ) %>%
+      dplyr::filter(grepl("title", description)) %>%
+      dplyr::mutate(description = gsub("\\\\|title", "", description)
+                    , description = gsub("^\\{|\\}$", "", description)
+                    )
+    
+  }
+
+  manuals <- fs::dir_info("man") %>%
+    dplyr::select(path) %>%
+    dplyr::filter(grepl("Rd$", path)
+                  , !grepl("pipe", path)
+                  ) %>%
+    dplyr::mutate(object = gsub("man\\/|\\.Rd","",path)
+                  , class = purrr::map_chr(object, ~envFunc::vec_to_sentence(class(get(.))))
+                  , text = purrr::map(path, readLines)
+                  , text = purrr::map(text, get_name_title)
+                  ) %>%
+    tidyr::unnest(cols = c(text))
+
+  knitr::kable(manuals[,2:4])
+
+```
+
+
+
+

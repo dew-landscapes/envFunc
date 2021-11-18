@@ -7,9 +7,9 @@
 #' @param do_commit Logical. Commit to github?
 #' @param m Character. Commit message to include.
 #'
-#' @return Called for side effect of running `devtools::document()`,
-#' `devtools::install()`, `knitr::knit("README.Rmd")`, `pkgdown::build_site()`
-#' and, optionally, `envFunc::git_commit_env()`.
+#' @return Called for side effect of running [devtools::document()],
+#' [devtools::install()], [knitr::knit("README.Rmd")], [pkgdown::build_site()[
+#' and, optionally, [envFunc::git_commit_env()].
 #' @export
 #'
 #' @examples

@@ -12,9 +12,9 @@ make_package(do_commit = FALSE, m)
 \item{m}{Character. Commit message to include.}
 }
 \value{
-Called for side effect of running \code{devtools::document()},
-\code{devtools::install()}, \code{knitr::knit("README.Rmd")}, \code{pkgdown::build_site()}
-and, optionally, \code{envFunc::git_commit_env()}.
+Called for side effect of running \code{\link[devtools:document]{devtools::document()}},
+\code{\link[devtools:install]{devtools::install()}}, \link[knitr:knit("README.Rmd")]{knitr::knit("README.Rmd")}, [pkgdown::build_site()[
+and, optionally, \code{\link[=git_commit_env]{git_commit_env()}}.
 }
 \description{
 document, install, knit README.Rmd, build_site, commit

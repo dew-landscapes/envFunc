@@ -8,7 +8,7 @@
 #' @param m Character. Commit message to include.
 #'
 #' @return Called for side effect of running [devtools::document()],
-#' [devtools::install()], [knitr::knit("README.Rmd")], [pkgdown::build_site()[
+#' [devtools::install()], [knitr::knit()] "README.Rmd", [pkgdown::build_site()]
 #' and, optionally, [envFunc::git_commit_env()].
 #' @export
 #'
@@ -29,7 +29,11 @@ make_package <- function(do_commit = FALSE
 
   devtools::install(dependencies = FALSE)
 
-  knitr::knit("README.Rmd")
+  if(file.exists("README.Rmd")){
+
+    knitr::knit("README.Rmd")
+
+  }
 
   pkgdown::build_site()
 

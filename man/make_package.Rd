@@ -13,7 +13,7 @@ make_package(do_commit = FALSE, m)
 }
 \value{
 Called for side effect of running \code{\link[devtools:document]{devtools::document()}},
-\code{\link[devtools:install]{devtools::install()}}, \link[knitr:knit("README.Rmd")]{knitr::knit("README.Rmd")}, [pkgdown::build_site()[
+\code{\link[devtools:install]{devtools::install()}}, \code{\link[knitr:knit]{knitr::knit()}} "README.Rmd", \code{\link[pkgdown:build_site]{pkgdown::build_site()}}
 and, optionally, \code{\link[=git_commit_env]{git_commit_env()}}.
 }
 \description{

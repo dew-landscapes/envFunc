@@ -15,6 +15,7 @@
 summarise_env <- function(env_df
                           , context
                           , luenv_df = NULL
+                          , trans = "transform"
                           ) {
 
   res <- env_df %>%
@@ -24,6 +25,7 @@ summarise_env <- function(env_df
                              , value = TRUE
                              )
                         ) %>%
+    dplyr::mutate(name = gsub("\\.","-",name)) %>%
     dplyr::filter(!is.na(value)) %>%
     dplyr::group_by(name) %>%
     dplyr::summarise(mean = mean(value)

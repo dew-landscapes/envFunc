@@ -36,6 +36,7 @@ Dataframe with columns
 raster with \code{rename_layers = TRUE} or the same as \code{name} with
 \code{rename_layers = FALSE}.}
 \item{value}{Value of the raster at \code{x} and \code{y} coordinates.}
+\item{path}{Full path to raster (from \code{ras_paths}).}
 }
 }
 \description{

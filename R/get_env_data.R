@@ -21,6 +21,7 @@
 #'   raster with `rename_layers = TRUE` or the same as `name` with
 #'   `rename_layers = FALSE`.}
 #'   \item{value}{Value of the raster at `x` and `y` coordinates.}
+#'   \item{path}{Full path to raster (from `ras_paths`).}
 #' }
 #' @export
 #'
@@ -91,7 +92,7 @@ get_env_data <- function(ras_paths
                   ,
                   ) %>%
     dplyr::left_join(points) %>%
-    dplyr::select(name, !!ensym(x), !!ensym(y), layer, value)
+    dplyr::select(name, !!ensym(x), !!ensym(y), layer, value, path)
 
 }
 

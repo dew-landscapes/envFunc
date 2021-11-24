@@ -4,7 +4,7 @@
 \alias{summarise_env}
 \title{Environmental summary statistics}
 \usage{
-summarise_env(env_df, context, luenv_df = NULL, trans = "transform")
+summarise_env(env_df, context, luenv_df = NULL, trans_col = "transform")
 }
 \arguments{
 \item{env_df}{Data frame of environmental values.}

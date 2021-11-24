@@ -17,7 +17,7 @@
 summarise_env <- function(env_df
                           , context
                           , luenv_df = NULL
-                          , trans = "transform"
+                          , trans_col = "transform"
                           ) {
 
   res <- env_df %>%
@@ -43,7 +43,7 @@ summarise_env <- function(env_df
     res <- res %>%
       dplyr::left_join(luenv_df %>%
                          dplyr::select(name = layer
-                                       , !!ensym(trans)
+                                       , !!rlang::ensym(trans_col)
                                        , units
                                        , desc
                                        )

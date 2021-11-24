@@ -33,6 +33,7 @@ Imports:
     snowfall,
     stringi,
     stringr,
+    terra,
     tibble,
     tidyr
 URL: https://github.com/Acanthiza/envFunc

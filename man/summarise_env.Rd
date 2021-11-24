@@ -12,6 +12,9 @@ summarise_env(env_df, context, luenv_df = NULL, trans = "transform")
 \item{context}{Character name of column(s) in \code{env_df} that define the context.}
 
 \item{luenv_df}{Data frame with information about each layer.}
+
+\item{trans_col}{Character. Name of column in \code{luenv_df} containing
+information on how to convert raster values to the scale of \code{units}.}
 }
 \value{
 Data frame of summary values for each layer, particularly \code{units} and

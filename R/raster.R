@@ -6,6 +6,8 @@
 #' @param env_df Data frame of environmental values.
 #' @param context Character name of column(s) in `env_df` that define the context.
 #' @param luenv_df Data frame with information about each layer.
+#' @param trans_col Character. Name of column in `luenv_df` containing
+#' information on how to convert raster values to the scale of `units`.
 #'
 #' @return Data frame of summary values for each layer, particularly `units` and
 #' `transform` to convert raster layer values to `units`.
@@ -41,7 +43,7 @@ summarise_env <- function(env_df
     res <- res %>%
       dplyr::left_join(luenv_df %>%
                          dplyr::select(name = layer
-                                       , transform
+                                       , !!ensym(trans)
                                        , units
                                        , desc
                                        )

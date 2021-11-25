@@ -38,6 +38,8 @@ get_env_data <- function(ras
 
   }
 
+  crs_ras <- crs(ras)
+
   layer_names <- tidyr::uncount(sources(ras)
                                 , weights = nlyr
                                 ) %>%

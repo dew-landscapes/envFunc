@@ -4,17 +4,10 @@
 \alias{get_env_data}
 \title{Get raster values for each unique location in a data frame.}
 \usage{
-get_env_data(
-  ras_paths,
-  df,
-  x = "long",
-  y = "lat",
-  crs_df = 4326,
-  rename_layers = FALSE
-)
+get_env_data(ras, df, x = "long", y = "lat", crs_df = 4326)
 }
 \arguments{
-\item{ras_paths}{Paths to the rasters.}
+\item{ras}{Either SpatRaster or path(s) from which to create SpatRaster.}
 
 \item{df}{Dataframe with \code{x} and \code{y}.}
 
@@ -22,21 +15,18 @@ get_env_data(
 
 \item{crs_df}{Coordinate reference system for \code{x} and \code{y}. Passed to the
 \code{crs} argument of \code{\link[sf:st_as_sf]{sf::st_as_sf()}}.}
-
-\item{rename_layers}{If there are multi-band rasters, should the names of
-those bands be kept? If \code{FALSE} the output will be}
 }
 \value{
 Dataframe with columns
 \itemize{
-\item{name}{Name of the raster file (with path removed).}
 \item{\code{x}}{Same as \code{x}.}
 \item{\code{y}}{Same as \code{y}.}
-\item{layer}{Layer from multiband raster. Will be \code{1} for single band
-raster with \code{rename_layers = TRUE} or the same as \code{name} with
-\code{rename_layers = FALSE}.}
+\item{name}{Concept being extracted - often the same as \code{file}.}
 \item{value}{Value of the raster at \code{x} and \code{y} coordinates.}
-\item{path}{Full path to raster (from \code{ras_paths}).}
+\item{layer}{Layer from multiband raster. Will be \code{1} for single band
+raster.}
+\item{path_abs}{Full path to raster.}
+\item{file}{filename component of \code{path_abs}.}
 }
 }
 \description{

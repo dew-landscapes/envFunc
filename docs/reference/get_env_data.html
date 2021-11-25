@@ -117,21 +117,14 @@
     <p>Get raster values for each unique location in a data frame.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_env_data</span><span class='op'>(</span>
-  <span class='va'>ras_paths</span>,
-  <span class='va'>df</span>,
-  x <span class='op'>=</span> <span class='st'>"long"</span>,
-  y <span class='op'>=</span> <span class='st'>"lat"</span>,
-  crs_df <span class='op'>=</span> <span class='fl'>4326</span>,
-  rename_layers <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_env_data</span><span class='op'>(</span><span class='va'>ras</span>, <span class='va'>df</span>, x <span class='op'>=</span> <span class='st'>"long"</span>, y <span class='op'>=</span> <span class='st'>"lat"</span>, crs_df <span class='op'>=</span> <span class='fl'>4326</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ras_paths</th>
-      <td><p>Paths to the rasters.</p></td>
+      <th>ras</th>
+      <td><p>Either SpatRaster or path(s) from which to create SpatRaster.</p></td>
     </tr>
     <tr>
       <th>df</th>
@@ -146,24 +139,19 @@
       <td><p>Coordinate reference system for <code>x</code> and <code>y</code>. Passed to the
 <code>crs</code> argument of <code><a href='https://r-spatial.github.io/sf/reference/st_as_sf.html'>sf::st_as_sf()</a></code>.</p></td>
     </tr>
-    <tr>
-      <th>rename_layers</th>
-      <td><p>If there are multi-band rasters, should the names of
-those bands be kept? If <code>FALSE</code> the output will be</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Dataframe with columns</p><ul>
-<li><p>nameName of the raster file (with path removed).</p></li>
 <li><p><code>x</code>Same as <code>x</code>.</p></li>
 <li><p><code>y</code>Same as <code>y</code>.</p></li>
-<li><p>layerLayer from multiband raster. Will be <code>1</code> for single band
-raster with <code>rename_layers = TRUE</code> or the same as <code>name</code> with
-<code>rename_layers = FALSE</code>.</p></li>
+<li><p>nameConcept being extracted - often the same as <code>file</code>.</p></li>
 <li><p>valueValue of the raster at <code>x</code> and <code>y</code> coordinates.</p></li>
-<li><p>pathFull path to raster (from <code>ras_paths</code>).</p></li>
+<li><p>layerLayer from multiband raster. Will be <code>1</code> for single band
+raster.</p></li>
+<li><p>path_absFull path to raster.</p></li>
+<li><p>filefilename component of <code>path_abs</code>.</p></li>
 </ul>
 
 

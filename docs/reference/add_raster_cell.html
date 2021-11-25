@@ -40,7 +40,8 @@
 
 
 <meta property="og:title" content="Add cell to df with lat/long — add_raster_cell" />
-<meta property="og:description" content="Add cell to df with lat/long" />
+<meta property="og:description" content="Add cell to df with lat/long
+Add cell to df with lat/long" />
 
 
 
@@ -109,15 +110,18 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add cell to df with lat/long</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Acanthiza/envFunc/blob/master/R/raster.R'><code>R/raster.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/Acanthiza/envFunc/blob/master/R/add_raster_cell.R'><code>R/add_raster_cell.R</code></a>, <a href='https://github.com/Acanthiza/envFunc/blob/master/R/summarise_env.R'><code>R/summarise_env.R</code></a></small>
     <div class="hidden name"><code>add_raster_cell.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Add cell to df with lat/long</p>
+<p>Add cell to df with lat/long</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_raster_cell</span><span class='op'>(</span><span class='va'>ras</span>, <span class='va'>df</span>, x <span class='op'>=</span> <span class='st'>"long"</span>, y <span class='op'>=</span> <span class='st'>"lat"</span>, crs_df <span class='op'>=</span> <span class='fl'>4326</span>, add_xy <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>add_raster_cell</span><span class='op'>(</span><span class='va'>ras</span>, <span class='va'>df</span>, x <span class='op'>=</span> <span class='st'>"long"</span>, y <span class='op'>=</span> <span class='st'>"lat"</span>, crs_df <span class='op'>=</span> <span class='fl'>4326</span>, add_xy <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>add_raster_cell</span><span class='op'>(</span><span class='va'>ras</span>, <span class='va'>df</span>, x <span class='op'>=</span> <span class='st'>"long"</span>, y <span class='op'>=</span> <span class='st'>"lat"</span>, crs_df <span class='op'>=</span> <span class='fl'>4326</span>, add_xy <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,6 +155,8 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>df with additional column 'cell' of cell numbers from ras and,
+dependent on <code>add_xy</code> columns <code>x</code> and <code>y</code>.</p>
+<p>df with additional column 'cell' of cell numbers from ras and,
 dependent on <code>add_xy</code> columns <code>x</code> and <code>y</code>.</p>
 
   </div>

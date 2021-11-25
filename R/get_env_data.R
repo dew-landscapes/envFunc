@@ -4,37 +4,54 @@
 #'
 #'
 #'
-#' @param ras_paths Paths to the rasters.
+#' @param ras Either SpatRaster or path(s) from which to create SpatRaster.
 #' @param df Dataframe with `x` and `y`.
 #' @param x,y Columns in `df` with x and y coordinates.
 #' @param crs_df Coordinate reference system for `x` and `y`. Passed to the
 #' `crs` argument of [sf::st_as_sf()].
-#' @param rename_layers If there are multi-band rasters, should the names of
-#' those bands be kept? If `FALSE` the output will be
 #'
 #' @return Dataframe with columns
 #' \itemize{
-#'   \item{name}{Name of the raster file (with path removed).}
 #'   \item{`x`}{Same as `x`.}
 #'   \item{`y`}{Same as `y`.}
-#'   \item{layer}{Layer from multiband raster. Will be `1` for single band
-#'   raster with `rename_layers = TRUE` or the same as `name` with
-#'   `rename_layers = FALSE`.}
+#'   \item{name}{Concept being extracted - often the same as `file`.}
 #'   \item{value}{Value of the raster at `x` and `y` coordinates.}
-#'   \item{path}{Full path to raster (from `ras_paths`).}
+#'   \item{layer}{Layer from multiband raster. Will be `1` for single band
+#'   raster.}
+#'   \item{path_abs}{Full path to raster.}
+#'   \item{file}{filename component of `path_abs`.}
 #' }
 #' @export
 #'
 #' @examples
-get_env_data <- function(ras_paths
+get_env_data <- function(ras
                          , df
                          , x = "long"
                          , y = "lat"
                          , crs_df = 4326
-                         , rename_layers = FALSE
                          ) {
 
-  crs_ras <- crs(terra::rast(ras_paths[[1]]))
+
+  if(!"SpatRaster" %in% class(ras[[1]])) {
+
+    ras <- terra::rast(ras)
+
+  }
+
+  layer_names <- tidyr::uncount(sources(ras)
+                                , weights = nlyr
+                                ) %>%
+    dplyr::rename(path_abs = source) %>%
+    dplyr::group_by(path_abs) %>%
+    dplyr::mutate(name = paste0(gsub("\\..{2,4}|_aligned"
+                                     , ""
+                                     , fs::path_file(path_abs)
+                                     )
+                                , "_"
+                                , row_number()
+                                )
+                  ) %>%
+    dplyr::ungroup()
 
   points <- df %>%
     dplyr::distinct(!!rlang::ensym(x), !!rlang::ensym(y)) %>%
@@ -56,43 +73,35 @@ get_env_data <- function(ras_paths
                 , geom = c("ras_x", "ras_y")
                 )
 
-  env_df <- tibble::tibble(path = ras_paths) %>%
-    dplyr::mutate(r = purrr::map(path, terra::rast)
-                  , vals = purrr::map(r
-                                      , terra::extract
-                                      , y = points_spatvect
-                                      )
-                  , vals = if(rename_layers) {
-
-                    purrr::map(vals
-                               , ~stats::setNames(., c("point_id",paste0("lyr",1:(ncol(.)-1))))
-                               )
-
-                  } else {
-
-                    purrr::map(vals
-                               , ~stats::setNames(., gsub("ID", "point_id", names(.)))
-                               )
-
-                    }
+  res <- terra::extract(ras
+                        , y = points_spatvect
+                        ) %>%
+    stats::setNames(c("point_id", layer_names$name)) %>%
+    tibble::as_tibble() %>%
+    dplyr::left_join(points %>%
+                       dplyr::select(point_id
+                                     , !!rlang::ensym(x)
+                                     , !!rlang::ensym(y)
+                                     )
+                     ) %>%
+    dplyr::select(!!rlang::ensym(x)
+                  , !!rlang::ensym(y)
+                  , layer_names$name
                   ) %>%
-    dplyr::select(negate(is.list), vals) %>%
-    tidyr::unnest(cols = c(vals)) %>%
-    tidyr::pivot_longer(3:ncol(.)
-                        , names_to = "layer"
+    tidyr::pivot_longer(layer_names$name
+                        , names_to = "name"
                         , values_to = "value"
                         ) %>%
-    dplyr::filter(!is.na(value)) %>%
-    dplyr::mutate(name = fs::path_file(path)
-                  , layer = if(rename_layers) {
-
-                    as.numeric(gsub("lyr", "", layer))
-
-                    } else layer
-                  ,
+    dplyr::left_join(layer_names) %>%
+    dplyr::mutate(layer = stringr::str_extract(name, "_\\d{1,2}$")
+                  , name = map2_chr(paste0(layer,"$")
+                                    , name
+                                    , ~gsub(.x, "", .y)
+                                    )
+                  , layer = readr::parse_number(layer)
+                  , file = fs::path_file(path_abs)
                   ) %>%
-    dplyr::left_join(points) %>%
-    dplyr::select(name, !!ensym(x), !!ensym(y), layer, value, path)
+    dplyr::select(-path_abs, -file, everything(), file, path_abs)
 
 }
 

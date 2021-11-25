@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2021-11-24 14:09:47 ACDT"
+#> [1] "2021-11-25 10:43:42 ACDT"
 ```
 
 ## What else is in `envFunc`

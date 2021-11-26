@@ -20,6 +20,7 @@ Imports:
     dplyr,
     fs,
     gert,
+    janitor,
     knitr,
     magrittr,
     pkgdown,

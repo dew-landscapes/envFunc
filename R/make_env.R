@@ -3,6 +3,9 @@
 #' Multicore [raster::extract()] adapted from the Stack Exchange Network [post](https://gis.stackexchange.com/questions/253618/r-multicore-approach-to-extract-raster-values-using-spatial-points)
 #' by [thiagoveloso](https://gis.stackexchange.com/users/41623/thiagoveloso).
 #'
+#' This function has been surpassed by `get_env_data` which uses
+#' `terra::extract`.
+#'
 #' @param x Raster* object.
 #' @param df Dataframe. Must have a column called 'cell' that corresponds to the
 #' cell numbers in x.

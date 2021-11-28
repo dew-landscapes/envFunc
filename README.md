@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2021-11-26 17:52:40 ACDT"
+#> [1] "2021-11-28 13:43:38 ACDT"
 ```
 
 ## What else is in `envFunc`
@@ -51,24 +51,25 @@ library("envFunc")
 The following functions and data sets are provided in `envFunc`. See https://acanthiza.github.io/envFunc/ for more examples.
 
 
-|object           |class                      |description                                                 |
-|:----------------|:--------------------------|:-----------------------------------------------------------|
-|add_freq_class   |function                   |Convert percentages to frequency classes                    |
-|add_raster_cell  |function                   |Add cell to df with lat/long                                |
-|add_time_stamp   |function                   |Add time stamp                                              |
-|filter_test_func |function                   |Test rows against a function                                |
-|get_env_data     |function                   |Get raster values for each unique location in a data frame. |
-|get_or_make      |function                   |Make an object if it is not available from provided file    |
-|git_commit_env   |function                   |Add, commit and push all current changes to github          |
-|lulsa            |tbl_df, tbl and data.frame |Lookup for Landscapes South Australia regions               |
-|make_env         |function                   |Create dataframe of 'cells' and their associated env data   |
-|make_package     |function                   |Make package workflow                                       |
-|mirror_directory |function                   |Mirror a directory                                          |
-|numbers2words    |function                   |Convert a numeric to its corresponding english character.   |
-|prop_cpu         |function                   |Proportion of current CPU usage                             |
-|prop_mem         |function                   |Proportion of current memory usage                          |
-|summarise_env    |function                   |Environmental summary statistics                            |
-|vec_to_sentence  |function                   |Vector to text list                                         |
+|object           |class                      |description                                                       |
+|:----------------|:--------------------------|:-----------------------------------------------------------------|
+|add_freq_class   |function                   |Convert percentages to frequency classes                          |
+|add_raster_cell  |function                   |Add cell to df with lat/long                                      |
+|add_time_stamp   |function                   |Add time stamp                                                    |
+|filter_test_func |function                   |Test rows against a function                                      |
+|get_env_data     |function                   |Get raster values for each unique location in a data frame.       |
+|get_or_make      |function                   |Make an object if it is not available from provided file          |
+|git_commit_env   |function                   |Add, commit and push all current changes to github                |
+|lulsa            |tbl_df, tbl and data.frame |Lookup for Landscapes South Australia regions                     |
+|make_env         |function                   |Create dataframe of 'cells' and their associated env data         |
+|make_package     |function                   |Make package workflow                                             |
+|mirror_directory |function                   |Mirror a directory                                                |
+|numbers2words    |function                   |Convert a numeric to its corresponding english character.         |
+|prop_cpu         |function                   |Proportion of current CPU usage                                   |
+|prop_mem         |function                   |Proportion of current memory usage                                |
+|summarise_env    |function                   |Environmental summary statistics                                  |
+|vec_to_sentence  |function                   |Vector to text list                                               |
+|widen_env_data   |function                   |Widen env data, especially AusCover data from code{get_env_data}. |
 
 
 

@@ -1,4 +1,25 @@
 
+#' Widen env data, especially AusCover data from `get_env_data`.
+#'
+#' Output is a context by environmental variable data frame.
+#'
+#' @param env_data_long Dataframe, in long format. Usually resulting from
+#' `get_env_data`.
+#' @param orig_df Dataframe containing the locations passed to `get_env_data`.
+#' @param context Character. Columns in `orig_df` defining the context.
+#' @param env_groups Character. Name of columns in `env_data_long` that define
+#' the context of the raster. Default to 'process', 'layer', 'method' and
+#' 'season'. See [envEcosystems::env] for definitions.
+#' @param epoch_step Numeric. If summarising several (years) rasters to one for
+#' the given `context`, how many years to summarise?
+#' @param min_years Numeric. What is the minimum acceptable number of years with
+#' data. Points with less than `min_years` of data will be filtered.
+#'
+#' @return Site (context) by environmental data with one row of env data for
+#' each context.
+#' @export
+#'
+#' @examples
 widen_env_data <- function(env_data_long
                            , orig_df
                            , context

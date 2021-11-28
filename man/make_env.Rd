@@ -26,3 +26,7 @@ Dataframe with column \code{cell} plus columns equal to the length of x.
 Multicore \code{\link[raster:extract]{raster::extract()}} adapted from the Stack Exchange Network \href{https://gis.stackexchange.com/questions/253618/r-multicore-approach-to-extract-raster-values-using-spatial-points}{post}
 by \href{https://gis.stackexchange.com/users/41623/thiagoveloso}{thiagoveloso}.
 }
+\details{
+This function has been surpassed by \code{get_env_data} which uses
+\code{terra::extract}.
+}

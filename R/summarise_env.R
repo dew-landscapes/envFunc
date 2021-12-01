@@ -36,25 +36,35 @@ summarise_env <- function(env_df
                      , iqrLo = quantile(value, probs = 0.25)
                      , iqrUp = quantile(value, probs = 0.75)
                      ) %>%
-    dplyr::ungroup()
+    dplyr::ungroup() %>%
+    tidyr::pivot_longer(grep("name", names(.), invert = TRUE, value = TRUE)
+                        , names_to = "func"
+                        , values_to = "value"
+                        ) %>%
+    tidyr::separate(name
+                    , into = c("process", "layer", "method", "season")
+                    , remove = FALSE
+                    )
 
   if(isTRUE(!is.null(luenv_df))) {
 
     res <- res %>%
       dplyr::left_join(luenv_df %>%
-                         dplyr::select(name = layer
-                                       , !!rlang::ensym(trans_col)
-                                       , units
-                                       , desc
-                                       )
+                         dplyr::select(any_of(c(names(res), trans_col)))
                        ) %>%
-      dplyr::mutate(transform = as.character(transform)) %>%
-      dplyr::mutate(across(where(is.numeric),~./as.numeric(transform))) %>%
-      dplyr::mutate(transform = as.numeric(transform))
+      dplyr::mutate(value = dplyr::if_else(!!rlang::ensym(trans_col) < 0
+                                           , value + !!rlang::ensym(trans_col)
+                                           , value / !!rlang::ensym(trans_col)
+                                           )
+                    ) %>%
+      dplyr::select(-!!rlang::ensym(trans_col))
 
   }
 
-  return(res)
+  res %>%
+    tidyr::pivot_wider(names_from = func
+                       , values_from = value
+                       )
 
 }
 

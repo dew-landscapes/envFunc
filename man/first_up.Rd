@@ -7,16 +7,16 @@
 first_up(string)
 }
 \arguments{
-\item{string}{}
+\item{string}{Character vector.}
 }
 \value{
-
+Character vector with first character upper case.
 }
 \description{
 Doesn't alter the capitalisation of any other characters, just the first one.
 }
 \examples{
-first_up("DEW")
-first_up("water from space")
-first_up("geoscience Australia")
+first_up("string")
+first_up(c("string", "another string"))
+first_up(c("1 string", "another string", "Yet another string"))
 }

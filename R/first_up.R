@@ -2,15 +2,15 @@
 #'
 #' Doesn't alter the capitalisation of any other characters, just the first one.
 #'
-#' @param string
+#' @param string Character vector.
 #'
-#' @return
+#' @return Character vector with first character upper case.
 #' @export
 #'
 #' @examples
-#' first_up("DEW")
-#' first_up("water from space")
-#' first_up("geoscience Australia")
+#' first_up("string")
+#' first_up(c("string", "another string"))
+#' first_up(c("1 string", "another string", "Yet another string"))
 first_up <- function(string) {
 
   paste0(toupper(substr(string, 1, 1)), substr(string, 2, nchar(string)))

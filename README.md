@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2021-11-28 13:43:38 ACDT"
+#> [1] "2021-12-02 07:07:42 ACDT"
 ```
 
 ## What else is in `envFunc`
@@ -57,6 +57,7 @@ The following functions and data sets are provided in `envFunc`. See https://aca
 |add_raster_cell  |function                   |Add cell to df with lat/long                                      |
 |add_time_stamp   |function                   |Add time stamp                                                    |
 |filter_test_func |function                   |Test rows against a function                                      |
+|first_up         |function                   |Change the first letter of a string to capital                    |
 |get_env_data     |function                   |Get raster values for each unique location in a data frame.       |
 |get_or_make      |function                   |Make an object if it is not available from provided file          |
 |git_commit_env   |function                   |Add, commit and push all current changes to github                |

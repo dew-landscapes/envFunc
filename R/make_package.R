@@ -25,6 +25,8 @@ make_package <- function(do_commit = FALSE
             )
      )
 
+  if(file.exists("data-raw/makeData.R")) source("data-raw/makeData.R")
+
   devtools::document()
 
   devtools::install(dependencies = FALSE)

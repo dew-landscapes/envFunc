@@ -51,7 +51,7 @@ widen_env_data <- function(env_data_long
                      , func_median = median(value, na.rm = TRUE)
                      , func_min = min(value, na.rm = TRUE)
                      , func_max = max(value, na.rm = TRUE)
-                     , if(min_years > 1) func_sd = sd(value, na.rm = TRUE)
+                     , func_sd = sd(value, na.rm = TRUE)
                      , func_n = sum(!is.na(value))
                      ) %>%
     dplyr::ungroup() %>%

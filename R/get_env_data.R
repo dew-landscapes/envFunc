@@ -100,7 +100,7 @@ get_env_data <- function(ras
                                     , name
                                     , ~gsub(.x, "", .y)
                                     )
-                  , layer = readr::parse_number(layer)
+                  , layer = as.character(readr::parse_number(layer))
                   , file = fs::path_file(path_abs)
                   ) %>%
     dplyr::select(-path_abs, -file, everything(), file, path_abs)

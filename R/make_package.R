@@ -39,6 +39,8 @@ make_package <- function(do_commit = FALSE
 
   pkgdown::build_site()
 
+  pkgdown::clean_site()
+
   if(do_commit) {
 
     envFunc::git_commit_env(m)

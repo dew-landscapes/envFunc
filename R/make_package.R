@@ -37,9 +37,9 @@ make_package <- function(do_commit = FALSE
 
   }
 
-  pkgdown::build_site()
-
   pkgdown::clean_site()
+
+  pkgdown::build_site()
 
   if(do_commit) {
 

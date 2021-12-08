@@ -25,7 +25,7 @@ make_package <- function(do_commit = FALSE
             )
      )
 
-  if(file.exists("data-raw/makeData.R")) source("data-raw/makeData.R")
+  if(file.exists("data-raw/make_data.R")) source("data-raw/make_data.R")
 
   devtools::document()
 

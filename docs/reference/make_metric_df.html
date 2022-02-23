@@ -120,13 +120,14 @@
     <pre class="usage"><span class='fu'>make_metric_df</span><span class='op'>(</span>
   <span class='va'>df</span>,
   mets_df <span class='op'>=</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>metric <span class='op'>=</span> <span class='st'>"av_clust_size"</span>, high_good <span class='op'>=</span> <span class='cn'>TRUE</span>, clust_sum <span class='op'>=</span>
-    <span class='cn'>TRUE</span><span class='op'>)</span>,
+    <span class='cn'>TRUE</span>, level <span class='op'>=</span> <span class='st'>"clustering"</span><span class='op'>)</span>,
   context <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"method"</span>, <span class='st'>"groups"</span><span class='op'>)</span>,
   mets_col <span class='op'>=</span> <span class='st'>"clust_sum"</span>,
   summarise_method <span class='op'>=</span> <span class='va'>median</span>,
   group_col <span class='op'>=</span> <span class='st'>"groups"</span>,
   top_thresh <span class='op'>=</span> <span class='fl'>0.25</span>,
-  best_thresh <span class='op'>=</span> <span class='fl'>5</span>
+  best_thresh <span class='op'>=</span> <span class='fl'>5</span>,
+  level <span class='op'>=</span> <span class='st'>"clustering"</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>

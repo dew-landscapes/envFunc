@@ -19,6 +19,7 @@ make_metric_df <- function(df
                       , mets_df = tibble::tibble(metric = "av_clust_size"
                                                  , high_good = TRUE
                                                  , clust_sum = TRUE
+                                                 , level = "clustering"
                                                  )
                       , context = c("method"
                                     , "groups"
@@ -28,11 +29,14 @@ make_metric_df <- function(df
                       , group_col = "groups"
                       , top_thresh = 0.25
                       , best_thresh = 5
+                      , level = "clustering"
                       ) {
 
   mets_df_use <- mets_df %>%
     dplyr::mutate(metric = forcats::fct_inorder(metric)) %>%
-    dplyr::filter(!is.na(!!rlang::ensym(mets_col))) %>%
+    dplyr::filter(!is.na(!!rlang::ensym(mets_col))
+                  , level != "cluster"
+                  ) %>%
     dplyr::select(metric, high_good, !!rlang::ensym(mets_col))
 
   df %>%

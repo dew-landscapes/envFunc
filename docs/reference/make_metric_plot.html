@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mirror a directory — mirror_directory • envFunc</title>
+<title>Plot the results from diagnostic_df — make_metric_plot • envFunc</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Mirror a directory — mirror_directory" />
-<meta property="og:description" content="Check for any new/updated files on from_dir and copy them to to_dir.
-Check for any extra files in to_dir and, optionally, delete them." />
+<meta property="og:title" content="Plot the results from diagnostic_df — make_metric_plot" />
+<meta property="og:description" content="Plot the results from diagnostic_df" />
 
 
 
@@ -109,42 +108,58 @@ Check for any extra files in to_dir and, optionally, delete them." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Mirror a directory</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Acanthiza/envFunc/blob/master/R/mirror_directory.R'><code>R/mirror_directory.R</code></a></small>
-    <div class="hidden name"><code>mirror_directory.Rd</code></div>
+    <h1>Plot the results from diagnostic_df</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Acanthiza/envFunc/blob/master/R/make_metric_plot.R'><code>R/make_metric_plot.R</code></a></small>
+    <div class="hidden name"><code>make_metric_plot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Check for any new/updated files on <code>from_dir</code> and copy them to <code>to_dir</code>.
-Check for any extra files in <code>to_dir</code> and, optionally, delete them.</p>
+    <p>Plot the results from diagnostic_df</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mirror_directory</span><span class='op'>(</span><span class='va'>from_dir</span>, <span class='va'>to_dir</span>, delete <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>make_metric_plot</span><span class='op'>(</span>
+  <span class='va'>metric_df</span>,
+  group_col <span class='op'>=</span> <span class='st'>"groups"</span>,
+  facet_col <span class='op'>=</span> <span class='st'>"method"</span>,
+  label <span class='op'>=</span> <span class='st'>"metric"</span>,
+  value <span class='op'>=</span> <span class='st'>"scale"</span>,
+  display_all <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>from_dir</th>
-      <td><p>Path to directory to mirror.</p></td>
+      <th>metric_df</th>
+      <td><p>Dataframe with results from call to <code>metrics_df</code>.</p></td>
     </tr>
     <tr>
-      <th>to_dir</th>
-      <td><p>Path to directory you wish to mirror <code>from_dir</code>.</p></td>
+      <th>group_col</th>
+      <td><p>Character. Name of column with numeric data for x-axis.</p></td>
     </tr>
     <tr>
-      <th>delete</th>
-      <td><p>Delete extra files in <code>to_dir</code>. USE WITH CAUTION.</p></td>
+      <th>facet_col</th>
+      <td><p>Character. Optional name of column to facet on (along with label).</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Arguments to <a href='https://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a>.</p></td>
+      <th>label</th>
+      <td><p>Character label for the diagnostics (choose another column from diagnosticDF).</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>Character. Name of column with values to plot.</p></td>
+    </tr>
+    <tr>
+      <th>display_all</th>
+      <td><p>Display all diagnostics or only those used to select best.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>to_dir</code> will mirror <code>from_dir</code></p>
+    
+
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

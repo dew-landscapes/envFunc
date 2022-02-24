@@ -9,12 +9,12 @@ make_metric_df(
   mets_df = tibble::tibble(metric = "av_clust_size", high_good = TRUE, clust_sum =
     TRUE, level = "clustering"),
   context = c("method", "groups"),
-  mets_col = "clust_sum",
+  mets_col = "summary_mets",
   summarise_method = median,
   group_col = "groups",
   top_thresh = 0.25,
   best_thresh = 5,
-  level = "clustering"
+  level = c("across", "within")
 )
 }
 \arguments{

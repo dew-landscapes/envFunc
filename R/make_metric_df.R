@@ -24,18 +24,20 @@ make_metric_df <- function(df
                       , context = c("method"
                                     , "groups"
                                     )
-                      , mets_col = "clust_sum"
+                      , mets_col = "summary_mets"
                       , summarise_method = median
                       , group_col = "groups"
                       , top_thresh = 0.25
                       , best_thresh = 5
-                      , level = "clustering"
+                      , level = c("across", "within")
                       ) {
+
+  if(length(level) > 1) level <- level[1]
 
   mets_df_use <- mets_df %>%
     dplyr::mutate(metric = forcats::fct_inorder(metric)) %>%
     dplyr::filter(!is.na(!!rlang::ensym(mets_col))
-                  , level != "cluster"
+                  , if(level == "across") !ecosystem_within_mets else TRUE
                   ) %>%
     dplyr::select(metric, high_good, !!rlang::ensym(mets_col))
 

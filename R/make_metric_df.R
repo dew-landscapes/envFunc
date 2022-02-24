@@ -58,14 +58,7 @@ make_metric_df <- function(df
                         ) %>%
     dplyr::left_join(mets_df_use) %>%
     dplyr::group_by(across(any_of(names(mets_df_use)))) %>%
-    dplyr::mutate(value = if_else(is.na(value)
-                                  , if_else(high_good
-                                            , 0
-                                            , max(value)
-                                            )
-                                  , value
-                                  )
-                  , scale = if_else(high_good
+    dplyr::mutate(scale = if_else(high_good
                                   , scales::rescale(value
                                                     , to = c(0
                                                              , 1

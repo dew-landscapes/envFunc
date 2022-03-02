@@ -37,7 +37,7 @@ make_metric_df <- function(df
   mets_df_use <- mets_df %>%
     dplyr::mutate(metric = forcats::fct_inorder(metric)) %>%
     dplyr::filter(!is.na(!!rlang::ensym(mets_col))
-                  , if(level == "across") !ecosystem_within_mets else TRUE
+                  , if(level == "within") ecosystem_within_mets else TRUE
                   ) %>%
     dplyr::select(metric, high_good, !!rlang::ensym(mets_col))
 

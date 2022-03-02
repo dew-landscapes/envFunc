@@ -3,13 +3,20 @@
 #' Use a set of (continuous) columns to choose a good set of rows
 #'
 #' @param df Dataframe with columns over which to find good rows
-#' @param mets_df Dataframe mapping the name of possible metrics to cases (columns) in which to use that metric.
+#' @param mets_df Dataframe mapping the name of possible metrics to cases
+#' (columns) in which to use that metric.
 #' @param context Character. Name of columns in df that define context.
 #' @param mets_col Character. Name of `mets_df` column to use in this instance.
-#' @param summarise_method Character. Name of method to use in summarising if there is more than one row per context.
-#' @param group_col Character. Optional. Name of column to filter on (min_groups, max_groups)
+#' @param summarise_method Character. Name of method to use in summarising if
+#' there is more than one row per context.
+#' @param group_col Character. Optional. Name of column to filter on
+#' (min_groups, max_groups)
 #' @param top_thresh Numeric specifying the proportion of rows considered 'top'.
-#' @param best_thresh Numeric specifying the absolute number of rows considered 'best'.
+#' @param best_thresh Numeric specifying the absolute number of rows considered
+#' 'best'.
+#' @param level Either 'across' or 'within'. If the latter, only metrics that
+#' are set up to work 'within' clusters (rather than 'across' clusterings) are
+#' used.
 #'
 #' @return
 #' @export

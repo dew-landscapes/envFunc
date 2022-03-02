@@ -139,7 +139,8 @@
     </tr>
     <tr>
       <th>mets_df</th>
-      <td><p>Dataframe mapping the name of possible metrics to cases (columns) in which to use that metric.</p></td>
+      <td><p>Dataframe mapping the name of possible metrics to cases
+(columns) in which to use that metric.</p></td>
     </tr>
     <tr>
       <th>context</th>
@@ -151,11 +152,13 @@
     </tr>
     <tr>
       <th>summarise_method</th>
-      <td><p>Character. Name of method to use in summarising if there is more than one row per context.</p></td>
+      <td><p>Character. Name of method to use in summarising if
+there is more than one row per context.</p></td>
     </tr>
     <tr>
       <th>group_col</th>
-      <td><p>Character. Optional. Name of column to filter on (min_groups, max_groups)</p></td>
+      <td><p>Character. Optional. Name of column to filter on
+(min_groups, max_groups)</p></td>
     </tr>
     <tr>
       <th>top_thresh</th>
@@ -163,7 +166,14 @@
     </tr>
     <tr>
       <th>best_thresh</th>
-      <td><p>Numeric specifying the absolute number of rows considered 'best'.</p></td>
+      <td><p>Numeric specifying the absolute number of rows considered
+'best'.</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>Either 'across' or 'within'. If the latter, only metrics that
+are set up to work 'within' clusters (rather than 'across' clusterings) are
+used.</p></td>
     </tr>
     </table>
 

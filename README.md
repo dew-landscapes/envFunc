@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2022-03-03 10:52:34 ACDT"
+#> [1] "2022-03-03 16:58:57 ACDT"
 ```
 
 ## What else is in `envFunc`
@@ -51,23 +51,12 @@ library("envFunc")
 The following functions and data sets are provided in `envFunc`. See https://acanthiza.github.io/envFunc/ for more examples.
 
 
-|object           |class                      |description                                                    |
-|:----------------|:--------------------------|:--------------------------------------------------------------|
-|add_freq_class   |function                   |Convert percentages to frequency classes                       |
-|add_time_stamp   |function                   |Add time stamp                                                 |
-|filter_test_func |function                   |Test rows against a function                                   |
-|first_up         |function                   |Change the first letter of a string to capital                 |
-|get_or_make      |function                   |Make an object if it is not available from provided file       |
-|git_commit_env   |function                   |Add, commit and push all current changes to github             |
-|lulsa            |tbl_df, tbl and data.frame |Lookup for Landscapes South Australia regions                  |
-|make_metric_df   |function                   |Use a set of (continuous) columns to choose a good set of rows |
-|make_metric_plot |function                   |Plot the results from diagnostic_df                            |
-|make_package     |function                   |Make package workflow                                          |
-|mirror_directory |function                   |Mirror a directory                                             |
-|numbers2words    |function                   |Convert a numeric to its corresponding english character.      |
-|prop_cpu         |function                   |Proportion of current CPU usage                                |
-|prop_mem         |function                   |Proportion of current memory usage                             |
-|vec_to_sentence  |function                   |Vector to text list                                            |
+```
+#> Error: Problem with `mutate()` column `class`.
+#> i `class = purrr::map_chr(object, ~envFunc::vec_to_sentence(class(get(.))))`.
+#> x lazy-load database 'C:/Users/nwilloughby/Documents/R/win-library/4.0/envFunc/R/envFunc.rdb' is corrupt
+#> Error in knitr::kable(manuals[, 2:4]): object 'manuals' not found
+```
 
 
 

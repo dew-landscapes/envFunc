@@ -101,102 +101,17 @@
     <span class="fu">envFunc</span><span class="fu">::</span><span class="fu"><a href="reference/add_time_stamp.html">add_time_stamp</a></span><span class="op">(</span><span class="op">)</span>
 
   <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">temp</span>, <span class="st">"ctime"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "2022-03-03 10:52:34 ACDT"</span></code></pre></div>
+<span class="co">#&gt; [1] "2022-03-03 16:58:57 ACDT"</span></code></pre></div>
 </div>
 <div id="what-else-is-in-envfunc" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-else-is-in-envfunc" class="anchor"></a>What else is in <code>envFunc</code>
 </h2>
 <p>The following functions and data sets are provided in <code>envFunc</code>. See <a href="https://acanthiza.github.io/envFunc/" class="uri">https://acanthiza.github.io/envFunc/</a> for more examples.</p>
-<table class="table">
-<colgroup>
-<col width="15%">
-<col width="25%">
-<col width="58%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">object</th>
-<th align="left">class</th>
-<th align="left">description</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">add_freq_class</td>
-<td align="left">function</td>
-<td align="left">Convert percentages to frequency classes</td>
-</tr>
-<tr class="even">
-<td align="left">add_time_stamp</td>
-<td align="left">function</td>
-<td align="left">Add time stamp</td>
-</tr>
-<tr class="odd">
-<td align="left">filter_test_func</td>
-<td align="left">function</td>
-<td align="left">Test rows against a function</td>
-</tr>
-<tr class="even">
-<td align="left">first_up</td>
-<td align="left">function</td>
-<td align="left">Change the first letter of a string to capital</td>
-</tr>
-<tr class="odd">
-<td align="left">get_or_make</td>
-<td align="left">function</td>
-<td align="left">Make an object if it is not available from provided file</td>
-</tr>
-<tr class="even">
-<td align="left">git_commit_env</td>
-<td align="left">function</td>
-<td align="left">Add, commit and push all current changes to github</td>
-</tr>
-<tr class="odd">
-<td align="left">lulsa</td>
-<td align="left">tbl_df, tbl and data.frame</td>
-<td align="left">Lookup for Landscapes South Australia regions</td>
-</tr>
-<tr class="even">
-<td align="left">make_metric_df</td>
-<td align="left">function</td>
-<td align="left">Use a set of (continuous) columns to choose a good set of rows</td>
-</tr>
-<tr class="odd">
-<td align="left">make_metric_plot</td>
-<td align="left">function</td>
-<td align="left">Plot the results from diagnostic_df</td>
-</tr>
-<tr class="even">
-<td align="left">make_package</td>
-<td align="left">function</td>
-<td align="left">Make package workflow</td>
-</tr>
-<tr class="odd">
-<td align="left">mirror_directory</td>
-<td align="left">function</td>
-<td align="left">Mirror a directory</td>
-</tr>
-<tr class="even">
-<td align="left">numbers2words</td>
-<td align="left">function</td>
-<td align="left">Convert a numeric to its corresponding english character.</td>
-</tr>
-<tr class="odd">
-<td align="left">prop_cpu</td>
-<td align="left">function</td>
-<td align="left">Proportion of current CPU usage</td>
-</tr>
-<tr class="even">
-<td align="left">prop_mem</td>
-<td align="left">function</td>
-<td align="left">Proportion of current memory usage</td>
-</tr>
-<tr class="odd">
-<td align="left">vec_to_sentence</td>
-<td align="left">function</td>
-<td align="left">Vector to text list</td>
-</tr>
-</tbody>
-</table>
+<pre><code>#&gt; Error: Problem with `mutate()` column `class`.
+#&gt; i `class = purrr::map_chr(object, ~envFunc::vec_to_sentence(class(get(.))))`.
+#&gt; x lazy-load database 'C:/Users/nwilloughby/Documents/R/win-library/4.0/envFunc/R/envFunc.rdb' is corrupt
+#&gt; Error in knitr::kable(manuals[, 2:4]): object 'manuals' not found</code></pre>
 </div>
 </div>
 

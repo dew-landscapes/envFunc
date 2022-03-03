@@ -46,7 +46,8 @@ make_metric_df <- function(df
     dplyr::filter(!is.na(!!rlang::ensym(mets_col))
                   , if(level == "within") grepl("within|both", ecosystem_within_mets) else grepl("across|both", ecosystem_within_mets)
                   ) %>%
-    dplyr::select(metric, high_good, ecosystem_within_mets, !!rlang::ensym(mets_col))
+    dplyr::select(metric, high_good, ecosystem_within_mets, !!rlang::ensym(mets_col)) %>%
+    dplyr::mutate(weight = !!rlang::ensym(mets_col))
 
   df %>%
     dplyr::select(all_of(context)
@@ -98,7 +99,6 @@ make_metric_df <- function(df
                                     )
                   ) %>%
     dplyr::ungroup() %>%
-    #dplyr::mutate(combo = scales::rescale(combo,to=c(0,1))) %>%
     dplyr::mutate(top_thresh = top_thresh
                   , best_thresh = best_thresh
                   , top = combo >= quantile(combo,probs = 1-top_thresh,na.rm = TRUE)
@@ -106,7 +106,6 @@ make_metric_df <- function(df
                   , best = combo >= sort(unique(.$combo),TRUE)[best_thresh]
                   , best = if_else(is.na(best),FALSE,best)
                   , metric = factor(metric, levels = levels(mets_df$metric))
-                  , weight = !!ensym(mets_col)
                   )
 
 }

@@ -44,9 +44,9 @@ make_metric_df <- function(df
   mets_df_use <- mets_df %>%
     dplyr::mutate(metric = forcats::fct_inorder(metric)) %>%
     dplyr::filter(!is.na(!!rlang::ensym(mets_col))
-                  , if(level == "within") ecosystem_within_mets else TRUE
+                  , if(level == "within") grepl("within|both", ecosystem_within_mets) else grepl("across|both", ecosystem_within_mets)
                   ) %>%
-    dplyr::select(metric, high_good, !!rlang::ensym(mets_col))
+    dplyr::select(metric, high_good, ecosystem_within_mets, !!rlang::ensym(mets_col))
 
   df %>%
     dplyr::select(all_of(context)

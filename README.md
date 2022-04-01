@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2022-03-03 17:04:00 ACDT"
+#> [1] "2022-04-01 16:00:52 ACDT"
 ```
 
 ## What else is in `envFunc`
@@ -60,6 +60,7 @@ The following functions and data sets are provided in `envFunc`. See https://aca
 |get_or_make      |function                   |Make an object if it is not available from provided file       |
 |git_commit_env   |function                   |Add, commit and push all current changes to github             |
 |lulsa            |tbl_df, tbl and data.frame |Lookup for Landscapes South Australia regions                  |
+|make_epochs      |function                   |Generate a tibble of epochs.                                   |
 |make_metric_df   |function                   |Use a set of (continuous) columns to choose a good set of rows |
 |make_metric_plot |function                   |Plot the results from diagnostic_df                            |
 |make_package     |function                   |Make package workflow                                          |

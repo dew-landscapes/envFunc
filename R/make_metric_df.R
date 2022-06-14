@@ -9,8 +9,6 @@
 #' @param mets_col Character. Name of `mets_df` column to use in this instance.
 #' @param summarise_method Character. Name of method to use in summarising if
 #' there is more than one row per context.
-#' @param group_col Character. Optional. Name of column to filter on
-#' (min_groups, max_groups)
 #' @param top_thresh Numeric specifying the proportion of rows considered 'top'.
 #' @param best_thresh Numeric specifying the absolute number of rows considered
 #' 'best'.
@@ -33,7 +31,6 @@ make_metric_df <- function(df
                                     )
                       , mets_col = "summary_mets"
                       , summarise_method = median
-                      , group_col = "groups"
                       , top_thresh = 0.25
                       , best_thresh = 5
                       , level = c("across", "within")
@@ -105,7 +102,7 @@ make_metric_df <- function(df
                   , top = if_else(is.na(top),FALSE,top)
                   , best = combo >= sort(unique(.$combo),TRUE)[best_thresh]
                   , best = if_else(is.na(best),FALSE,best)
-                  , metric = factor(metric, levels = levels(mets_df$metric))
+                  , metric = factor(metric, levels = levels(mets_df_use$metric))
                   )
 
 }

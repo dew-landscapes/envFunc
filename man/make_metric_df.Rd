@@ -11,7 +11,6 @@ make_metric_df(
   context = c("method", "groups"),
   mets_col = "summary_mets",
   summarise_method = median,
-  group_col = "groups",
   top_thresh = 0.25,
   best_thresh = 5,
   level = c("across", "within")
@@ -29,9 +28,6 @@ make_metric_df(
 
 \item{summarise_method}{Character. Name of method to use in summarising if
 there is more than one row per context.}
-
-\item{group_col}{Character. Optional. Name of column to filter on
-(min_groups, max_groups)}
 
 \item{top_thresh}{Numeric specifying the proportion of rows considered 'top'.}
 

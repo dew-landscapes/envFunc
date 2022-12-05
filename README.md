@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2022-06-14 16:57:59 ACST"
+#> [1] "2022-12-05 10:54:26 ACDT"
 ```
 
 ## What else is in `envFunc`
@@ -54,6 +54,7 @@ The following functions and data sets are provided in `envFunc`. See https://aca
 |object           |class                      |description                                                    |
 |:----------------|:--------------------------|:--------------------------------------------------------------|
 |add_freq_class   |function                   |Convert percentages to frequency classes                       |
+|add_likelihood   |function                   |Add likelihood based on IPCC thresholds                        |
 |add_time_stamp   |function                   |Add time stamp                                                 |
 |filter_test_func |function                   |Test rows against a function                                   |
 |first_up         |function                   |Change the first letter of a string to capital                 |
@@ -68,6 +69,7 @@ The following functions and data sets are provided in `envFunc`. See https://aca
 |numbers2words    |function                   |Convert a numeric to its corresponding english character.      |
 |prop_cpu         |function                   |Proportion of current CPU usage                                |
 |prop_mem         |function                   |Proportion of current memory usage                             |
+|quibble          |function                   |Make a wide, single row, data frame of quantiles (percentiles) |
 |vec_to_sentence  |function                   |Vector to text list                                            |
 
 

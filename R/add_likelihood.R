@@ -13,10 +13,8 @@
 #' @examples
   add_likelihood <- function(df, col) {
 
-    likelihood <- envFunc::lulikelihood
-
     df %>%
-      dplyr::mutate(likelihood = purrr::map({{ col }}
+      dplyr::mutate(likelihood = purrr::map(!!rlang::ensym(col)
                                             , ~cut(.
                                                    , breaks = c(0,lulikelihood$maxVal)
                                                    , labels = lulikelihood$likelihood
@@ -25,10 +23,10 @@
                                             )
                     ) %>%
       tidyr::unnest(cols = c(likelihood)) %>%
-      dplyr::mutate(likelihood = forcats::fct_expand(likelihood
-                                                     , levels(lulikelihood$likelihood)
-                                                     )
-                    ) %>%
+      # dplyr::mutate(likelihood = forcats::fct_expand(likelihood
+      #                                                , levels(lulikelihood$likelihood)
+      #                                                )
+      #               ) %>%
       dplyr::left_join(lulikelihood %>%
                          dplyr::select(likelihood
                                        , any_of(names(lulikelihood))

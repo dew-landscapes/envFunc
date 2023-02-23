@@ -37,39 +37,53 @@
   }
 
 
-#' Vector to text list
+#' Vector to phrase
 #'
-#' Turn a vector into a comma separated list of values with a penultimate 'and'
-#' or other separator.
+#' Turn a vector into a phrase with a final 'and' (or other separator). If `sep`
+#' is ";" the final is `sep` plus `end`.
 #'
-#' @param x Character. Vector to collapse to a sentence.
-#' @param sep Character. Separator between all except last.
-#' @param end Character. Last separator.
+#' @param x Character. Vector to collapse to phrase
+#' @param sep Character. Separator between all except last
+#' @param end Character. Last separator
+#' @param na_rm Logical. Remove `NA`?
 #'
 #' @return Character.
 #' @export
 #'
 #' @examples
-#' x <- c("apples", "bannanas", "pears", "grapes")
+#' x <- c("apples", "bannanas", "pears", NA, "grapes")
 #' vec_to_sentence(x)
-#' vec_to_sentence(x,end = "&")
-  vec_to_sentence <- function(x,sep=",",end="and") {
+#' vec_to_sentence(x, end = "&")
+#' vec_to_sentence(x, ";")
+#' vec_to_sentence(x, na_rm = F)
+  vec_to_sentence <- function(x
+                              , sep = ","
+                              , end = "and"
+                              , na_rm = TRUE
+                              ) {
 
-    x[!is.na(x)] %>%
-      paste(collapse = "JOINSRUS") %>%
-      (function(x) if(sep == ";") {
+    sep <- paste0(sep, " ")
+    end <- paste0(end, " ")
 
-        stringi::stri_replace_last_regex(x,"JOINSRUS", paste0(sep," and ")) %>%
-          stringr::str_replace_all("JOINSRUS",paste0(sep," "))
+    if(na_rm) x <- x[!is.na(x)]
 
-      } else {
+    x %>%
+      paste(collapse = sep) %>%
+      stringi::stri_replace_last_regex(sep
+                                       , if(sep == "; ") {
 
-        stringi::stri_replace_last_regex(x,"JOINSRUS",paste0(" ",end," ")) %>%
-          stringr::str_replace_all("JOINSRUS",paste0(sep," "))
+                                         paste0(sep
+                                                , end
+                                                )
 
-      }
-      )
+                                       } else {
 
+                                         paste0(" "
+                                                , end
+                                                )
+
+                                       }
+                                       )
   }
 
 
@@ -84,8 +98,14 @@
 #' @export
 #'
 #' @examples
+#' x <- 10
 #' numbers2words(10)
-#' numbers2words(floor(sample(1:1000,1)))
+#'
+#' x <- c(x, 0, 20)
+#' numbers2words(x)
+#'
+#' x <- c(x, sample(1:10000,1))
+#' numbers2words(x)
   numbers2words <- function(x){
 
     ## Function by John Fox found here:
@@ -95,7 +115,9 @@
     helper <- function(x){
 
       digits <- rev(strsplit(as.character(x), "")[[1]])
+
       nDigits <- length(digits)
+
       if (nDigits == 1) as.vector(ones[digits])
       else if (nDigits == 2)
         if (x <= 19) as.vector(teens[digits[1]])
@@ -110,35 +132,56 @@
           nDigits:(3*nSuffix + 1)])),
           suffixes[nSuffix],"," ,
           Recall(makeNumber(digits[(3*nSuffix):1]))))
+
       }
+
     }
+
     trim <- function(text){
+
       #Tidy leading/trailing whitespace, space before comma
       text=gsub("^\ ", "", gsub("\ *$", "", gsub("\ ,",",",text)))
+
       #Clear any trailing " and"
       text=gsub(" and$","",text)
+
       #Clear any trailing comma
       gsub("\ *,$","",text)
+
     }
+
     makeNumber <- function(...) as.numeric(paste(..., collapse=""))
+
     #Disable scientific notation
     opts <- options(scipen=100)
+
     on.exit(options(opts))
+
     ones <- c("", "one", "two", "three", "four", "five", "six", "seven",
               "eight", "nine")
+
     names(ones) <- 0:9
+
     teens <- c("ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
                "sixteen", "seventeen", "eighteen", "nineteen")
+
     names(teens) <- 0:9
+
     tens <- c("twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
               "ninety")
+
     names(tens) <- 2:9
+
     x <- round(x)
+
     suffixes <- c("thousand", "million", "billion", "trillion")
-    if (length(x) > 1) return(trim(sapply(x, helper)))
-    res <- helper(x)
-    #res <- gsub(" ","",res)
+
+    res <- trim(sapply(x, helper))
+
+    res[x == 0] <- "zero"
+
     return(res)
+
   }
 
 

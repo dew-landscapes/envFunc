@@ -17,6 +17,12 @@ Edited from the \href{https://github.com/ateucher/useful_code/blob/master/R/numb
 file by \href{https://github.com/ateucher}{ateucher}.
 }
 \examples{
+x <- 10
 numbers2words(10)
-numbers2words(floor(sample(1:1000,1)))
+
+x <- c(x, 0, 20)
+numbers2words(x)
+
+x <- c(x, sample(1:10000,1))
+numbers2words(x)
 }

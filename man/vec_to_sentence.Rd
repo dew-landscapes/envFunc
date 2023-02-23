@@ -2,26 +2,30 @@
 % Please edit documentation in R/functions.R
 \name{vec_to_sentence}
 \alias{vec_to_sentence}
-\title{Vector to text list}
+\title{Vector to phrase}
 \usage{
-vec_to_sentence(x, sep = ",", end = "and")
+vec_to_sentence(x, sep = ",", end = "and", na_rm = TRUE)
 }
 \arguments{
-\item{x}{Character. Vector to collapse to a sentence.}
+\item{x}{Character. Vector to collapse to phrase}
 
-\item{sep}{Character. Separator between all except last.}
+\item{sep}{Character. Separator between all except last}
 
-\item{end}{Character. Last separator.}
+\item{end}{Character. Last separator}
+
+\item{na_rm}{Logical. Remove \code{NA}?}
 }
 \value{
 Character.
 }
 \description{
-Turn a vector into a comma separated list of values with a penultimate 'and'
-or other separator.
+Turn a vector into a phrase with a final 'and' (or other separator). If \code{sep}
+is ";" the final is \code{sep} plus \code{end}.
 }
 \examples{
-x <- c("apples", "bannanas", "pears", "grapes")
+x <- c("apples", "bannanas", "pears", NA, "grapes")
 vec_to_sentence(x)
-vec_to_sentence(x,end = "&")
+vec_to_sentence(x, end = "&")
+vec_to_sentence(x, ";")
+vec_to_sentence(x, na_rm = F)
 }

@@ -1,11 +1,13 @@
 
 
-#' Plot the results from diagnostic_df
+#' Plot the results from `make_metric_df`
 #'
-#' @param metric_df Dataframe with results from call to `metrics_df`.
+#' @param metric_df Dataframe with results from call to `make_metric_df`.
 #' @param group_col Character. Name of column with numeric data for x-axis.
-#' @param facet_col Character. Optional name of column to facet on (along with label).
-#' @param label Character label for the diagnostics (choose another column from diagnosticDF).
+#' @param facet_col Character. Optional name of column to facet on (along with
+#' label).
+#' @param label Character label for the diagnostics (choose another column from
+#' `metric_df`).
 #' @param value Character. Name of column with values to plot.
 #' @param display_all Display all diagnostics or only those used to select best.
 #'
@@ -14,12 +16,12 @@
 #'
 #' @examples
 make_metric_plot <- function(metric_df
-                        , group_col = "groups"
-                        , facet_col = "method"
-                        , label = "metric"
-                        , value = "scale"
-                        , display_all = FALSE
-                        ) {
+                             , group_col = "groups"
+                             , facet_col = "method"
+                             , label = "metric"
+                             , value = "scale"
+                             , display_all = FALSE
+                             ) {
 
   df <- metric_df %>%
     {if(display_all) (.) else (.) %>% dplyr::filter(weight)} %>%

@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_metric_plot.R
 \name{make_metric_plot}
 \alias{make_metric_plot}
-\title{Plot the results from diagnostic_df}
+\title{Plot the results from \code{make_metric_df}}
 \usage{
 make_metric_plot(
   metric_df,
@@ -14,13 +14,15 @@ make_metric_plot(
 )
 }
 \arguments{
-\item{metric_df}{Dataframe with results from call to \code{metrics_df}.}
+\item{metric_df}{Dataframe with results from call to \code{make_metric_df}.}
 
 \item{group_col}{Character. Name of column with numeric data for x-axis.}
 
-\item{facet_col}{Character. Optional name of column to facet on (along with label).}
+\item{facet_col}{Character. Optional name of column to facet on (along with
+label).}
 
-\item{label}{Character label for the diagnostics (choose another column from diagnosticDF).}
+\item{label}{Character label for the diagnostics (choose another column from
+\code{metric_df}).}
 
 \item{value}{Character. Name of column with values to plot.}
 
@@ -30,5 +32,5 @@ make_metric_plot(
 
 }
 \description{
-Plot the results from diagnostic_df
+Plot the results from \code{make_metric_df}
 }

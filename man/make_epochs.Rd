@@ -19,7 +19,7 @@ make_epochs(
 \item{epoch_step}{Numeric. How many years in an epoch?}
 
 \item{epoch_overlap}{Logical. Should epochs overlap by one year? i.e.
-\code{epoch_step = 10} with \code{epoch_overlap = TRUE} with  gives, say, 2000-2010 and
+\code{epoch_step = 10} with \code{epoch_overlap = TRUE} gives, say, 2000-2010 and
 2010-2020 whereas \code{epoch_overlap = FALSE} gives 2000-2009 and
 2010-2019.}
 }
@@ -28,7 +28,7 @@ Tibble with columns
 \describe{
 \item{start}{First year of epoch}
 \item{end}{Last year of epoch}
-\item{year}{List column containing the years for the epoch}
+\item{years}{List column containing the years for the epoch}
 \item{epoch}{Last two digits of first year and last year in epoch.
 e.g. 10-19.}
 \item{data}{List column of full path of raster files to summarise.}
@@ -38,5 +38,8 @@ e.g. 10-19.}
 Generate a tibble of epochs.
 }
 \examples{
+now <- as.numeric(format(Sys.Date(), "\%Y"))
+make_epochs(now - 30, now, 10)
+make_epochs(now - 30, now, 10, F)
 
 }

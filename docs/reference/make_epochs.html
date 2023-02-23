@@ -142,7 +142,7 @@
     <tr>
       <th>epoch_overlap</th>
       <td><p>Logical. Should epochs overlap by one year? i.e.
-<code>epoch_step = 10</code> with <code>epoch_overlap = TRUE</code> with  gives, say, 2000-2010 and
+<code>epoch_step = 10</code> with <code>epoch_overlap = TRUE</code> gives, say, 2000-2010 and
 2010-2020 whereas <code>epoch_overlap = FALSE</code> gives 2000-2009 and
 2010-2019.</p></td>
     </tr>
@@ -153,7 +153,7 @@
     <p>Tibble with columns</p><dl>
 <dt>start</dt><dd><p>First year of epoch</p></dd>
 <dt>end</dt><dd><p>Last year of epoch</p></dd>
-<dt>year</dt><dd><p>List column containing the years for the epoch</p></dd>
+<dt>years</dt><dd><p>List column containing the years for the epoch</p></dd>
 <dt>epoch</dt><dd><p>Last two digits of first year and last year in epoch.
 e.g. 10-19.</p></dd>
 <dt>data</dt><dd><p>List column of full path of raster files to summarise.</p></dd>
@@ -162,7 +162,22 @@ e.g. 10-19.</p></dd>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'></span>
+    <pre class="examples"><span class='r-in'><span class='va'>now</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"%Y"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>make_epochs</span><span class='op'>(</span><span class='va'>now</span> <span class='op'>-</span> <span class='fl'>30</span>, <span class='va'>now</span>, <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 3 x 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   start   end years      epoch epoch_now</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;ord&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>  <span style='text-decoration: underline;'>1</span>993  <span style='text-decoration: underline;'>2</span>003 <span style='color: #949494;'>&lt;int [11]&gt;</span> 93-03 FALSE    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span>  <span style='text-decoration: underline;'>2</span>003  <span style='text-decoration: underline;'>2</span>013 <span style='color: #949494;'>&lt;int [11]&gt;</span> 03-13 FALSE    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span>  <span style='text-decoration: underline;'>2</span>013  <span style='text-decoration: underline;'>2</span>023 <span style='color: #949494;'>&lt;int [11]&gt;</span> 13-23 TRUE     </span>
+<span class='r-in'><span class='fu'>make_epochs</span><span class='op'>(</span><span class='va'>now</span> <span class='op'>-</span> <span class='fl'>30</span>, <span class='va'>now</span>, <span class='fl'>10</span>, <span class='cn'>F</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4 x 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   start   end years      epoch epoch_now</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;ord&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span>  <span style='text-decoration: underline;'>1</span>993  <span style='text-decoration: underline;'>1</span>993 <span style='color: #949494;'>&lt;int [1]&gt;</span>  93-93 FALSE    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span>  <span style='text-decoration: underline;'>1</span>994  <span style='text-decoration: underline;'>2</span>003 <span style='color: #949494;'>&lt;int [10]&gt;</span> 94-03 FALSE    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span>  <span style='text-decoration: underline;'>2</span>004  <span style='text-decoration: underline;'>2</span>013 <span style='color: #949494;'>&lt;int [10]&gt;</span> 04-13 FALSE    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span>  <span style='text-decoration: underline;'>2</span>014  <span style='text-decoration: underline;'>2</span>023 <span style='color: #949494;'>&lt;int [10]&gt;</span> 14-23 TRUE     </span>
 <span class='r-in'></span>
 </pre>
   </div>

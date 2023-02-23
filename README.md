@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2023-02-02 17:41:18 ACDT"
+#> [1] "2023-02-23 15:05:47 ACDT"
 ```
 
 ## What else is in `envFunc`
@@ -64,14 +64,14 @@ The following functions and data sets are provided in `envFunc`. See https://aca
 |`envFunc::lulsa`            |tbl_df, tbl and data.frame |Lookup for Landscapes South Australia regions                  |
 |`envFunc::make_epochs`      |function                   |Generate a tibble of epochs.                                   |
 |`envFunc::make_metric_df`   |function                   |Use a set of (continuous) columns to choose a good set of rows |
-|`envFunc::make_metric_plot` |function                   |Plot the results from diagnostic_df                            |
+|`envFunc::make_metric_plot` |function                   |Plot the results from code{make_metric_df}                     |
 |`envFunc::make_package`     |function                   |Make package workflow                                          |
 |`envFunc::mirror_directory` |function                   |Mirror a directory                                             |
 |`envFunc::numbers2words`    |function                   |Convert a numeric to its corresponding english character.      |
 |`envFunc::prop_cpu`         |function                   |Proportion of current CPU usage                                |
 |`envFunc::prop_mem`         |function                   |Proportion of current memory usage                             |
 |`envFunc::quibble`          |function                   |Make a wide, single row, data frame of quantiles (percentiles) |
-|`envFunc::vec_to_sentence`  |function                   |Vector to text list                                            |
+|`envFunc::vec_to_sentence`  |function                   |Vector to phrase                                               |
 
 
 

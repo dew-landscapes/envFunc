@@ -28,21 +28,28 @@ filter_test_func <- function(df
     dplyr::mutate(test = purrr::map(!!rlang::ensym(test_col)
                                     , ~ test_func(.)
                                     )
-                  , pass = purrr::map_lgl(test, ~is.null(.$error))
+                  , pass = purrr::map_lgl(test
+                                          , ~ all(is.null(.$error), .$result)
+                                          )
                   )
 
   fail_res <- test_res %>%
     dplyr::filter(!pass)
 
-  cat(paste0("Filtering the following from df[test_col], due to test_func failure\n  "
-             , paste0(fail_res$path
-                      , collapse = "\n  "
-                      )
-             )
-      )
+  if(nrow(fail_res) > 0) {
+
+    cat(paste0("Filtering the following from df[test_col], due to test_func failure\n  "
+               , paste0(fail_res %>% dplyr::pull(!!rlang::ensym(test_col))
+                        , collapse = "\n  "
+                        )
+               , "\n"
+               )
+        )
+
+  }
 
   test_res %>%
     dplyr::filter(pass) %>%
-    dplyr::select(keep_names)
+    dplyr::select(tidyselect::all_of(keep_names))
 
 }

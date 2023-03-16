@@ -68,8 +68,8 @@
     if(na_rm) x <- x[!is.na(x)]
 
     x %>%
-      paste(collapse = sep) %>%
-      stringi::stri_replace_last_regex(sep
+      paste(collapse = "join_goes_here") %>%
+      stringi::stri_replace_last_regex("join_goes_here"
                                        , if(sep == "; ") {
 
                                          paste0(sep
@@ -83,7 +83,11 @@
                                                 )
 
                                        }
-                                       )
+                                       ) %>%
+      stringi::stri_replace_all_regex("join_goes_here"
+                                      , sep
+                                      )
+
   }
 
 

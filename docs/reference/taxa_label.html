@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Proportion of current CPU usage — prop_cpu • envFunc</title>
+<title>Create a label for a species — taxa_label • envFunc</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Proportion of current CPU usage — prop_cpu" />
-<meta property="og:description" content="Edited from various posts on the Stack Exchange Network." />
+<meta property="og:title" content="Create a label for a species — taxa_label" />
+<meta property="og:description" content="Default is 'Common (Scientific). Possibly including n = 
+if records is supplied. Formatted for either ggplot (default
+what_for =plot) or markdown." />
 
 
 
@@ -108,26 +110,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Proportion of current CPU usage</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Acanthiza/envFunc/blob/master/R/system.R'><code>R/system.R</code></a></small>
-    <div class="hidden name"><code>prop_cpu.Rd</code></div>
+    <h1>Create a label for a species</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Acanthiza/envFunc/blob/master/R/taxa_label.R'><code>R/taxa_label.R</code></a></small>
+    <div class="hidden name"><code>taxa_label.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Edited from various posts on the <a href='https://stackoverflow.com/questions/27788968/how-would-one-check-the-system-memory-available-using-r-on-a-windows-machine'>Stack Exchange Network</a>.</p>
+    <p>Default is 'Common (<em>Scientific</em>). Possibly including <code>n = </code>
+if <code>records</code> is supplied. Formatted for either ggplot (default
+<code>what_for =plot</code>) or markdown.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>prop_cpu</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>taxa_label</span><span class='op'>(</span>common <span class='op'>=</span> <span class='cn'>NULL</span>, taxa <span class='op'>=</span> <span class='cn'>NULL</span>, records <span class='op'>=</span> <span class='cn'>NULL</span>, what_for <span class='op'>=</span> <span class='st'>"plot"</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>common</th>
+      <td><p>Character. Common name for species</p></td>
+    </tr>
+    <tr>
+      <th>taxa</th>
+      <td><p>Character. Scientific name for species</p></td>
+    </tr>
+    <tr>
+      <th>records</th>
+      <td><p>Numeric. Optional number of records.</p></td>
+    </tr>
+    <tr>
+      <th>what_for</th>
+      <td><p>"plot" or something else. If plot will be formatted for
+plotting otherwise formatted for markdown.</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Numeric. Proportion</p>
+    
+
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span><span class='op'>(</span><span class='va'>.Platform</span><span class='op'>$</span><span class='va'>OS.type</span> <span class='op'>==</span> <span class='st'>"windows"</span><span class='op'>)</span> <span class='fu'>prop_cpu</span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>NAs introduced by coercion</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.05370682</span>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'>taxa_label</span><span class='op'>(</span><span class='st'>"Black-chinned Honeyeater"</span>, <span class='st'>"Melithreptus gularis"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> "Black-chinned Honeyeater" ~ italic("Melithreptus gularis")</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'>taxa_label</span><span class='op'>(</span>taxa <span class='op'>=</span> <span class='st'>"Melithreptus gularis"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ~italic("Melithreptus gularis")</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'>taxa_label</span><span class='op'>(</span><span class='st'>"Black-chinned Honeyeater"</span>, records <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> "Black-chinned Honeyeater" * ", n = 3"</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'>taxa_label</span><span class='op'>(</span><span class='st'>"Black-chinned Honeyeater"</span>, <span class='st'>"Melithreptus gularis"</span>, what_for <span class='op'>=</span> <span class='st'>"md"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Black-chinned Honeyeater (_Melithreptus gularis_)</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'>taxa_label</span><span class='op'>(</span><span class='st'>"Black-chinned Honeyeater"</span>, <span class='st'>"Melithreptus gularis"</span>, what_for <span class='op'>=</span> <span class='st'>"md"</span>, records <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Black-chinned Honeyeater (_Melithreptus gularis_), n = 3</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

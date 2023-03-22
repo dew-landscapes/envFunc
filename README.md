@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2023-03-16 14:36:37 ACDT"
+#> [1] "2023-03-22 10:28:47 ACDT"
 ```
 
 ## What else is in `envFunc`
@@ -71,6 +71,7 @@ The following functions and data sets are provided in `envFunc`. See https://aca
 |`envFunc::prop_cpu`         |function                   |Proportion of current CPU usage                                |
 |`envFunc::prop_mem`         |function                   |Proportion of current memory usage                             |
 |`envFunc::quibble`          |function                   |Make a wide, single row, data frame of quantiles (percentiles) |
+|`envFunc::taxa_label`       |function                   |Create a label for a species                                   |
 |`envFunc::vec_to_sentence`  |function                   |Vector to phrase                                               |
 
 

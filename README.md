@@ -43,7 +43,32 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2023-03-22 10:28:47 ACDT"
+#> [1] "2023-05-31 15:29:31 ACST"
+```
+
+## Add a likelihood classification
+
+
+```r
+
+  x <- tibble::tibble(x = rbeta(10, 1, 1)) %>%
+    add_likelihood(x)
+#> Joining, by = "likelihood"
+  
+  x
+#> # A tibble: 10 x 8
+#>         x likelihood             maxVal range         loose very  extreme exceptional
+#>     <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
+#>  1 0.160  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  2 0.0702 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         
+#>  3 0.984  Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        
+#>  4 0.660  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  5 0.685  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  6 0.732  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  7 0.685  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  8 0.409  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  9 0.739  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#> 10 0.978  Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---
 ```
 
 ## What else is in `envFunc`

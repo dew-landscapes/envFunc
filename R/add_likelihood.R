@@ -16,20 +16,16 @@
     df %>%
       dplyr::mutate(likelihood = purrr::map(!!rlang::ensym(col)
                                             , ~cut(.
-                                                   , breaks = c(0,lulikelihood$maxVal)
-                                                   , labels = lulikelihood$likelihood
+                                                   , breaks = c(0,envFunc::lulikelihood$maxVal)
+                                                   , labels = envFunc::lulikelihood$likelihood
                                                    , include.lowest = TRUE
                                                    )
                                             )
                     ) %>%
       tidyr::unnest(cols = c(likelihood)) %>%
-      # dplyr::mutate(likelihood = forcats::fct_expand(likelihood
-      #                                                , levels(lulikelihood$likelihood)
-      #                                                )
-      #               ) %>%
-      dplyr::left_join(lulikelihood %>%
+      dplyr::left_join(envFunc::lulikelihood %>%
                          dplyr::select(likelihood
-                                       , any_of(names(lulikelihood))
+                                       , any_of(names(envFunc::lulikelihood))
                                        )
                        )
 

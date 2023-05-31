@@ -54,6 +54,17 @@ library("envFunc")
 
 ```
 
+## Add a likelihood classification
+
+```{r}
+
+  x <- tibble::tibble(x = rbeta(10, 1, 1)) %>%
+    add_likelihood(x)
+  
+  x
+
+```
+
 ## What else is in `envFunc`
 
 The following functions and data sets are provided in `envFunc`. See https://acanthiza.github.io/envFunc/ for more examples.

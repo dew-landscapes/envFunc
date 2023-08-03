@@ -16,9 +16,6 @@ taxa_label(common = NULL, taxa = NULL, records = NULL, what_for = "plot")
 \item{what_for}{"plot" or something else. If plot will be formatted for
 plotting otherwise formatted for markdown.}
 }
-\value{
-
-}
 \description{
 Default is 'Common (\emph{Scientific}). Possibly including \verb{n = }
 if \code{records} is supplied. Formatted for either ggplot (default

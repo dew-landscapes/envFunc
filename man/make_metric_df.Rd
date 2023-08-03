@@ -6,8 +6,8 @@
 \usage{
 make_metric_df(
   df,
-  mets_df = tibble::tibble(metric = "av_clust_size", high_good = TRUE, clust_sum =
-    TRUE, level = "clustering"),
+  mets_df = tibble::tibble(metric = "av_clust_size", high_good = TRUE, clust_sum = TRUE,
+    level = "clustering"),
   context = c("method", "groups"),
   mets_col = "summary_mets",
   summarise_method = median,
@@ -37,9 +37,6 @@ there is more than one row per context.}
 \item{level}{Either 'across' or 'within'. If the latter, only metrics that
 are set up to work 'within' clusters (rather than 'across' clusterings) are
 used.}
-}
-\value{
-
 }
 \description{
 Use a set of (continuous) columns to choose a good set of rows

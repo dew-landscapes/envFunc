@@ -28,9 +28,6 @@ label).}
 
 \item{display_all}{Display all diagnostics or only those used to select best.}
 }
-\value{
-
-}
 \description{
 Plot the results from \code{make_metric_df}
 }

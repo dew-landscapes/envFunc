@@ -22,6 +22,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -34,25 +36,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">envFunc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Acanthiza/envFunc/">
+  <a href="https://github.com/Acanthiza/envFunc/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -69,222 +65,116 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-
-<hr>
-<p>output: rmarkdown::github_document —</p>
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="envfunc-an-r-package-of-tools-to-help-with-other-envpackages" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#envfunc-an-r-package-of-tools-to-help-with-other-envpackages" class="anchor"></a><code>envFunc</code>: an R package of tools to help with other <code>env</code>Packages</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="envfunc-an-r-package-of-tools-to-help-with-other-envpackages">
+<code>envFunc</code>: an R package of tools to help with other <code>env</code>Packages<a class="anchor" aria-label="anchor" href="#envfunc-an-r-package-of-tools-to-help-with-other-envpackages"></a>
+</h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
 <p>The goal of <code>envFunc</code> is to store functions that help across the other <code>env</code>Packages.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p><code>envFunc</code> is not on <a href="https://CRAN.R-project.org">CRAN</a>.</p>
-<p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p><code>envFunc</code> is not on <a href="https://CRAN.R-project.org" class="external-link">CRAN</a>.</p>
+<p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"Acanthiza/envFunc"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Acanthiza/envFunc"</span><span class="op">)</span></span></code></pre></div>
 <p>Load <code>envFunc</code></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/Acanthiza/envFunc">"envFunc"</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/Acanthiza/envFunc" class="external-link">"envFunc"</a></span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="add-time-stamp" class="section level2">
-<h2 class="hasAnchor">
-<a href="#add-time-stamp" class="anchor"></a>Add time stamp</h2>
+<div class="section level2">
+<h2 id="add-time-stamp">Add time stamp<a class="anchor" aria-label="anchor" href="#add-time-stamp"></a>
+</h2>
 <p><code>add_time_stamp</code> adds the creation time of an object as an attribute.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-  <span class="va">temp</span> <span class="op">&lt;-</span> <span class="va">cars</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu">envFunc</span><span class="fu">::</span><span class="fu"><a href="reference/add_time_stamp.html">add_time_stamp</a></span><span class="op">(</span><span class="op">)</span>
-
-  <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">temp</span>, <span class="st">"ctime"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "2023-05-31 15:29:31 ACST"</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span>  <span class="va">temp</span> <span class="op">&lt;-</span> <span class="va">cars</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">envFunc</span><span class="fu">::</span><span class="fu"><a href="reference/add_time_stamp.html">add_time_stamp</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">temp</span>, <span class="st">"ctime"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "2023-08-03 11:00:22 ACST"</span></span></code></pre></div>
 </div>
-<div id="add-a-likelihood-classification" class="section level2">
-<h2 class="hasAnchor">
-<a href="#add-a-likelihood-classification" class="anchor"></a>Add a likelihood classification</h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span>
-    <span class="fu"><a href="reference/add_likelihood.html">add_likelihood</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = "likelihood"</span>
-  
-  <span class="va">x</span>
-<span class="co">#&gt; # A tibble: 10 x 8</span>
-<span class="co">#&gt;         x likelihood             maxVal range         loose very  extreme exceptional</span>
-<span class="co">#&gt;     &lt;dbl&gt; &lt;fct&gt;                   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;      </span>
-<span class="co">#&gt;  1 0.160  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span>
-<span class="co">#&gt;  2 0.0702 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         </span>
-<span class="co">#&gt;  3 0.984  Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        </span>
-<span class="co">#&gt;  4 0.660  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span>
-<span class="co">#&gt;  5 0.685  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span>
-<span class="co">#&gt;  6 0.732  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span>
-<span class="co">#&gt;  7 0.685  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span>
-<span class="co">#&gt;  8 0.409  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span>
-<span class="co">#&gt;  9 0.739  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span>
-<span class="co">#&gt; 10 0.978  Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---</span></code></pre></div>
-</div>
-<div id="what-else-is-in-envfunc" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-else-is-in-envfunc" class="anchor"></a>What else is in <code>envFunc</code>
+<div class="section level2">
+<h2 id="add-a-likelihood-classification">Add a likelihood classification<a class="anchor" aria-label="anchor" href="#add-a-likelihood-classification"></a>
 </h2>
-<p>The following functions and data sets are provided in <code>envFunc</code>. See <a href="https://acanthiza.github.io/envFunc/" class="uri">https://acanthiza.github.io/envFunc/</a> for more examples.</p>
-<table class="table">
-<colgroup>
-<col width="23%">
-<col width="22%">
-<col width="53%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">object</th>
-<th align="left">class</th>
-<th align="left">description</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code><a href="reference/add_freq_class.html">envFunc::add_freq_class</a></code></td>
-<td align="left">function</td>
-<td align="left">Convert percentages to frequency classes</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="reference/add_likelihood.html">envFunc::add_likelihood</a></code></td>
-<td align="left">function</td>
-<td align="left">Add likelihood based on IPCC thresholds</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="reference/add_time_stamp.html">envFunc::add_time_stamp</a></code></td>
-<td align="left">function</td>
-<td align="left">Add time stamp</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="reference/filter_test_func.html">envFunc::filter_test_func</a></code></td>
-<td align="left">function</td>
-<td align="left">Test rows against a function</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="reference/first_up.html">envFunc::first_up</a></code></td>
-<td align="left">function</td>
-<td align="left">Change the first letter of a string to capital</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="reference/get_or_make.html">envFunc::get_or_make</a></code></td>
-<td align="left">function</td>
-<td align="left">Make an object if it is not available from provided file</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="reference/git_commit_env.html">envFunc::git_commit_env</a></code></td>
-<td align="left">function</td>
-<td align="left">Add, commit and push all current changes to github</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="reference/lulikelihood.html">envFunc::lulikelihood</a></code></td>
-<td align="left">tbl_df, tbl and data.frame</td>
-<td align="left">Dataframe of likelihood thresholds and definitions</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="reference/lulsa.html">envFunc::lulsa</a></code></td>
-<td align="left">tbl_df, tbl and data.frame</td>
-<td align="left">Lookup for Landscapes South Australia regions</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="reference/make_epochs.html">envFunc::make_epochs</a></code></td>
-<td align="left">function</td>
-<td align="left">Generate a tibble of epochs.</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="reference/make_metric_df.html">envFunc::make_metric_df</a></code></td>
-<td align="left">function</td>
-<td align="left">Use a set of (continuous) columns to choose a good set of rows</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="reference/make_metric_plot.html">envFunc::make_metric_plot</a></code></td>
-<td align="left">function</td>
-<td align="left">Plot the results from code{make_metric_df}</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="reference/make_package.html">envFunc::make_package</a></code></td>
-<td align="left">function</td>
-<td align="left">Make package workflow</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="reference/mirror_directory.html">envFunc::mirror_directory</a></code></td>
-<td align="left">function</td>
-<td align="left">Mirror a directory</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="reference/numbers2words.html">envFunc::numbers2words</a></code></td>
-<td align="left">function</td>
-<td align="left">Convert a numeric to its corresponding english character.</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="reference/prop_cpu.html">envFunc::prop_cpu</a></code></td>
-<td align="left">function</td>
-<td align="left">Proportion of current CPU usage</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="reference/prop_mem.html">envFunc::prop_mem</a></code></td>
-<td align="left">function</td>
-<td align="left">Proportion of current memory usage</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="reference/quibble.html">envFunc::quibble</a></code></td>
-<td align="left">function</td>
-<td align="left">Make a wide, single row, data frame of quantiles (percentiles)</td>
-</tr>
-<tr class="odd">
-<td align="left"><code><a href="reference/taxa_label.html">envFunc::taxa_label</a></code></td>
-<td align="left">function</td>
-<td align="left">Create a label for a species</td>
-</tr>
-<tr class="even">
-<td align="left"><code><a href="reference/vec_to_sentence.html">envFunc::vec_to_sentence</a></code></td>
-<td align="left">function</td>
-<td align="left">Vector to phrase</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html" class="external-link">rbeta</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="reference/add_likelihood.html">add_likelihood</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in `dplyr::mutate()`:</span></span>
+<span><span class="co">#&gt; i In argument: `likelihood = purrr::map(...)`.</span></span>
+<span><span class="co">#&gt; Caused by error in `purrr::map()`:</span></span>
+<span><span class="co">#&gt; i In index: 1.</span></span>
+<span><span class="co">#&gt; Caused by error:</span></span>
+<span><span class="co">#&gt; ! Can't find `lulikelihood` in envFunc.</span></span>
+<span>  </span>
+<span>  <span class="va">x</span></span>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'x' not found</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="what-else-is-in-envfunc">What else is in <code>envFunc</code>
+<a class="anchor" aria-label="anchor" href="#what-else-is-in-envfunc"></a>
+</h2>
+<p>The following functions and data sets are provided in <code>envFunc</code>. See <a href="https://acanthiza.github.io/envFunc/" class="external-link uri">https://acanthiza.github.io/envFunc/</a> for more examples.</p>
+<pre><code><span><span class="co">#&gt; Error in `dplyr::mutate()`:</span></span>
+<span><span class="co">#&gt; i In argument: `class = purrr::map_chr(object, ~envFunc::vec_to_sentence(class(get(.))))`.</span></span>
+<span><span class="co">#&gt; Caused by error in `purrr::map_chr()`:</span></span>
+<span><span class="co">#&gt; i In index: 19.</span></span>
+<span><span class="co">#&gt; Caused by error in `get()`:</span></span>
+<span><span class="co">#&gt; ! lazy-load database 'C:/Users/sysnw/AppData/Local/R/win-library/4.3/envFunc/R/envFunc.rdb' is corrupt</span></span>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'manuals' not found</span></span></code></pre>
 </div>
 </div>
-
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/Acanthiza/envFunc/">https://​github.com/​Acanthiza/​envFunc/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/Acanthiza/envFunc/issues">https://​github.com/​Acanthiza/​envFunc/​issues</a>
-</li>
+<li><a href="https://github.com/Acanthiza/envFunc/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/Acanthiza/envFunc/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small>GPL (&gt;= 3)</small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing envFunc</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Nigel Willoughby <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
 </div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Nigel Willoughby.</p>
+  <p></p>
+<p>Developed by Nigel Willoughby.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -292,6 +182,8 @@
 
   
 
+
+  
 
   </body>
 </html>

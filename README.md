@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2023-08-03 11:00:22 ACST"
+#> [1] "2023-08-03 11:03:23 ACST"
 ```
 
 ## Add a likelihood classification
@@ -69,15 +69,32 @@ library("envFunc")
 The following functions and data sets are provided in `envFunc`. See https://acanthiza.github.io/envFunc/ for more examples.
 
 
-```
-#> Error in `dplyr::mutate()`:
-#> i In argument: `class = purrr::map_chr(object, ~envFunc::vec_to_sentence(class(get(.))))`.
-#> Caused by error in `purrr::map_chr()`:
-#> i In index: 19.
-#> Caused by error in `get()`:
-#> ! lazy-load database 'C:/Users/sysnw/AppData/Local/R/win-library/4.3/envFunc/R/envFunc.rdb' is corrupt
-#> Error in eval(expr, envir, enclos): object 'manuals' not found
-```
+
+|object                      |class                      |description                                                    |
+|:---------------------------|:--------------------------|:--------------------------------------------------------------|
+|`envFunc::add_freq_class`   |function                   |Convert percentages to frequency classes                       |
+|`envFunc::add_likelihood`   |function                   |Add likelihood based on IPCC thresholds                        |
+|`envFunc::add_time_stamp`   |function                   |Add time stamp                                                 |
+|`envFunc::filter_test_func` |function                   |Test rows against a function                                   |
+|`envFunc::first_up`         |function                   |Change the first letter of a string to capital                 |
+|`envFunc::get_or_make`      |function                   |Make an object if it is not available from provided file       |
+|`envFunc::git_commit_env`   |function                   |Add, commit and push all current changes to github             |
+|`envFunc::lulikelihood`     |tbl_df, tbl and data.frame |Dataframe of likelihood thresholds and definitions             |
+|`envFunc::lulsa`            |tbl_df, tbl and data.frame |Lookup for Landscapes South Australia regions                  |
+|`envFunc::make_epochs`      |function                   |Generate a tibble of epochs.                                   |
+|`envFunc::make_metric_df`   |function                   |Use a set of (continuous) columns to choose a good set of rows |
+|`envFunc::make_metric_plot` |function                   |Plot the results from code{make_metric_df}                     |
+|`envFunc::make_package`     |function                   |Make package workflow                                          |
+|`envFunc::mirror_directory` |function                   |Mirror a directory                                             |
+|`envFunc::numbers2words`    |function                   |Convert a numeric to its corresponding english character.      |
+|`envFunc::prop_cpu`         |function                   |Proportion of current CPU usage                                |
+|`envFunc::prop_mem`         |function                   |Proportion of current memory usage                             |
+|`envFunc::quibble`          |function                   |Make a wide, single row, data frame of quantiles (percentiles) |
+|`envFunc::sp_transform_df`  |function                   |Transform the coordinates in a dataframe                       |
+|`envFunc::taxa_label`       |function                   |Create a label for a species                                   |
+|`envFunc::vec_to_sentence`  |function                   |Vector to phrase                                               |
+
+
 
 
 

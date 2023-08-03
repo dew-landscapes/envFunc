@@ -94,7 +94,7 @@
 <span>    <span class="fu">envFunc</span><span class="fu">::</span><span class="fu"><a href="reference/add_time_stamp.html">add_time_stamp</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">temp</span>, <span class="st">"ctime"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2023-08-03 11:00:22 ACST"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2023-08-03 11:03:23 ACST"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="add-a-likelihood-classification">Add a likelihood classification<a class="anchor" aria-label="anchor" href="#add-a-likelihood-classification"></a>
@@ -118,13 +118,125 @@
 <a class="anchor" aria-label="anchor" href="#what-else-is-in-envfunc"></a>
 </h2>
 <p>The following functions and data sets are provided in <code>envFunc</code>. See <a href="https://acanthiza.github.io/envFunc/" class="external-link uri">https://acanthiza.github.io/envFunc/</a> for more examples.</p>
-<pre><code><span><span class="co">#&gt; Error in `dplyr::mutate()`:</span></span>
-<span><span class="co">#&gt; i In argument: `class = purrr::map_chr(object, ~envFunc::vec_to_sentence(class(get(.))))`.</span></span>
-<span><span class="co">#&gt; Caused by error in `purrr::map_chr()`:</span></span>
-<span><span class="co">#&gt; i In index: 19.</span></span>
-<span><span class="co">#&gt; Caused by error in `get()`:</span></span>
-<span><span class="co">#&gt; ! lazy-load database 'C:/Users/sysnw/AppData/Local/R/win-library/4.3/envFunc/R/envFunc.rdb' is corrupt</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'manuals' not found</span></span></code></pre>
+<table class="table">
+<colgroup>
+<col width="23%">
+<col width="22%">
+<col width="53%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">object</th>
+<th align="left">class</th>
+<th align="left">description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="reference/add_freq_class.html">envFunc::add_freq_class</a></code></td>
+<td align="left">function</td>
+<td align="left">Convert percentages to frequency classes</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/add_likelihood.html">envFunc::add_likelihood</a></code></td>
+<td align="left">function</td>
+<td align="left">Add likelihood based on IPCC thresholds</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/add_time_stamp.html">envFunc::add_time_stamp</a></code></td>
+<td align="left">function</td>
+<td align="left">Add time stamp</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/filter_test_func.html">envFunc::filter_test_func</a></code></td>
+<td align="left">function</td>
+<td align="left">Test rows against a function</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/first_up.html">envFunc::first_up</a></code></td>
+<td align="left">function</td>
+<td align="left">Change the first letter of a string to capital</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/get_or_make.html">envFunc::get_or_make</a></code></td>
+<td align="left">function</td>
+<td align="left">Make an object if it is not available from provided file</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/git_commit_env.html">envFunc::git_commit_env</a></code></td>
+<td align="left">function</td>
+<td align="left">Add, commit and push all current changes to github</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/lulikelihood.html">envFunc::lulikelihood</a></code></td>
+<td align="left">tbl_df, tbl and data.frame</td>
+<td align="left">Dataframe of likelihood thresholds and definitions</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/lulsa.html">envFunc::lulsa</a></code></td>
+<td align="left">tbl_df, tbl and data.frame</td>
+<td align="left">Lookup for Landscapes South Australia regions</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/make_epochs.html">envFunc::make_epochs</a></code></td>
+<td align="left">function</td>
+<td align="left">Generate a tibble of epochs.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/make_metric_df.html">envFunc::make_metric_df</a></code></td>
+<td align="left">function</td>
+<td align="left">Use a set of (continuous) columns to choose a good set of rows</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/make_metric_plot.html">envFunc::make_metric_plot</a></code></td>
+<td align="left">function</td>
+<td align="left">Plot the results from code{make_metric_df}</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/make_package.html">envFunc::make_package</a></code></td>
+<td align="left">function</td>
+<td align="left">Make package workflow</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/mirror_directory.html">envFunc::mirror_directory</a></code></td>
+<td align="left">function</td>
+<td align="left">Mirror a directory</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/numbers2words.html">envFunc::numbers2words</a></code></td>
+<td align="left">function</td>
+<td align="left">Convert a numeric to its corresponding english character.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/prop_cpu.html">envFunc::prop_cpu</a></code></td>
+<td align="left">function</td>
+<td align="left">Proportion of current CPU usage</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/prop_mem.html">envFunc::prop_mem</a></code></td>
+<td align="left">function</td>
+<td align="left">Proportion of current memory usage</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/quibble.html">envFunc::quibble</a></code></td>
+<td align="left">function</td>
+<td align="left">Make a wide, single row, data frame of quantiles (percentiles)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/sp_transform_df.html">envFunc::sp_transform_df</a></code></td>
+<td align="left">function</td>
+<td align="left">Transform the coordinates in a dataframe</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/taxa_label.html">envFunc::taxa_label</a></code></td>
+<td align="left">function</td>
+<td align="left">Create a label for a species</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/vec_to_sentence.html">envFunc::vec_to_sentence</a></code></td>
+<td align="left">function</td>
+<td align="left">Vector to phrase</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
   </div>

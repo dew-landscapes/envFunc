@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2023-08-03 11:04:22 ACST"
+#> [1] "2023-08-25 15:00:10 ACST"
 ```
 
 ## Add a likelihood classification
@@ -81,6 +81,7 @@ The following functions and data sets are provided in `envFunc`. See https://aca
 |`envFunc::git_commit_env`   |function                   |Add, commit and push all current changes to github             |
 |`envFunc::lulikelihood`     |tbl_df, tbl and data.frame |Dataframe of likelihood thresholds and definitions             |
 |`envFunc::lulsa`            |tbl_df, tbl and data.frame |Lookup for Landscapes South Australia regions                  |
+|`envFunc::make_aoi`         |function                   |Make a region (area) of interest                               |
 |`envFunc::make_epochs`      |function                   |Generate a tibble of epochs.                                   |
 |`envFunc::make_metric_df`   |function                   |Use a set of (continuous) columns to choose a good set of rows |
 |`envFunc::make_metric_plot` |function                   |Plot the results from code{make_metric_df}                     |

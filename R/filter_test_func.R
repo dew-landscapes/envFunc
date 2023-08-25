@@ -29,7 +29,7 @@ filter_test_func <- function(df
                                     , ~ test_func(.)
                                     )
                   , pass = purrr::map_lgl(test
-                                          , ~ all(is.null(.$error), .$result)
+                                          , ~ is.null(.$error)
                                           )
                   )
 

@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2023-08-25 15:05:28 ACST"
+#> [1] "2023-08-25 15:13:29 ACST"
 ```
 
 ## Add a likelihood classification
@@ -53,15 +53,22 @@ library("envFunc")
 
   x <- tibble::tibble(x = rbeta(10, 1, 1)) %>%
     add_likelihood(x)
-#> Error in `dplyr::mutate()`:
-#> i In argument: `likelihood = purrr::map(...)`.
-#> Caused by error in `purrr::map()`:
-#> i In index: 1.
-#> Caused by error:
-#> ! Can't find `lulikelihood` in envFunc.
+#> Joining with `by = join_by(likelihood)`
   
   x
-#> Error in eval(expr, envir, enclos): object 'x' not found
+#> # A tibble: 10 x 8
+#>        x likelihood             maxVal range         loose very  extreme exceptional
+#>    <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
+#>  1 0.313 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  2 0.398 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  3 0.616 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  4 0.236 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  5 0.697 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  6 0.564 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  7 0.531 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  8 0.698 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  9 0.974 Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        
+#> 10 0.235 Unlikely                0.333 (0.1,0.333]   +     +     +       +
 ```
 
 ## What else is in `envFunc`

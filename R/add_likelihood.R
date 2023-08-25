@@ -13,19 +13,21 @@
 #' @examples
   add_likelihood <- function(df, col) {
 
+    lulikelihood <- envFunc::lulikelihood
+
     df %>%
       dplyr::mutate(likelihood = purrr::map(!!rlang::ensym(col)
                                             , ~cut(.
-                                                   , breaks = c(0,envFunc::lulikelihood$maxVal)
-                                                   , labels = envFunc::lulikelihood$likelihood
+                                                   , breaks = c(0, lulikelihood$maxVal)
+                                                   , labels = lulikelihood$likelihood
                                                    , include.lowest = TRUE
                                                    )
                                             )
                     ) %>%
       tidyr::unnest(cols = c(likelihood)) %>%
-      dplyr::left_join(envFunc::lulikelihood %>%
+      dplyr::left_join(lulikelihood %>%
                          dplyr::select(likelihood
-                                       , any_of(names(envFunc::lulikelihood))
+                                       , any_of(names(lulikelihood))
                                        )
                        )
 

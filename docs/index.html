@@ -94,7 +94,7 @@
 <span>    <span class="fu">envFunc</span><span class="fu">::</span><span class="fu"><a href="reference/add_time_stamp.html">add_time_stamp</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">temp</span>, <span class="st">"ctime"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2023-08-25 15:05:28 ACST"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2023-08-25 15:13:29 ACST"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="add-a-likelihood-classification">Add a likelihood classification<a class="anchor" aria-label="anchor" href="#add-a-likelihood-classification"></a>
@@ -103,15 +103,22 @@
 <code class="sourceCode R"><span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html" class="external-link">rbeta</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="reference/add_likelihood.html">add_likelihood</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in `dplyr::mutate()`:</span></span>
-<span><span class="co">#&gt; i In argument: `likelihood = purrr::map(...)`.</span></span>
-<span><span class="co">#&gt; Caused by error in `purrr::map()`:</span></span>
-<span><span class="co">#&gt; i In index: 1.</span></span>
-<span><span class="co">#&gt; Caused by error:</span></span>
-<span><span class="co">#&gt; ! Can't find `lulikelihood` in envFunc.</span></span>
+<span><span class="co">#&gt; Joining with `by = join_by(likelihood)`</span></span>
 <span>  </span>
 <span>  <span class="va">x</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'x' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 10 x 8</span></span>
+<span><span class="co">#&gt;        x likelihood             maxVal range         loose very  extreme exceptional</span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt; &lt;fct&gt;                   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;      </span></span>
+<span><span class="co">#&gt;  1 0.313 Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
+<span><span class="co">#&gt;  2 0.398 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span><span class="co">#&gt;  3 0.616 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span><span class="co">#&gt;  4 0.236 Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
+<span><span class="co">#&gt;  5 0.697 Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
+<span><span class="co">#&gt;  6 0.564 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span><span class="co">#&gt;  7 0.531 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span><span class="co">#&gt;  8 0.698 Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
+<span><span class="co">#&gt;  9 0.974 Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        </span></span>
+<span><span class="co">#&gt; 10 0.235 Unlikely                0.333 (0.1,0.333]   +     +     +       +</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="what-else-is-in-envfunc">What else is in <code>envFunc</code>

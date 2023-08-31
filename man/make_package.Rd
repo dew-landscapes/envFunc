@@ -4,18 +4,23 @@
 \alias{make_package}
 \title{Make package workflow}
 \usage{
-make_package(do_commit = FALSE, m)
+make_package(do_commit = FALSE, m, ...)
 }
 \arguments{
 \item{do_commit}{Logical. Commit to github?}
 
-\item{m}{Character. Commit message to include.}
+\item{m}{Character. Commit message to include}
+
+\item{...}{Passed to \code{pkgdown::build_site()}}
 }
 \value{
-Called for side effect of running \code{\link[devtools:document]{devtools::document()}},
-\code{\link[devtools:install]{devtools::install()}}, \code{\link[knitr:knit]{knitr::knit()}} "README.Rmd", \code{\link[pkgdown:build_site]{pkgdown::build_site()}}
-and, optionally, \code{\link[=git_commit_env]{git_commit_env()}}.
+Called for side effect of running \code{devtools::document()},
+\code{devtools::install()}, \code{knitr::knit()} "README.Rmd", \code{pkgdown::build_site()}
+and, optionally, \code{envFunc::git_commit_env()}.
 }
 \description{
 document, install, knit README.Rmd, build_site, commit
+}
+\details{
+WARNING. Runs rm(list = ls()), leaving only arguments to this function.
 }

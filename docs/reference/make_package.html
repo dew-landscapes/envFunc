@@ -50,7 +50,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_package</span><span class="op">(</span>do_commit <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">m</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_package</span><span class="op">(</span>do_commit <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">m</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -60,7 +60,11 @@
 
 
 <dt>m</dt>
-<dd><p>Character. Commit message to include.</p></dd>
+<dd><p>Character. Commit message to include</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Passed to <code><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">pkgdown::build_site()</a></code></p></dd>
 
 </dl></div>
     <div id="value">
@@ -71,7 +75,11 @@
 <code><a href="https://devtools.r-lib.org/reference/install.html" class="external-link">devtools::install()</a></code>, <code><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knitr::knit()</a></code> "README.Rmd", <code><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">pkgdown::build_site()</a></code></p>
 
 
-<p>and, optionally, <code><a href="git_commit_env.html">git_commit_env()</a></code>.</p>
+<p>and, optionally, <code><a href="git_commit_env.html">envFunc::git_commit_env()</a></code>.</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>WARNING. Runs rm(list = ls()), leaving only arguments to this function.</p>
     </div>
 
   </div>

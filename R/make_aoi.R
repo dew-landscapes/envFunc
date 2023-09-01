@@ -28,9 +28,9 @@
       {if(!is.null(filt_col)) (.) %>% dplyr::filter(grepl(paste0(level, collapse = "|"), !!rlang::ensym(filt_col))) else (.)} %>%
       {if(simplify) (.) %>% dplyr::summarise() else(.)} %>%
       {if(buffer) (.) %>% sf::st_buffer(buffer) else (.)} %>%
+      sf::st_transform(crs = out_crs) %>%
       {if(bbox) (.) %>% sf::st_bbox() else (.)} %>%
       sf::st_as_sfc() %>%
-      sf::st_transform(crs = out_crs) %>%
       sf::st_make_valid()
 
     return(aoi)

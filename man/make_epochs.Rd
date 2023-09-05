@@ -5,16 +5,16 @@
 \title{Generate a tibble of epochs.}
 \usage{
 make_epochs(
-  min_year = 1987,
-  max_year = 2020,
+  start_year = 1987,
+  end_year = 2020,
   epoch_step = 5,
   epoch_overlap = TRUE
 )
 }
 \arguments{
-\item{min_year}{Minimum year in epochs}
+\item{start_year}{Minimum year in epochs}
 
-\item{max_year}{Maximum year in epochs}
+\item{end_year}{Maximum year in epochs}
 
 \item{epoch_step}{Numeric. How many years in an epoch?}
 

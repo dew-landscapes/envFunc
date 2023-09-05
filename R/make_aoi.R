@@ -29,8 +29,7 @@
       {if(simplify) (.) %>% dplyr::summarise() else(.)} %>%
       {if(buffer) (.) %>% sf::st_buffer(buffer) else (.)} %>%
       sf::st_transform(crs = out_crs) %>%
-      {if(bbox) (.) %>% sf::st_bbox() else (.)} %>%
-      sf::st_as_sfc() %>%
+      {if(bbox) (.) %>% sf::st_bbox() %>% sf::st_as_sfc() else (.)} %>%
       sf::st_make_valid()
 
     return(aoi)

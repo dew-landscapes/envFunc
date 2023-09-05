@@ -1,8 +1,8 @@
 
 #' Generate a tibble of epochs.
 #'
-#' @param min_year Minimum year in epochs
-#' @param max_year Maximum year in epochs
+#' @param start_year Minimum year in epochs
+#' @param end_year Maximum year in epochs
 #' @param epoch_step Numeric. How many years in an epoch?
 #' @param epoch_overlap Logical. Should epochs overlap by one year? i.e.
 #' `epoch_step = 10` with `epoch_overlap = TRUE` gives, say, 2000-2010 and
@@ -25,44 +25,44 @@
 #' make_epochs(now - 30, now, 10)
 #' make_epochs(now - 30, now, 10, F)
 #'
-make_epochs <- function(min_year = 1987
-                        , max_year = 2020
+make_epochs <- function(start_year = 1987
+                        , end_year = 2020
                         , epoch_step = 5
                         , epoch_overlap = TRUE
                         ) {
 
   now <- as.numeric(format(Sys.Date(), "%Y"))
 
-  if(is.null(min_year)) {
+  if(is.null(start_year)) {
 
-    min_year <- 1987
-
-  }
-
-  if(is.null(max_year)) {
-
-    max_year <- as.integer(now)
+    start_year <- 1987
 
   }
 
-  epochs <- (max_year - min_year) / epoch_step
+  if(is.null(end_year)) {
 
-  ends <- max_year - epoch_step*0:epochs
+    end_year <- as.integer(now)
+
+  }
+
+  epochs <- (end_year - start_year) / epoch_step
+
+  ends <- end_year - epoch_step*0:epochs
   if(!epoch_overlap) epoch_step <- epoch_step - 1
   starts <- ends - epoch_step
-  starts <- starts[starts >= min_year]
-  if(min(starts) != min_year) starts <- c(starts, min_year)
+  starts <- starts[starts >= start_year]
+  if(min(starts) != start_year) starts <- c(starts, start_year)
 
-  eps <- tibble::tibble(start = starts
-                        , end = ends[1:length(starts)]
+  eps <- tibble::tibble(start_year = starts
+                        , end_year = ends[1:length(starts)]
                         ) %>%
-    dplyr::mutate(years = purrr::map2(start, end, ~.x:.y)
-                  , epoch = paste0(substr(start,3,4), "-", substr(end,3,4))
-                  , epoch = forcats::fct_reorder(epoch, start)
+    dplyr::mutate(years = purrr::map2(start_year, end_year, ~.x:.y)
+                  , epoch = paste0(substr(start_year,3,4), "-", substr(end_year,3,4))
+                  , epoch = forcats::fct_reorder(epoch, start_year)
                   , epoch = factor(epoch, ordered = TRUE)
                   , epoch_now = purrr::map_lgl(years, ~ now %in% .)
                   ) %>%
-    dplyr::arrange(start)
+    dplyr::arrange(start_year)
 
   return(eps)
 

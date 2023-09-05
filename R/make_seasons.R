@@ -57,30 +57,29 @@
                     , year = year + dec_adjust
                     ) %>%
       dplyr::arrange(year, mon) %>%
-      dplyr::mutate(date_start = paste0(year
+      dplyr::mutate(start_date = paste0(year
                                         , "/"
                                         , stringr::str_pad(mon, 2, pad = "0")
                                         , "/"
                                         , "01"
                                         )
-                    , date_start = as.Date(date_start)
-                    , end_day = lubridate::days_in_month(date_start)
-                    , date_end = paste0(year
+                    , start_date = as.Date(start_date)
+                    , end_day = lubridate::days_in_month(start_date)
+                    , end_date = paste0(year
                                         , "/"
                                         , stringr::str_pad(mon, 2, pad = "0")
                                         , "/"
                                         , end_day
                                         )
-                    , date_end = as.Date(date_end)
+                    , end_date = as.Date(end_date)
                     )
 
 
     result$seasons <- result$months %>%
-      tidyr::pivot_longer(contains("date_")) %>%
+      tidyr::pivot_longer(contains("_date")) %>%
       dplyr::group_by(year_use, season) %>%
       dplyr::filter(value == min(value) | value == max(value)) %>%
       dplyr::ungroup() %>%
-      dplyr::mutate(name = gsub("date_", "", name)) %>%
       dplyr::select(year = year_use, season, name, value) %>%
       tidyr::pivot_wider()
 

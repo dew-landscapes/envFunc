@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2023-09-05 14:26:41 ACST"
+#> [1] "2023-10-30 12:55:38 ACDT"
 ```
 
 ## Add a likelihood classification
@@ -53,22 +53,10 @@ library("envFunc")
 
   x <- tibble::tibble(x = rbeta(10, 1, 1)) %>%
     add_likelihood(x)
-#> Joining with `by = join_by(likelihood)`
+#> Error in envFunc::lulikelihood: Can't find `lulikelihood` in envFunc.
   
   x
-#> # A tibble: 10 x 8
-#>        x likelihood             maxVal range         loose very  extreme exceptional
-#>    <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.806 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  2 0.826 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  3 0.418 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  4 0.540 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  5 0.960 Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        
-#>  6 0.893 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  7 0.389 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  8 0.483 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  9 0.267 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#> 10 0.837 Likely                  0.9   (0.667,0.9]   -     -     -       -
+#> Error in eval(expr, envir, enclos): object 'x' not found
 ```
 
 ## What else is in `envFunc`

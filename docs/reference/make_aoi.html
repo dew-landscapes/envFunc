@@ -57,6 +57,9 @@
 <span>  simplify <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  buffer <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  bbox <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  clip <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  clip_buf <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  buf_crs <span class="op">=</span> <span class="fl">7845</span>,</span>
 <span>  out_crs <span class="op">=</span> <span class="fl">4326</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -77,11 +80,24 @@ for no filter)</p></dd>
 
 
 <dt>buffer</dt>
-<dd><p>Numeric (or <code>FALSE</code>). Distance to buffer in units of <code>layer</code></p></dd>
+<dd><p>Numeric (or <code>FALSE</code>). Distance to buffer in units of <code>buf_crs</code></p></dd>
 
 
 <dt>bbox</dt>
 <dd><p>Logical. Return a bounding box around the result?</p></dd>
+
+
+<dt>clip</dt>
+<dd><p>sf. If not null, this will be used to clip back the original
+<code>layer</code> +/- filtered +/- buffered +/- bbox. CHECK both CRS and <code>clip_buf</code></p></dd>
+
+
+<dt>clip_buf</dt>
+<dd><p>Numeric (or <code>FALSE</code>). Distance to buffer <code>clip</code> in units of <code>clip</code></p></dd>
+
+
+<dt>buf_crs</dt>
+<dd><p><a href="https://epsg.io/" class="external-link">EPSG</a> code to use when buffering</p></dd>
 
 
 <dt>out_crs</dt>

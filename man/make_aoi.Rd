@@ -11,6 +11,9 @@ make_aoi(
   simplify = TRUE,
   buffer = FALSE,
   bbox = FALSE,
+  clip = NULL,
+  clip_buf = 100,
+  buf_crs = 7845,
   out_crs = 4326
 )
 }
@@ -22,9 +25,16 @@ for no filter)}
 
 \item{level}{Level(s) of \code{filt_col} to filter}
 
-\item{buffer}{Numeric (or \code{FALSE}). Distance to buffer in units of \code{layer}}
+\item{buffer}{Numeric (or \code{FALSE}). Distance to buffer in units of \code{buf_crs}}
 
 \item{bbox}{Logical. Return a bounding box around the result?}
+
+\item{clip}{sf. If not null, this will be used to clip back the original
+\code{layer} +/- filtered +/- buffered +/- bbox. CHECK both CRS and \code{clip_buf}}
+
+\item{clip_buf}{Numeric (or \code{FALSE}). Distance to buffer \code{clip} in units of \code{clip}}
+
+\item{buf_crs}{\href{https://epsg.io/}{EPSG} code to use when buffering}
 
 \item{out_crs}{\href{https://epsg.io/}{EPSG} code for coordinate system of
 result}

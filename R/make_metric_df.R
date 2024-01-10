@@ -36,17 +36,17 @@ make_metric_df <- function(df
                       , level = c("across", "within")
                       ) {
 
-  if(length(level) > 1) level <- level[1]
+  level <- level[1]
 
   mets_df_use <- mets_df %>%
     dplyr::mutate(metric = forcats::fct_inorder(metric)) %>%
     dplyr::filter(!is.na(!!rlang::ensym(mets_col))
-                  , if(level == "within") grepl("within|both", ecosystem_within_mets) else grepl("across|both", ecosystem_within_mets)
+                  , if(level == "within") within_mets else across_mets
                   ) %>%
-    dplyr::select(metric, high_good, ecosystem_within_mets, !!rlang::ensym(mets_col)) %>%
+    dplyr::select(metric, high_good, within_mets, !!rlang::ensym(mets_col)) %>%
     dplyr::mutate(weight = !!rlang::ensym(mets_col))
 
-  df %>%
+  ret <- df %>%
     dplyr::select(all_of(context)
                   , any_of(mets_df_use$metric)
                   ) %>%
@@ -65,12 +65,12 @@ make_metric_df <- function(df
     dplyr::group_by(across(any_of(names(mets_df_use)))) %>%
     dplyr::mutate(scale = if_else(high_good
                                   , scales::rescale(value
-                                                    , to = c(0
+                                                    , to = c(0.001
                                                              , 1
                                                              )
                                                     )
                                   , scales::rescale(desc(value)
-                                                    , to = c(0
+                                                    , to = c(0.001
                                                              , 1
                                                              )
                                                     )
@@ -98,11 +98,13 @@ make_metric_df <- function(df
     dplyr::ungroup() %>%
     dplyr::mutate(top_thresh = top_thresh
                   , best_thresh = best_thresh
-                  , top = combo >= quantile(combo,probs = 1-top_thresh,na.rm = TRUE)
-                  , top = if_else(is.na(top),FALSE,top)
-                  , best = combo >= sort(unique(.$combo),TRUE)[best_thresh]
-                  , best = if_else(is.na(best),FALSE,best)
+                  , top = combo >= quantile(combo, probs = 1 - top_thresh, na.rm = TRUE)
+                  , top = if_else(is.na(top), FALSE, top)
+                  , best = combo >= sort(unique(.$combo), TRUE)[best_thresh]
+                  , best = if_else(is.na(best), FALSE, best)
                   , metric = factor(metric, levels = levels(mets_df_use$metric))
                   )
+
+  return(ret)
 
 }

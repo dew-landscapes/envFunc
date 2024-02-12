@@ -57,6 +57,7 @@
 <span>  context <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"method"</span>, <span class="st">"groups"</span><span class="op">)</span>,</span>
 <span>  mets_col <span class="op">=</span> <span class="st">"summary_mets"</span>,</span>
 <span>  summarise_method <span class="op">=</span> <span class="va">median</span>,</span>
+<span>  scale <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  top_thresh <span class="op">=</span> <span class="fl">0.25</span>,</span>
 <span>  best_thresh <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>  level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"across"</span>, <span class="st">"within"</span><span class="op">)</span></span>
@@ -85,6 +86,11 @@
 <dt>summarise_method</dt>
 <dd><p>Character. Name of method to use in summarising if
 there is more than one row per context.</p></dd>
+
+
+<dt>scale</dt>
+<dd><p>Logical. If true, all metrics will be rescale 0 ('worst') to 1
+('best').</p></dd>
 
 
 <dt>top_thresh</dt>

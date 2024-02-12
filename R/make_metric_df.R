@@ -9,6 +9,8 @@
 #' @param mets_col Character. Name of `mets_df` column to use in this instance.
 #' @param summarise_method Character. Name of method to use in summarising if
 #' there is more than one row per context.
+#' @param scale Logical. If true, all metrics will be rescale 0 ('worst') to 1
+#' ('best').
 #' @param top_thresh Numeric specifying the proportion of rows considered 'top'.
 #' @param best_thresh Numeric specifying the absolute number of rows considered
 #' 'best'.
@@ -31,6 +33,7 @@ make_metric_df <- function(df
                                     )
                       , mets_col = "summary_mets"
                       , summarise_method = median
+                      , scale = FALSE
                       , top_thresh = 0.25
                       , best_thresh = 5
                       , level = c("across", "within")
@@ -63,25 +66,33 @@ make_metric_df <- function(df
                         ) %>%
     dplyr::left_join(mets_df_use) %>%
     dplyr::group_by(across(any_of(names(mets_df_use)))) %>%
-    dplyr::mutate(scale = if_else(high_good
-                                  , scales::rescale(value
-                                                    , to = c(0.001
-                                                             , 1
-                                                             )
-                                                    )
-                                  , scales::rescale(desc(value)
-                                                    , to = c(0.001
-                                                             , 1
-                                                             )
-                                                    )
-                                  )
-                  ) %>%
+    {if(scale) (.) %>%
+        dplyr::mutate(scale = dplyr::if_else(high_good
+                                             , scales::rescale(value
+                                                               , to = c(0.001
+                                                                        , 1
+                                                                        )
+                                                               )
+                                             , scales::rescale(desc(value)
+                                                               , to = c(0.001
+                                                                        , 1
+                                                                        )
+                                                               )
+                                             )
+                      ) else (.) %>%
+        dplyr::mutate(scale = value) %>%
+        dplyr::mutate(scale = dplyr::if_else(high_good
+                                             , scale
+                                             , 1 - scale
+                                             )
+                      )
+      } %>%
     dplyr::ungroup() %>%
     dplyr::mutate(combo_init = scale * !!ensym(mets_col)) %>%
     dplyr::group_by(across(all_of(context))
                     , across(!!ensym(mets_col))
                     ) %>%
-    dplyr::mutate(combo = prod(combo_init)
+    dplyr::mutate(combo = envTrend::geo_mean(combo_init)
                   , combo = if_else(is.na(combo)
                                     , 0
                                     , combo

@@ -50,13 +50,12 @@ make_metric_df <- function(df
     dplyr::mutate(weight = !!rlang::ensym(mets_col))
 
   ret <- df %>%
-    dplyr::select(all_of(context)
+    dplyr::select(any_of(context)
                   , any_of(mets_df_use$metric)
                   ) %>%
-    dplyr::group_by(across(all_of(context))) %>%
+    dplyr::group_by(across(any_of(context))) %>%
     dplyr::summarise(across(any_of(mets_df_use$metric)
-                            , summarise_method
-                            , na.rm = TRUE
+                            , \(x) summarise_method(x, na.rm = TRUE)
                             )
                      ) %>%
     dplyr::ungroup() %>%
@@ -89,7 +88,7 @@ make_metric_df <- function(df
       } %>%
     dplyr::ungroup() %>%
     dplyr::mutate(combo_init = scale * !!ensym(mets_col)) %>%
-    dplyr::group_by(across(all_of(context))
+    dplyr::group_by(across(any_of(context))
                     , across(!!ensym(mets_col))
                     ) %>%
     dplyr::mutate(combo = envTrend::geo_mean(combo_init)
@@ -99,7 +98,7 @@ make_metric_df <- function(df
                                     )
                   ) %>%
     dplyr::ungroup() %>%
-    dplyr::group_by(across(all_of(context))) %>%
+    dplyr::group_by(across(any_of(context))) %>%
     dplyr::mutate(combo = max(combo)
                   , combo = if_else(is.na(combo)
                                     , 0

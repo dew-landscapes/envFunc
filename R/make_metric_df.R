@@ -91,7 +91,7 @@ make_metric_df <- function(df
     dplyr::group_by(across(any_of(context))
                     , across(!!ensym(mets_col))
                     ) %>%
-    dplyr::mutate(combo = envTrend::geo_mean(combo_init)
+    dplyr::mutate(combo = prod(combo_init)
                   , combo = if_else(is.na(combo)
                                     , 0
                                     , combo

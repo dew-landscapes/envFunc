@@ -4,7 +4,7 @@
 \alias{monitor_system}
 \title{Monitor system resources}
 \usage{
-monitor_system(monitor_df = NULL)
+monitor_system(monitor_df = NULL, plot = TRUE)
 }
 \arguments{
 \item{monitor_df}{NULL or results from previous call to envFunc::monitor_system()}

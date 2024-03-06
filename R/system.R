@@ -14,10 +14,11 @@
 
     if(Sys.info()['sysname'] == "Windows") {
 
-      total <- readr::parse_number(paste0(system2("wmic", args =  "OS get TotalVirtualMemorySize /Value", stdout = TRUE),collapse = "_"))
-      free <- readr::parse_number(paste0(system2("wmic", args =  "OS get FreeVirtualMemory /Value", stdout = TRUE),collapse = "_"))
-
-      (total-free)/total
+      res <- tibble::tibble(type = "mem"
+                            , total = readr::parse_number(paste0(system2("wmic", args =  "ComputerSystem get TotalPhysicalMemory /Value", stdout = TRUE),collapse = "_"))
+                            , free = readr::parse_number(paste0(system2("wmic", args =  "OS get FreePhysicalMemory /Value", stdout = TRUE),collapse = "_"))
+                            ) |>
+        dplyr::mutate(prop = (total-free)/total)
 
     } else warning("Only runs on windows")
 
@@ -38,10 +39,23 @@
     if(Sys.info()['sysname'] == "Windows") {
 
       a <- system("wmic path Win32_PerfFormattedData_PerfProc_Process get Name,PercentProcessorTime", intern = TRUE)
-      df <- tibble::as_tibble(do.call(rbind, lapply(strsplit(a, " "), function(x) {x <- x[x != ""];data.frame(process = x[1], cpu = x[2])}))) %>%
+
+      df <- tibble::as_tibble(a) |>
+        purrr::map(stringr::str_squish) |>
+        tibble::as_tibble(name = NULL) |>
+        tidyr::separate_wider_delim(cols = value
+                                    , delim = " "
+                                    , names = c("process", "cpu")
+                                    , too_many = "merge"
+                                    , too_few = "align_start"
+                                    ) |>
         dplyr::mutate(cpu = as.numeric(cpu))
 
-      sum(df$cpu[!grepl("Idle|Total",df$process)],na.rm = TRUE)/(df %>% dplyr::filter(grepl("Total",process)) %>% dplyr::pull(cpu))
+      res <- tibble::tibble(type = "cpu"
+                            , total = df$cpu[grepl("Total", df$process)]
+                            , free = df$cpu[grepl("Idle", df$process)]
+                            ) |>
+        dplyr::mutate(prop = (total-free)/total)
 
       } else warning("Only runs on windows")
 

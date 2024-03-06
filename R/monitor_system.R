@@ -21,13 +21,14 @@
 #'     df <- monitor_system(df)
 #'
 #'   }
-  monitor_system <- function(monitor_df = NULL) {
+  monitor_system <- function(monitor_df = NULL, plot = TRUE) {
 
-      new <- tibble::tibble(
-        now = Sys.time()
-        , prop_cpu = envFunc::prop_cpu()
-        , prop_mem = envFunc::prop_mem()
-        )
+      new <- tibble::tibble(now = Sys.time())
+
+      new_cpu <- new |> dplyr::bind_cols(prop_cpu())
+      new_mem <- new |> dplyr::bind_cols(prop_mem())
+
+      new <- dplyr::bind_rows(new_cpu, new_mem)
 
       monitor_df <- if(!is.null(monitor_df)) {
 
@@ -36,16 +37,18 @@
 
       } else new
 
-      mon_long <- monitor_df |>
-        tidyr::pivot_longer(contains("prop")
-                            , names_to = "process"
-                            , values_to = "value"
-                            )
+      if(plot) {
 
-      print(ggplot(mon_long, aes(now, value)) +
-        geom_point() +
-        geom_smooth() +
-        facet_wrap(~ process, scales = "free_y"))
+        print(ggplot(monitor_df |>
+                       tidyr::pivot_longer(dplyr::where(is.numeric)) |>
+                       dplyr::filter(!grepl("free", name))
+                     , aes(now, value)
+                     ) +
+                geom_point() +
+                facet_wrap(name ~ type, scales = "free_y")
+              )
+
+      }
 
       return(monitor_df)
 

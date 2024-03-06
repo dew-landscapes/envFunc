@@ -26,7 +26,7 @@
                                     , "\\d{4}"
                                     )
                ) %>%
-      `[` (names(.)[as.numeric(names(.)) <= run_to & as.numeric(names(.)) >= if(run_from == 0) 1 else run_from]) %>%
+      `[` (names(.)[as.numeric(names(.)) <= to & as.numeric(names(.)) >= if(from == 0) 1 else from]) %>%
       unique() %>%
       purrr::walk(source
                   , verbose = TRUE

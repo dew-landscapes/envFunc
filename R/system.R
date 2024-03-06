@@ -15,10 +15,22 @@
     if(Sys.info()['sysname'] == "Windows") {
 
       res <- tibble::tibble(type = "mem"
-                            , total = readr::parse_number(paste0(system2("wmic", args =  "ComputerSystem get TotalPhysicalMemory /Value", stdout = TRUE),collapse = "_"))
-                            , free = readr::parse_number(paste0(system2("wmic", args =  "OS get FreePhysicalMemory /Value", stdout = TRUE),collapse = "_"))
+                            , total = readr::parse_number(paste0(system2("wmic"
+                                                                         , args =  "OS get TotalVisibleMemorySize /Value"
+                                                                         , stdout = TRUE
+                                                                         )
+                                                                 , collapse = "_"
+                                                                 )
+                                                          )
+                            , free = readr::parse_number(paste0(system2("wmic"
+                                                                        , args =  "OS get FreePhysicalMemory /Value"
+                                                                        , stdout = TRUE
+                                                                        )
+                                                                , collapse = "_"
+                                                                )
+                                                         )
                             ) |>
-        dplyr::mutate(prop = (total-free)/total)
+        dplyr::mutate(prop = (total - free) / total)
 
     } else warning("Only runs on windows")
 

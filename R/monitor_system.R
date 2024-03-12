@@ -28,8 +28,8 @@
 
       new <- tibble::tibble(now = Sys.time())
 
-      new_cpu <- new |> dplyr::bind_cols(prop_cpu())
-      new_mem <- new |> dplyr::bind_cols(prop_mem())
+      new_cpu <- new |> dplyr::bind_cols(envFunc::prop_cpu())
+      new_mem <- new |> dplyr::bind_cols(envFunc::prop_mem())
 
       new <- dplyr::bind_rows(new_cpu, new_mem)
 
@@ -42,16 +42,28 @@
 
       if(plot) {
 
-        print(ggplot(monitor_df |>
-                       tidyr::pivot_longer(dplyr::where(is.numeric)) |>
-                       dplyr::filter(!grepl("free", name)) |>
-                       dplyr::filter(as.numeric(difftime(Sys.time(), now, units = "days")) <= plot_time)
-                     , aes(now, value)
-                     ) +
-                geom_point() +
-                facet_wrap(name ~ type, scales = "free_y") +
-                scale_x_datetime(labels = scales::date_format("%H:%M", tz = "Australia/Adelaide"))
-              )
+        real <- ggplot(monitor_df |>
+                         tidyr::pivot_longer(dplyr::where(is.numeric)) |>
+                         dplyr::filter(!grepl("prop", name)) |>
+                         dplyr::filter(as.numeric(difftime(Sys.time(), now, units = "days")) <= plot_time)
+                       , aes(now, value)
+                       ) +
+          geom_point() +
+          facet_grid(type ~ name, scales = "free_y") +
+          scale_x_datetime(labels = scales::date_format("%H:%M", tz = "Australia/Adelaide"))
+
+        prop <- ggplot(monitor_df |>
+                         tidyr::pivot_longer(dplyr::where(is.numeric)) |>
+                         dplyr::filter(grepl("prop", name)) |>
+                         dplyr::filter(as.numeric(difftime(Sys.time(), now, units = "days")) <= plot_time)
+                       , aes(now, value)
+                       ) +
+          geom_point() +
+          facet_grid(type ~ name, scales = "free_y") +
+          scale_x_datetime(labels = scales::date_format("%H:%M", tz = "Australia/Adelaide")) +
+          coord_cartesian(y = c(0, 1))
+
+        print(patchwork::wrap_plots(real, prop, nrow = 1, widths = c(2/3, 1/3)))
 
       }
 

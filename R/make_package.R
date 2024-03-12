@@ -35,7 +35,7 @@ make_package <- function(do_commit = FALSE
 
   devtools::document()
 
-  devtools::install(dependencies = FALSE)
+  # devtools::install(dependencies = FALSE)
 
   if(file.exists("README.Rmd")){
 

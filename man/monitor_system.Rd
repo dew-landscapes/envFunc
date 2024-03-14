@@ -4,7 +4,11 @@
 \alias{monitor_system}
 \title{Monitor system resources}
 \usage{
-monitor_system(monitor_df = NULL, plot = TRUE, plot_time = 1/24)
+monitor_system(
+  out_file = "system_monitor.csv",
+  plot = !is.null(out_file),
+  plot_time = 1/24
+)
 }
 \arguments{
 \item{monitor_df}{NULL or results from previous call to envFunc::monitor_system()}

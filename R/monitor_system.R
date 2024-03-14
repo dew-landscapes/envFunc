@@ -21,8 +21,8 @@
 #'     df <- monitor_system(df)
 #'
 #'   }
-  monitor_system <- function(monitor_df = NULL
-                             , plot = TRUE
+  monitor_system <- function(out_file = "system_monitor.csv"
+                             , plot = !is.null(out_file)
                              , plot_time = 1/24
                              ) {
 
@@ -33,10 +33,14 @@
 
       new <- dplyr::bind_rows(new_cpu, new_mem)
 
-      monitor_df <- if(!is.null(monitor_df)) {
+      monitor_df <- if(!is.null(out_file)) {
 
-        monitor_df |>
-          dplyr::bind_rows(new)
+        rio::export(new
+                    , out_file
+                    , append = TRUE
+                    )
+
+        rio::import(out_file)
 
       } else new
 

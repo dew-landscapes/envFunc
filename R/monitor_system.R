@@ -37,7 +37,7 @@
 
         rio::export(new
                     , out_file
-                    , append = TRUE
+                    , append = file.exists(out_file)
                     )
 
         rio::import(out_file)

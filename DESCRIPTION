@@ -10,7 +10,7 @@ Description: A collection of functions to help with creating ecosystems,
     determining trends in individual taxa and other common environmental science
     tasks. These are generic functions, those more specific to each task live in
     appropriate `envBlah` packages.
-License: GPL (>= 3)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

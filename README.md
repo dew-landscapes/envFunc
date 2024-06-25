@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2024-05-19 11:19:51 ACST"
+#> [1] "2024-06-25 10:44:05 ACST"
 ```
 
 ## Add a likelihood classification
@@ -53,22 +53,10 @@ library("envFunc")
 
   x <- tibble::tibble(x = rbeta(10, 1, 1)) %>%
     add_likelihood(x)
-#> Joining with `by = join_by(likelihood)`
+#> Error in envFunc::lulikelihood: Can't find `lulikelihood` in envFunc.
   
   x
-#> # A tibble: 10 × 8
-#>          x likelihood             maxVal range         loose very  extreme exceptional
-#>      <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.950   Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        
-#>  2 0.571   About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  3 0.929   Very likely             0.95  (0.9,0.95]    -     --    --      --         
-#>  4 0.00978 Exceptionally unlikely  0.01  (0,0.01]      +     ++    +++     ++++       
-#>  5 0.0639  Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         
-#>  6 0.882   Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  7 0.154   Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  8 0.264   Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  9 0.115   Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#> 10 0.143   Unlikely                0.333 (0.1,0.333]   +     +     +       +
+#> Error in eval(expr, envir, enclos): object 'x' not found
 ```
 
 ## What else is in `envFunc`
@@ -98,6 +86,7 @@ The following functions and data sets are provided in `envFunc`. See https://aca
 |`envFunc::make_seasons`     |function                   |Make a list of data frames for months and seasons              |
 |`envFunc::mirror_directory` |function                   |Mirror a directory                                             |
 |`envFunc::monitor_system`   |function                   |Monitor system resources                                       |
+|`envFunc::name_env_out`     |function                   |Use meta data to name or parse output paths                    |
 |`envFunc::numbers2words`    |function                   |Convert a numeric to its corresponding english character.      |
 |`envFunc::prop_cpu`         |function                   |Proportion of current CPU usage                                |
 |`envFunc::prop_mem`         |function                   |Proportion of current memory usage                             |

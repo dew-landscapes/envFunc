@@ -19,13 +19,15 @@
     files <- fs::dir_ls(dir_to_clean) %>%
         grep(paste0(skip, collapse = "|"), ., value = TRUE, invert = TRUE)
 
-    if(length(files > 0)) {
+    if(length(files) > 0) {
 
       new_dir <- fs::path(dir_to_clean, "old", paste0("moved__", format(now(), "%Y%m%d_%H%M%S")))
 
       dir_create(new_dir)
 
-      message(length(files), " files moved from "
+      message(format(now(), "%Y%m%d_%H%M%S")
+              , ":"
+              , length(files), " files moved from "
               , dir_to_clean
               , " to "
               , new_dir

@@ -43,7 +43,7 @@ make_metric_df <- function(df
 
   mets_df_use <- mets_df %>%
     dplyr::mutate(metric = forcats::fct_inorder(metric)) %>%
-    dplyr::filter(!is.na(!!rlang::ensym(mets_col))
+    dplyr::filter(!base::is.na(!!rlang::ensym(mets_col))
                   , if(level == "within") within_mets else across_mets
                   ) %>%
     dplyr::select(metric, high_good, within_mets, !!rlang::ensym(mets_col)) %>%
@@ -87,32 +87,32 @@ make_metric_df <- function(df
                       )
       } %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(combo_init = scale * !!ensym(mets_col)) %>%
-    dplyr::group_by(across(any_of(context))
-                    , across(!!ensym(mets_col))
+    dplyr::mutate(combo_init = scale * !!rlang::ensym(mets_col)) %>%
+    dplyr::group_by(dplyr::across(tidyselect::any_of(context))
+                    , dplyr::across(!!rlang::ensym(mets_col))
                     ) %>%
-    dplyr::mutate(combo = prod(combo_init)
-                  , combo = if_else(is.na(combo)
-                                    , 0
-                                    , combo
-                                    )
+    dplyr::mutate(combo = base::prod(combo_init)
+                  , combo = dplyr::if_else(base::is.na(combo)
+                                           , 0
+                                           , combo
+                                           )
                   ) %>%
     dplyr::ungroup() %>%
-    dplyr::group_by(across(any_of(context))) %>%
-    dplyr::mutate(combo = max(combo)
-                  , combo = if_else(is.na(combo)
-                                    , 0
-                                    , combo
-                                    )
+    dplyr::group_by(dplyr::across(tidyselect::any_of(context))) %>%
+    dplyr::mutate(combo = base::max(combo)
+                  , combo = dplyr::if_else(base::is.na(combo)
+                                           , 0
+                                           , combo
+                                           )
                   ) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(top_thresh = top_thresh
                   , best_thresh = best_thresh
-                  , top = combo >= quantile(combo, probs = 1 - top_thresh, na.rm = TRUE)
-                  , top = if_else(is.na(top), FALSE, top)
+                  , top = combo >= stats::quantile(combo, probs = 1 - top_thresh, na.rm = TRUE)
+                  , top = dplyr::if_else(base::is.na(top), FALSE, top)
                   , best = combo >= sort(unique(.$combo), TRUE)[best_thresh]
-                  , best = if_else(is.na(best), FALSE, best)
-                  , metric = factor(metric, levels = levels(mets_df_use$metric))
+                  , best = dplyr::if_else(base::is.na(best), FALSE, best)
+                  , metric = factor(metric, levels = base::levels(mets_df_use$metric))
                   )
 
   return(ret)

@@ -4,18 +4,23 @@
 \alias{clean_dir}
 \title{Empty a directory}
 \usage{
-clean_dir(dir_to_clean, skip = "old")
+clean_dir(dir_to_clean, skip = "old", max_files = 10000)
 }
 \arguments{
 \item{dir_to_clean}{Path to directory to 'clean'}
 
 \item{skip}{Character. Any strings that identify files to skip (identified
 via \code{base::grep()})}
+
+\item{max_files}{Numeric. If there are more than \code{max_files} to be moved,
+files will be DELTETED instead of moved.}
 }
 \value{
-Returns \code{NULL}. Any files in \code{dir_to_clean} are moved.
+Returns \code{NULL}. Any files in \code{dir_to_clean} are moved (or deleted).
+Log written to \code{dirname(dir_to_clean)}
 }
 \description{
-Any files in \code{dir_to_clean} are moved to the new directory
-\code{dir_to_clean/old/moved_\%Y\%m\%d_\%H\%M\%S}
+Any files or directories in \code{dir_to_clean} are moved to the new directory
+\code{dir_to_clean/old/moved_\%Y\%m\%d_\%H\%M\%S} UNLESS THERE ARE MORE THAN \code{max_files}
+IN WHICH CASE ALL ARE DELETED
 }

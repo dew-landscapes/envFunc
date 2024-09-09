@@ -47,7 +47,7 @@ name_env_out <- function(x
   df <- if(!"data.frame" %in% class(x)) {
 
     if("character" %in% class(x)) {
-      
+
       tibble::tibble(path = x)
 
     } else if("list" %in% class(x)) {
@@ -70,45 +70,49 @@ name_env_out <- function(x
         tidyr::separate(context
                         , into = context_defn
                         , sep = "__"
-                        )
-      
+                        ) %>%
+        dplyr::mutate(dplyr::across(dplyr::where(is.character)
+                                    , \(x) gsub("^$", NA_character_, x)
+                                    )
+                      )
+
       res <- res %>%
         dplyr::relocate(-path)
 
   } else {
-    
+
     if(fill_null) {
-      
+
       # check all names are in df
-      
+
       missing <- setdiff(context_defn
-                         , names(df) 
+                         , names(df)
                          )
-      
+
       if(length(missing) > x_null) {
-        
+
         stop(length(missing)
              , " definitions are missing: "
              , envFunc::vec_to_sentence(missing)
              )
-        
+
       }
-      
+
       warning("All of "
               , envFunc::vec_to_sentence(missing)
-              , " will be NULL"
+              , ' will be blank ("")'
               )
-      
+
       if(length(missing)) {
-        
+
         df <- cbind(df
                     , purrr::map(missing
-                                 , \(x) tibble::tibble(!!rlang::ensym(x) := list(NULL))
+                                 , \(x) tibble::tibble(!!rlang::ensym(x) := list(""))
                                  )
                     )
-        
+
       }
-      
+
     }
 
     res <- df %>%

@@ -43,7 +43,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2024-08-15 09:28:10 ACST"
+#> [1] "2024-09-09 15:46:42 ACST"
 ```
 
 ## Add a likelihood classification
@@ -57,18 +57,18 @@ library("envFunc")
   
   x
 #> # A tibble: 10 × 8
-#>        x likelihood             maxVal range         loose very  extreme exceptional
-#>    <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.530 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  2 0.718 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  3 0.946 Very likely             0.95  (0.9,0.95]    -     --    --      --         
-#>  4 0.934 Very likely             0.95  (0.9,0.95]    -     --    --      --         
-#>  5 0.997 Virtually certain       1     (0.99,1]      -     --    ---     ----       
-#>  6 0.159 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  7 0.832 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  8 0.433 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  9 0.116 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#> 10 0.773 Likely                  0.9   (0.667,0.9]   -     -     -       -
+#>         x likelihood             maxVal range         loose very  extreme exceptional
+#>     <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
+#>  1 0.225  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  2 0.780  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  3 0.458  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  4 0.0762 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         
+#>  5 0.718  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  6 0.571  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  7 0.228  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  8 0.602  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  9 0.675  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#> 10 0.621  About as likely as not  0.667 (0.333,0.667] 0     0     0       0
 ```
 
 ## What else is in `envFunc`

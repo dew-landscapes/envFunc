@@ -51,6 +51,7 @@
     if(is.null(file)) file <- time_df$file[nrow(time_df)]
     if(is.null(name)) name <- time_df$name[nrow(time_df)]
     if(is.null(log)) log <- time_df$log[nrow(time_df)]
+    if(is.null(name)) name <- process
 
     new_df <- tibble::tibble(name = name
                              , file = file

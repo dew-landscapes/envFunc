@@ -49,9 +49,17 @@
                     ) {
 
     if(is.null(file)) file <- time_df$file[nrow(time_df)]
-    if(is.null(name)) name <- time_df$name[nrow(time_df)]
     if(is.null(log)) log <- time_df$log[nrow(time_df)]
-    if(is.null(name)) name <- process
+
+    if(is.null(name)) if(!is.null(time_df)) {
+
+      name <- time_df$name[nrow(time_df)]
+
+    } else {
+
+      name <- process
+
+    }
 
     new_df <- tibble::tibble(name = name
                              , file = file
@@ -88,7 +96,8 @@
 
       text <- time_df |>
         dplyr::group_by(file) |> # to ensure difftime gets max and min within 'file'
-        dplyr::mutate(text = dplyr::case_when(grepl("start", process) ~ paste0(process
+        dplyr::mutate(text = dplyr::case_when(grepl("start", process) ~ paste0("\n"
+                                                                               , process
                                                                                , ": "
                                                                                , time
                                                                                )
@@ -100,6 +109,7 @@
                                                                                                       , min(time)
                                                                                                       )
                                                                                              )
+                                                                               , "\n"
                                                                                )
                                               , grepl("warning|error", process) ~ paste0(process
                                                                                         , ": "
@@ -117,9 +127,10 @@
                       ) |>
         dplyr::ungroup()
 
-      writeLines(c(unique(text$name), text$text)
-                 , con = log
-                 )
+      readr::write_lines(c(unique(text$name), text$text)
+                         , con = log
+                         , append = TRUE
+                         )
 
     }
 

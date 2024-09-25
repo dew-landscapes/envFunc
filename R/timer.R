@@ -129,7 +129,6 @@
 
       readr::write_lines(c(unique(text$name), text$text)
                          , file = log
-                         , append = TRUE
                          )
 
     }

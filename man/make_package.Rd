@@ -19,8 +19,11 @@ Called for side effect of running \code{devtools::document()},
 and, optionally, \code{envFunc::git_commit_env()}.
 }
 \description{
-document, install, knit README.Rmd, build_site, commit
+All now wrapped in if(FALSE) so doesn't do anything. Best run as line by line
+manually.
 }
 \details{
+document, install, knit README.Rmd, build_site, commit
+
 WARNING. Runs rm(list = ls()), leaving only arguments to this function.
 }

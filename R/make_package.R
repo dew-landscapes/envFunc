@@ -2,6 +2,9 @@
 
 #' Make package workflow
 #'
+#' All now wrapped in if(FALSE) so doesn't do anything. Best run as line by line
+#' manually.
+#'
 #' document, install, knit README.Rmd, build_site, commit
 #'
 #' WARNING. Runs rm(list = ls()), leaving only arguments to this function.
@@ -21,38 +24,45 @@ make_package <- function(do_commit = FALSE
                          , ...
                          ) {
 
-  dots_list <- list(...)
+  if(FALSE) {
 
-  rm(list = ls() %>%
-       grep("do_commit|m|dots_list"
-            , .
-            , value = TRUE
-            , invert = TRUE
-            )
-     )
+    dots_list <- list(...)
 
-  if(file.exists("data-raw/make_data.R")) source("data-raw/make_data.R")
+    rm(list = ls() %>%
+         grep("do_commit|m|dots_list"
+              , .
+              , value = TRUE
+              , invert = TRUE
+              )
+       )
 
-  devtools::document()
+    if(file.exists("data-raw/make_data.R")) source("data-raw/make_data.R")
 
-  # devtools::install(dependencies = FALSE)
+    devtools::document()
 
-  if(file.exists("README.Rmd")){
+    # devtools::install(dependencies = FALSE)
 
-    knitr::knit("README.Rmd")
+    if(file.exists("README.Rmd")){
+
+      knitr::knit("README.Rmd")
+
+    }
+
+    pkgdown::clean_site()
+
+    # restart R session between these steps
+    .rs.restartR() # might not be enough - doesn't unload the packages
+
+    pkgdown::build_site()
+
+    if(do_commit) {
+
+      envFunc::git_commit_env(m)
+
+    }
 
   }
 
-  pkgdown::clean_site()
-
-  do.call(pkgdown::build_site
-          , dots_list
-          )
-
-  if(do_commit) {
-
-    envFunc::git_commit_env(m)
-
-  }
+  return(invisible(NULL))
 
 }

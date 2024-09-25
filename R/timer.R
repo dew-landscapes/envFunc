@@ -128,7 +128,7 @@
         dplyr::ungroup()
 
       readr::write_lines(c(unique(text$name), text$text)
-                         , con = log
+                         , file = log
                          , append = TRUE
                          )
 

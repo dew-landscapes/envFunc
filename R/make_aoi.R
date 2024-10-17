@@ -44,7 +44,7 @@
     }
 
     if(!is.null(filt_col)) aoi <- polygons %>%
-        dplyr::filter(grepl(paste0(filt_level, collapse = "|"), level)) %>%
+        dplyr::filter(grepl(paste0(filt_level, collapse = "|"), !!rlang::ensym(filt_col))) %>%
         sf::st_make_valid()
 
     if(simplify) aoi <- aoi %>%
@@ -61,7 +61,7 @@
     if(!is.null(clip)) aoi <- aoi %>%
         sf::st_intersection(clip)
 
-    # bbox last to esnure
+    # bbox last to ensure
     if(bbox) aoi <- aoi %>%
         sf::st_bbox() %>%
         sf::st_as_sfc() %>%

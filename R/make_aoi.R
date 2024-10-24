@@ -43,9 +43,9 @@
 
     }
 
-    if(!is.null(filt_col)) aoi <- polygons %>%
+    aoi <- if(!is.null(filt_col)) polygons %>%
         dplyr::filter(grepl(paste0(filt_level, collapse = "|"), !!rlang::ensym(filt_col))) %>%
-        sf::st_make_valid()
+        sf::st_make_valid() else polygons
 
     if(simplify) aoi <- aoi %>%
         dplyr::summarise() %>%

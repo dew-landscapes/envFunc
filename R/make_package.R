@@ -44,7 +44,7 @@ make_package <- function(do_commit = FALSE
 
     if(file.exists("README.Rmd")){
 
-      knitr::knit("README.Rmd")
+      rmarkdown::render("README.Rmd")
 
     }
 

@@ -1,128 +1,77 @@
 
 
-#' Use meta data to name or parse output paths
+#' Create output directory paths or parse output directory paths
 #'
 #' Either create file path for saving outputs or parse the meta data from a path
 #'
-#' @param x Either dataframe with path(s) to parse (in column `path`), character
-#' vector of path(s) to search, or named list object.
-#' @param context_defn Character vector of meta data names (in order)
-#' @param parse Logical. If `FALSE` (default) an `out_dir` path will be returned rather
-#' than parsed. Assumes the appropriate names can be found in `x`.
-#' @param fill_null Logical. If `TRUE`, will fill up to `x_null` definitions
-#' with NULL (and issue a warning).
-#' @param x_null Numeric. Even if `fill_null` is `TRUE`, if there are more than
-#' `x_null` missing definitions, an error will be thrown.
-#' @param ... Not used
+#' @param set_list List (optionally nested) of critical settings (only) for use
+#' in output path names. The first elements of the list will return directories.
+#' Any elements within each of the first elements of the list are concatenated
+#' to form the name of each directory (see examples)
+#' @param base_dir Character. Directory prepended to the output path
+#' @param all_files Logical or numeric. Return files within the `path` column
+#' provided in the resulting dataframe? If numeric, passed to the `recurse`
+#' argument of `fs::dir_ls()`.
+#' @param show_null Logical. Display "NULL" or "NA" in names
+#' (or gsub it out with "")
 #'
 #'
-#' @return If `!parse`, tibble with columns:
-#' \describe{
-#'   \item{vector}{Vector layer originally used to define area of interest}
-#'   \item{filt_col}{Column name from vector to filter to define area of interest}
-#'   \item{level}{Level(s) of filt_col originally filtered to define area of interest}
-#'   \item{buffer}{Any buffer around area of interest}
-#'   \item{res}{Resolution of output raster in units of rasters crs}
-#'   \item{path}{Full (relative) path including `file_type`.}
-#' }
-#'
-#' If `!parse`, `df` with additional column `out_dir`
+#' @return Tibble containing:
+#' * all contexts: named as per the second level elements of `set_list`
+#' * directories: a directory for each element in the first level of `set_list`
+#' * path: the output path, prepended with base_dir
 #'
 #' @export
 #'
-#' @examples
-name_env_out <- function(x
-                         , context_defn = c("vector"
-                                            , "filt_col"
-                                            , "level"
-                                            , "buffer"
-                                            , "res"
-                                            )
-                         , parse = FALSE
-                         , fill_null = FALSE
-                         , x_null = 2
-                         , ...
+#' @example inst/examples/name_env_out_ex.R
+name_env_out <- function(set_list
+                         , base_dir = NULL
+                         , all_files = FALSE
+                         , show_null = FALSE
                          ) {
 
-  df <- if(!"data.frame" %in% class(x)) {
+  df <- set_list %>%
+    purrr::map(\(x) paste0(x, collapse = "__")) %>%
+    list2DF() %>%
+    tibble::as_tibble() %>%
+    {if(show_null) (.) else (.) %>% dplyr::mutate(dplyr::across(dplyr::where(is.character)
+                                                                , \(x) gsub("NULL|NA", "", x)
+                                                                )
+                                                  )
+      } %>%
+    tidyr::unite(col = "path"
+                 , tidyselect::everything()
+                 , remove = FALSE
+                 , sep = "/"
+                 )
 
-    if("character" %in% class(x)) {
+  df <- purrr::map(names(set_list)
+             , \(x) df %>%
+               tidyr::separate(col = !!rlang::ensym(x)
+                               , into = names(set_list[[x]])
+                               , remove = FALSE
+                               , sep = "__"
+                               )
+             ) %>%
+    purrr::reduce(dplyr::left_join) %>%
+    dplyr::relocate(tidyselect::any_of(names(set_list))
+                    , path
+                    , .after = everything()
+                    ) %>%
+    {if(!is.null(base_dir)) (.) %>% dplyr::mutate(path = fs::path(base_dir, path)) else (.)}
 
-      tibble::tibble(path = x)
+  if(all_files) {
 
-    } else if("list" %in% class(x)) {
-
-      get_names <- names(x) %in% context_defn
-
-      x[get_names] %>%
-        purrr::map(paste0, collapse = "--") %>%
-        list2DF() %>%
-        tibble::as_tibble()
-
-    }
-
-  } else x
-
-  if(parse) {
-
-      res <- df %>%
-        dplyr::mutate(context = basename(path)) %>%
-        tidyr::separate(context
-                        , into = context_defn
-                        , sep = "__"
-                        ) %>%
-        dplyr::mutate(dplyr::across(dplyr::where(is.character)
-                                    , \(x) gsub("^$", NA_character_, x)
-                                    )
-                      )
-
-      res <- res %>%
-        dplyr::relocate(-path)
-
-  } else {
-
-    if(fill_null) {
-
-      # check all names are in df
-
-      missing <- setdiff(context_defn
-                         , names(df)
-                         )
-
-      if(length(missing) > x_null) {
-
-        stop(length(missing)
-             , " definitions are missing: "
-             , envFunc::vec_to_sentence(missing)
-             )
-
-      }
-
-      warning("All of "
-              , envFunc::vec_to_sentence(missing)
-              , ' will be blank ("")'
-              )
-
-      if(length(missing)) {
-
-        df <- cbind(df
-                    , purrr::map(missing
-                                 , \(x) tibble::tibble(!!rlang::ensym(x) := list(""))
-                                 )
+    df <- df %>%
+      dplyr::mutate(dir_exists = dir.exists(path)
+                    , files = purrr::map2(path
+                                          , dir_exists
+                                          , \(x, y) if(y) fs::dir_ls(x, recurse = all_files)
+                                          )
                     )
-
-      }
-
-    }
-
-    res <- df %>%
-      tidyr::unite("path"
-                  , tidyselect::any_of(context_defn)
-                   , sep = "__"
-                   )
 
   }
 
-  return(res)
+  return(df)
 
 }

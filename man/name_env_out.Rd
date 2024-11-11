@@ -2,47 +2,77 @@
 % Please edit documentation in R/name_env_out.R
 \name{name_env_out}
 \alias{name_env_out}
-\title{Use meta data to name or parse output paths}
+\title{Create output directory paths or parse output directory paths}
 \usage{
-name_env_out(
-  x,
-  context_defn = c("vector", "filt_col", "level", "buffer", "res"),
-  parse = FALSE,
-  fill_null = FALSE,
-  x_null = 2,
-  ...
-)
+name_env_out(set_list, base_dir = NULL, all_files = FALSE, show_null = FALSE)
 }
 \arguments{
-\item{x}{Either dataframe with path(s) to parse (in column \code{path}), character
-vector of path(s) to search, or named list object.}
+\item{set_list}{List (optionally nested) of critical settings (only) for use
+in output path names. The first elements of the list will return directories.
+Any elements within each of the first elements of the list are concatenated
+to form the name of each directory (see examples)}
 
-\item{context_defn}{Character vector of meta data names (in order)}
+\item{base_dir}{Character. Directory prepended to the output path}
 
-\item{parse}{Logical. If \code{FALSE} (default) an \code{out_dir} path will be returned rather
-than parsed. Assumes the appropriate names can be found in \code{x}.}
+\item{all_files}{Logical or numeric. Return files within the \code{path} column
+provided in the resulting dataframe? If numeric, passed to the \code{recurse}
+argument of \code{fs::dir_ls()}.}
 
-\item{fill_null}{Logical. If \code{TRUE}, will fill up to \code{x_null} definitions
-with NULL (and issue a warning).}
-
-\item{x_null}{Numeric. Even if \code{fill_null} is \code{TRUE}, if there are more than
-\code{x_null} missing definitions, an error will be thrown.}
-
-\item{...}{Not used}
+\item{show_null}{Logical. Display "NULL" or "NA" in names
+(or gsub it out with "")}
 }
 \value{
-If \code{!parse}, tibble with columns:
-\describe{
-\item{vector}{Vector layer originally used to define area of interest}
-\item{filt_col}{Column name from vector to filter to define area of interest}
-\item{level}{Level(s) of filt_col originally filtered to define area of interest}
-\item{buffer}{Any buffer around area of interest}
-\item{res}{Resolution of output raster in units of rasters crs}
-\item{path}{Full (relative) path including \code{file_type}.}
+Tibble containing:
+\itemize{
+\item all contexts: named as per the second level elements of \code{set_list}
+\item directories: a directory for each element in the first level of \code{set_list}
+\item path: the output path, prepended with base_dir
 }
-
-If \code{!parse}, \code{df} with additional column \code{out_dir}
 }
 \description{
 Either create file path for saving outputs or parse the meta data from a path
+}
+\examples{
+
+settings <- list(extent = list(polygons = "sa_ibrasub_xn"
+                               , filt_col = NULL
+                               , filt_level = NULL
+                               , bbox = TRUE
+                               , buffer = 0
+                               , temp_ext = "P50Y"
+                               )
+                 , grain = list(x = 90
+                                , y = 90
+                                , z = "P50Y"
+                                , taxonomic = "species"
+                                )
+                 , reliability = list(rel_geo = 10000
+                                      , rel_temp = "P10Y"
+                                      )
+                 )
+
+settings$out_dir <- name_env_out(set_list = settings#[1:3]
+                                 , base_dir = here::here("inst", "examples")
+                                 )$path
+
+settings$out_dir
+
+fs::dir_create(settings$out_dir)
+
+# create some junk files
+purrr::map(1:10
+           , \(x) tempfile(tmpdir = settings$out_dir)
+           ) \%>\%
+  fs::file_create()
+
+files <- name_env_out(set_list = settings[1:3]
+                      , base_dir = here::here("inst", "examples")
+                      , all_files = TRUE
+                      ) \%>\%
+  tidyr::unnest(cols = c(files)
+                , keep_empty = TRUE
+                )
+
+files
+
 }

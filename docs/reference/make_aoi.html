@@ -51,9 +51,9 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_aoi</span><span class="op">(</span></span>
-<span>  <span class="va">layer</span>,</span>
+<span>  <span class="va">polygons</span>,</span>
 <span>  filt_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  level <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filt_level <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  simplify <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  buffer <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  bbox <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -66,16 +66,16 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>layer</dt>
+    <dl><dt>polygons</dt>
 <dd><p>sf</p></dd>
 
 
 <dt>filt_col</dt>
-<dd><p>Character name of column in <code>layer</code> to filter on (or <code>NULL</code>
+<dd><p>Character name of column in <code>polygons</code> to filter on (or <code>NULL</code>
 for no filter)</p></dd>
 
 
-<dt>level</dt>
+<dt>filt_level</dt>
 <dd><p>Level(s) of <code>filt_col</code> to filter</p></dd>
 
 
@@ -89,7 +89,7 @@ for no filter)</p></dd>
 
 <dt>clip</dt>
 <dd><p>sf. If not null, this will be used to clip back the original
-<code>layer</code> +/- filtered +/- buffered +/- bbox. CHECK both CRS and <code>clip_buf</code></p></dd>
+<code>polygons</code> +/- filtered +/- buffered +/- bbox. CHECK both CRS and <code>clip_buf</code></p></dd>
 
 
 <dt>clip_buf</dt>

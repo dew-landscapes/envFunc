@@ -31,6 +31,7 @@ name_env_out <- function(set_list
                          ) {
 
   df <- set_list %>%
+    purrr::modify_tree(leaf = \(x) paste0(x, collapse = "--")) %>%
     purrr::map(\(x) paste0(x, collapse = "__")) %>%
     list2DF() %>%
     tibble::as_tibble() %>%

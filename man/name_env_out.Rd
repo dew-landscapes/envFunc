@@ -4,22 +4,46 @@
 \alias{name_env_out}
 \title{Create output directory paths or parse output directory paths}
 \usage{
-name_env_out(set_list, base_dir = NULL, all_files = FALSE, show_null = FALSE)
+name_env_out(
+  set_list,
+  base_dir = NULL,
+  show_null = FALSE,
+  return_contexts = TRUE,
+  dir_with_context = FALSE,
+  all_files = FALSE,
+  search_dir = if (is.null(base_dir)) here::here() else NULL,
+  ...
+)
 }
 \arguments{
 \item{set_list}{List (optionally nested) of critical settings (only) for use
 in output path names. The first elements of the list will return directories.
 Any elements within each of the first elements of the list are concatenated
-to form the name of each directory (see examples)}
+to form the name of each directory (see examples).}
 
-\item{base_dir}{Character. Directory prepended to the output path}
+\item{base_dir}{Character. Directory prefix to the output path.}
+
+\item{show_null}{Logical. Display "NULL" or "NA" in names
+(or gsub it out with "").}
+
+\item{return_contexts}{Logical. If TRUE (default) contexts, directories and
+path are returned, otherwise just directories and path.}
+
+\item{dir_with_context}{Logical. If FALSE (default) the first elements in
+\code{set_list} are used as prefix to each context, otherwise no prefix is added.
+Set to TRUE if there are contexts are repeated across any elements of
+\code{set_list}.}
 
 \item{all_files}{Logical or numeric. Return files within the \code{path} column
 provided in the resulting dataframe? If numeric, passed to the \code{recurse}
 argument of \code{fs::dir_ls()}.}
 
-\item{show_null}{Logical. Display "NULL" or "NA" in names
-(or gsub it out with "")}
+\item{search_dir}{Character. Path(s) to search for the \code{path} in the returned
+tibble. Ignore if \code{base_dir} is not null. Allows for searching several
+different paths for the same \code{path} in the returned tibble.}
+
+\item{...}{Passed to \code{fs::dir_ls()}. Arguments \code{path} and \code{regexp} are
+already provided, so providing them here will cause an error.}
 }
 \value{
 Tibble containing:
@@ -30,14 +54,16 @@ Tibble containing:
 }
 }
 \description{
-Either create file path for saving outputs or parse the meta data from a path
+Either create file path for saving outputs or parse the meta data from a
+path. The first elements in the list will form directories. The second
+elements in the list form the name of each directory, separated by "__".
 }
 \examples{
 
+# a list of settings
 settings <- list(extent = list(polygons = "sa_ibrasub_xn"
                                , filt_col = NULL
                                , filt_level = NULL
-                               , bbox = TRUE
                                , buffer = 0
                                , temp_ext = "P50Y"
                                )
@@ -49,30 +75,47 @@ settings <- list(extent = list(polygons = "sa_ibrasub_xn"
                  , reliability = list(rel_geo = 10000
                                       , rel_temp = "P10Y"
                                       )
+                 , aoi = list(polygons = "lsa"
+                              , filt_col = "LSA"
+                              , filt_level = "GA"
+                              , buffer = 0
+                              )
                  )
 
-settings$out_dir <- name_env_out(set_list = settings#[1:3]
+# generate an 'out directory' based on those settings
+settings$out_dir <- name_env_out(set_list = settings#[1:4]
                                  , base_dir = here::here("inst", "examples")
+                                 , dir_with_context = TRUE
                                  )$path
 
 settings$out_dir
 
+# create the 'out directory'
 fs::dir_create(settings$out_dir)
 
-# create some junk files
+# put some junk files in the 'out directory'
 purrr::map(1:10
            , \(x) tempfile(tmpdir = settings$out_dir)
            ) \%>\%
   fs::file_create()
 
-files <- name_env_out(set_list = settings[1:3]
+# use name_env_out to return the list of files, based on the settings
+files <- name_env_out(set_list = settings[1:4]
                       , base_dir = here::here("inst", "examples")
+                      , dir_with_context = TRUE
                       , all_files = TRUE
+                      # dots
+                      , recurse = TRUE
                       ) \%>\%
   tidyr::unnest(cols = c(files)
                 , keep_empty = TRUE
                 )
 
 files
+
+# clean up
+# fs::dir_delete(settings$out_dir) # only run this if you're sure it is safe
+rm(settings, files)
+
 
 }

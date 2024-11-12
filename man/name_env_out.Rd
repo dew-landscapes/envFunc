@@ -2,7 +2,7 @@
 % Please edit documentation in R/name_env_out.R
 \name{name_env_out}
 \alias{name_env_out}
-\title{Create output directory paths or parse output directory paths}
+\title{Create and/or parse output directory paths}
 \usage{
 name_env_out(
   set_list,
@@ -12,14 +12,15 @@ name_env_out(
   dir_with_context = FALSE,
   all_files = FALSE,
   search_dir = if (is.null(base_dir)) here::here() else NULL,
+  reg_exp,
   ...
 )
 }
 \arguments{
-\item{set_list}{List (optionally nested) of critical settings (only) for use
-in output path names. The first elements of the list will return directories.
-Any elements within each of the first elements of the list are concatenated
-to form the name of each directory (see examples).}
+\item{set_list}{Nested list, with two levels, of critical settings (only) for
+use in output path names. The first elements of the list will return
+directories. Elements within each of the first elements of the list are
+concatenated to form the name of each directory (see examples).}
 
 \item{base_dir}{Character. Directory prefix to the output path.}
 
@@ -39,11 +40,14 @@ provided in the resulting dataframe? If numeric, passed to the \code{recurse}
 argument of \code{fs::dir_ls()}.}
 
 \item{search_dir}{Character. Path(s) to search for the \code{path} in the returned
-tibble. Ignore if \code{base_dir} is not null. Allows for searching several
+tibble. Ignored unless \code{base_dir} is null. Allows for searching several
 different paths for the same \code{path} in the returned tibble.}
 
 \item{...}{Passed to \code{fs::dir_ls()}. Arguments \code{path} and \code{regexp} are
 already provided, so providing them here will cause an error.}
+
+\item{regexp}{Character. Combined with \code{path} in the returned tibble to
+search for files.}
 }
 \value{
 Tibble containing:
@@ -54,9 +58,10 @@ Tibble containing:
 }
 }
 \description{
-Either create file path for saving outputs or parse the meta data from a
-path. The first elements in the list will form directories. The second
-elements in the list form the name of each directory, separated by "__".
+Either create directory path for saving outputs or parse the meta data from
+an output directory path. The first elements in the list will form
+directories. The second elements in the list form the name of each directory,
+separated by "__".
 }
 \examples{
 

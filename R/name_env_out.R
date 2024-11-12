@@ -1,15 +1,16 @@
 
 
-#' Create output directory paths or parse output directory paths
+#' Create and/or parse output directory paths
 #'
-#' Either create file path for saving outputs or parse the meta data from a
-#' path. The first elements in the list will form directories. The second
-#' elements in the list form the name of each directory, separated by "__".
+#' Either create directory path for saving outputs or parse the meta data from
+#' an output directory path. The first elements in the list will form
+#' directories. The second elements in the list form the name of each directory,
+#' separated by "__".
 #'
-#' @param set_list List (optionally nested) of critical settings (only) for use
-#' in output path names. The first elements of the list will return directories.
-#' Any elements within each of the first elements of the list are concatenated
-#' to form the name of each directory (see examples).
+#' @param set_list Nested list, with two levels, of critical settings (only) for
+#' use in output path names. The first elements of the list will return
+#' directories. Elements within each of the first elements of the list are
+#' concatenated to form the name of each directory (see examples).
 #' @param base_dir Character. Directory prefix to the output path.
 #' @param show_null Logical. Display "NULL" or "NA" in names
 #' (or gsub it out with "").
@@ -23,8 +24,10 @@
 #' provided in the resulting dataframe? If numeric, passed to the `recurse`
 #' argument of `fs::dir_ls()`.
 #' @param search_dir Character. Path(s) to search for the `path` in the returned
-#' tibble. Ignore if `base_dir` is not null. Allows for searching several
+#' tibble. Ignored unless `base_dir` is null. Allows for searching several
 #' different paths for the same `path` in the returned tibble.
+#' @param regexp Character. Combined with `path` in the returned tibble to
+#' search for files.
 #' @param ... Passed to `fs::dir_ls()`. Arguments `path` and `regexp` are
 #' already provided, so providing them here will cause an error.
 #'
@@ -44,6 +47,7 @@ name_env_out <- function(set_list
                          , dir_with_context = FALSE
                          , all_files = FALSE
                          , search_dir = if(is.null(base_dir)) here::here() else NULL
+                         , reg_exp
                          , ...
                          ) {
 
@@ -80,36 +84,41 @@ name_env_out <- function(set_list
                        }
 
                        df %>%
-                       tidyr::separate(col = !!rlang::ensym(x)
-                                       , into = use_names
-                                       , remove = FALSE
-                                       , sep = "__"
-                                       )
+                         tidyr::separate(col = !!rlang::ensym(x)
+                                         , into = use_names
+                                         , remove = FALSE
+                                         , sep = "__"
+                                         )
 
                      }
                      ) %>%
-      purrr::reduce(dplyr::left_join) %>%
-      dplyr::relocate(tidyselect::matches(names(set_list))
-                      , path
-                      , .after = everything()
-                      )
+      purrr::reduce(dplyr::left_join)
 
   }
 
   if(all_files) {
 
-    search_dir <- if(!is.null(base_dir)) unique(df$path)
+    search_dir <- if(!is.null(base_dir)) unique(df$path) else search_dir
 
     df <- df %>%
       dplyr::mutate(files = purrr::map(path
                                        , \(x) fs::dir_ls(path = search_dir
-                                                         , regexp = x
+                                                         , regexp = paste(x, reg_exp, sep = ".*", collapse = "|")
                                                          , ...
                                                          )
                                        )
                     )
 
   }
+
+
+
+  df <- df %>%
+    dplyr::relocate(tidyselect::matches(names(set_list))
+                    , path
+                    , tidyselect::matches("\\bfiles\\b")
+                    , .after = everything()
+                    )
 
   return(df)
 

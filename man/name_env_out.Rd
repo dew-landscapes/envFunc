@@ -12,7 +12,7 @@ name_env_out(
   dir_with_context = FALSE,
   all_files = FALSE,
   search_dir = if (is.null(base_dir)) here::here() else NULL,
-  reg_exp,
+  reg_exp = NULL,
   ...
 )
 }
@@ -32,7 +32,7 @@ path are returned, otherwise just directories and path.}
 
 \item{dir_with_context}{Logical. If FALSE (default) the first elements in
 \code{set_list} are used as prefix to each context, otherwise no prefix is added.
-Set to TRUE if there are contexts are repeated across any elements of
+Set to TRUE if there are contexts repeated across any elements of
 \code{set_list}.}
 
 \item{all_files}{Logical or numeric. Return files within the \code{path} column
@@ -43,11 +43,11 @@ argument of \code{fs::dir_ls()}.}
 tibble. Ignored unless \code{base_dir} is null. Allows for searching several
 different paths for the same \code{path} in the returned tibble.}
 
+\item{reg_exp}{Character. Combined with \code{path} in the returned tibble to
+search for files.}
+
 \item{...}{Passed to \code{fs::dir_ls()}. Arguments \code{path} and \code{regexp} are
 already provided, so providing them here will cause an error.}
-
-\item{regexp}{Character. Combined with \code{path} in the returned tibble to
-search for files.}
 }
 \value{
 Tibble containing:

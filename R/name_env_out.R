@@ -18,7 +18,7 @@
 #' path are returned, otherwise just directories and path.
 #' @param dir_with_context Logical. If FALSE (default) the first elements in
 #' `set_list` are used as prefix to each context, otherwise no prefix is added.
-#' Set to TRUE if there are contexts are repeated across any elements of
+#' Set to TRUE if there are contexts repeated across any elements of
 #' `set_list`.
 #' @param all_files Logical or numeric. Return files within the `path` column
 #' provided in the resulting dataframe? If numeric, passed to the `recurse`
@@ -26,7 +26,7 @@
 #' @param search_dir Character. Path(s) to search for the `path` in the returned
 #' tibble. Ignored unless `base_dir` is null. Allows for searching several
 #' different paths for the same `path` in the returned tibble.
-#' @param regexp Character. Combined with `path` in the returned tibble to
+#' @param reg_exp Character. Combined with `path` in the returned tibble to
 #' search for files.
 #' @param ... Passed to `fs::dir_ls()`. Arguments `path` and `regexp` are
 #' already provided, so providing them here will cause an error.
@@ -47,7 +47,7 @@ name_env_out <- function(set_list
                          , dir_with_context = FALSE
                          , all_files = FALSE
                          , search_dir = if(is.null(base_dir)) here::here() else NULL
-                         , reg_exp
+                         , reg_exp = NULL
                          , ...
                          ) {
 
@@ -102,10 +102,16 @@ name_env_out <- function(set_list
 
     df <- df %>%
       dplyr::mutate(files = purrr::map(path
-                                       , \(x) fs::dir_ls(path = search_dir
-                                                         , regexp = paste(x, reg_exp, sep = ".*", collapse = "|")
-                                                         , ...
-                                                         )
+                                       , \(x) {
+
+                                         use_regex <- if(is.null(reg_exp)) x else paste(x, reg_exp, sep = ".*", collapse = "|")
+
+                                         fs::dir_ls(path = search_dir
+                                                    , regexp = use_regex
+                                                    , ...
+                                                    )
+
+                                       }
                                        )
                     )
 

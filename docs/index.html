@@ -91,7 +91,7 @@
 <span>    <span class="fu">envFunc</span><span class="fu">::</span><span class="fu"><a href="reference/add_time_stamp.html">add_time_stamp</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">temp</span>, <span class="st">"ctime"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2024-11-26 12:00:01 ACDT"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2024-12-13 14:46:26 ACDT"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="add-a-likelihood-classification">Add a likelihood classification<a class="anchor" aria-label="anchor" href="#add-a-likelihood-classification"></a>
@@ -104,18 +104,18 @@
 <span>  </span>
 <span>  <span class="va">x</span></span>
 <span><span class="co">#&gt; # A tibble: 10 × 8</span></span>
-<span><span class="co">#&gt;          x likelihood             maxVal range         loose very  extreme exceptional</span></span>
-<span><span class="co">#&gt;      &lt;dbl&gt; &lt;fct&gt;                   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;      </span></span>
-<span><span class="co">#&gt;  1 0.328   Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span><span class="co">#&gt;  2 0.674   Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
-<span><span class="co">#&gt;  3 0.00702 Exceptionally unlikely  0.01  (0,0.01]      +     ++    +++     ++++       </span></span>
-<span><span class="co">#&gt;  4 0.163   Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span><span class="co">#&gt;  5 0.208   Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span><span class="co">#&gt;  6 0.259   Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span><span class="co">#&gt;  7 0.770   Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
-<span><span class="co">#&gt;  8 0.424   About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
-<span><span class="co">#&gt;  9 0.0826  Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         </span></span>
-<span><span class="co">#&gt; 10 0.664   About as likely as not  0.667 (0.333,0.667] 0     0     0       0</span></span></code></pre></div>
+<span><span class="co">#&gt;         x likelihood             maxVal range         loose very  extreme exceptional</span></span>
+<span><span class="co">#&gt;     &lt;dbl&gt; &lt;fct&gt;                   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;      </span></span>
+<span><span class="co">#&gt;  1 0.0687 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         </span></span>
+<span><span class="co">#&gt;  2 0.529  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span><span class="co">#&gt;  3 0.296  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
+<span><span class="co">#&gt;  4 0.452  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span><span class="co">#&gt;  5 0.394  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span><span class="co">#&gt;  6 0.572  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span><span class="co">#&gt;  7 0.232  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
+<span><span class="co">#&gt;  8 0.112  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
+<span><span class="co">#&gt;  9 0.141  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
+<span><span class="co">#&gt; 10 0.298  Unlikely                0.333 (0.1,0.333]   +     +     +       +</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="what-else-is-in-envfunc">What else is in <code>envFunc</code>
@@ -225,49 +225,59 @@
 <td align="left">Make a list of data frames for months and seasons</td>
 </tr>
 <tr class="odd">
+<td align="left"><code><a href="reference/make_targets.html">envFunc::make_targets</a></code></td>
+<td align="left">function</td>
+<td align="left">Make targets</td>
+</tr>
+<tr class="even">
 <td align="left"><code><a href="reference/mirror_directory.html">envFunc::mirror_directory</a></code></td>
 <td align="left">function</td>
 <td align="left">Mirror a directory</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code><a href="reference/monitor_system.html">envFunc::monitor_system</a></code></td>
 <td align="left">function</td>
 <td align="left">Monitor system resources</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code><a href="reference/name_env_out.html">envFunc::name_env_out</a></code></td>
 <td align="left">function</td>
 <td align="left">Create and/or parse output directory paths</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code><a href="reference/numbers2words.html">envFunc::numbers2words</a></code></td>
 <td align="left">function</td>
 <td align="left">Convert a numeric to its corresponding english character.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code><a href="reference/prop_cpu.html">envFunc::prop_cpu</a></code></td>
 <td align="left">function</td>
 <td align="left">Proportion of current CPU usage</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code><a href="reference/prop_mem.html">envFunc::prop_mem</a></code></td>
 <td align="left">function</td>
 <td align="left">Proportion of current memory usage</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code><a href="reference/quibble.html">envFunc::quibble</a></code></td>
 <td align="left">function</td>
 <td align="left">Make a wide, single row, data frame of quantiles (percentiles)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code><a href="reference/run.html">envFunc::run</a></code></td>
 <td align="left">function</td>
 <td align="left">Run the scrips in a project</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code><a href="reference/sp_transform_df.html">envFunc::sp_transform_df</a></code></td>
 <td align="left">function</td>
 <td align="left">Transform the coordinates in a dataframe</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/store_dir.html">envFunc::store_dir</a></code></td>
+<td align="left">function</td>
+<td align="left">Generate a path to a storage directory</td>
 </tr>
 <tr class="even">
 <td align="left"><code><a href="reference/taxa_label.html">envFunc::taxa_label</a></code></td>

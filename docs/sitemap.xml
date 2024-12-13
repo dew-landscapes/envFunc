@@ -23,6 +23,7 @@
 <url><loc>/reference/make_metric_plot.html</loc></url>
 <url><loc>/reference/make_package.html</loc></url>
 <url><loc>/reference/make_seasons.html</loc></url>
+<url><loc>/reference/make_targets.html</loc></url>
 <url><loc>/reference/mirror_directory.html</loc></url>
 <url><loc>/reference/monitor_system.html</loc></url>
 <url><loc>/reference/name_env_out.html</loc></url>
@@ -32,7 +33,6 @@
 <url><loc>/reference/prop_mem.html</loc></url>
 <url><loc>/reference/quibble.html</loc></url>
 <url><loc>/reference/run.html</loc></url>
-<url><loc>/reference/run_targets.html</loc></url>
 <url><loc>/reference/sp_transform_df.html</loc></url>
 <url><loc>/reference/store_dir.html</loc></url>
 <url><loc>/reference/taxa_label.html</loc></url>

@@ -37,7 +37,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2024-11-26 12:00:01 ACDT"
+#> [1] "2024-12-13 14:46:26 ACDT"
 ```
 
 ## Add a likelihood classification
@@ -50,18 +50,18 @@ library("envFunc")
   
   x
 #> # A tibble: 10 × 8
-#>          x likelihood             maxVal range         loose very  extreme exceptional
-#>      <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.328   Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  2 0.674   Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  3 0.00702 Exceptionally unlikely  0.01  (0,0.01]      +     ++    +++     ++++       
-#>  4 0.163   Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  5 0.208   Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  6 0.259   Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  7 0.770   Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  8 0.424   About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  9 0.0826  Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         
-#> 10 0.664   About as likely as not  0.667 (0.333,0.667] 0     0     0       0
+#>         x likelihood             maxVal range         loose very  extreme exceptional
+#>     <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
+#>  1 0.0687 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         
+#>  2 0.529  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  3 0.296  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  4 0.452  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  5 0.394  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  6 0.572  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  7 0.232  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  8 0.112  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  9 0.141  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#> 10 0.298  Unlikely                0.333 (0.1,0.333]   +     +     +       +
 ```
 
 ## What else is in `envFunc`
@@ -89,6 +89,7 @@ The following functions and data sets are provided in `envFunc`. See
 | `envFunc::make_metric_plot` | function | Plot the results from code{make_metric_df} |
 | `envFunc::make_package` | function | Make package workflow |
 | `envFunc::make_seasons` | function | Make a list of data frames for months and seasons |
+| `envFunc::make_targets` | function | Make targets |
 | `envFunc::mirror_directory` | function | Mirror a directory |
 | `envFunc::monitor_system` | function | Monitor system resources |
 | `envFunc::name_env_out` | function | Create and/or parse output directory paths |
@@ -98,6 +99,7 @@ The following functions and data sets are provided in `envFunc`. See
 | `envFunc::quibble` | function | Make a wide, single row, data frame of quantiles (percentiles) |
 | `envFunc::run` | function | Run the scrips in a project |
 | `envFunc::sp_transform_df` | function | Transform the coordinates in a dataframe |
+| `envFunc::store_dir` | function | Generate a path to a storage directory |
 | `envFunc::taxa_label` | function | Create a label for a species |
 | `envFunc::timer` | function | A (rough) timer |
 | `envFunc::vec_to_sentence` | function | Vector to phrase |

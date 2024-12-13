@@ -40,4 +40,6 @@ settings <- list(extent = list(polygons = "sa_ibrasub_xn"
 
 # generate the full path to a store
 out_dir <- store_dir(settings)
+
+out_dir
 }

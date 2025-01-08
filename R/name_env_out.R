@@ -56,7 +56,7 @@ name_env_out <- function(set_list
     purrr::map(\(x) paste0(x, collapse = "__")) %>%
     tibble::as_tibble() %>%
     {if(show_null) (.) else (.) %>% dplyr::mutate(dplyr::across(dplyr::where(is.character)
-                                                                , \(x) gsub("NULL|NA", "", x)
+                                                                , \(x) gsub("NULL", "", x)
                                                                 )
                                                   )
       } %>%

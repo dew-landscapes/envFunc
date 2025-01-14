@@ -22,14 +22,15 @@ make_targets <- function(settings_context_file = "settings/setup.yaml") {
   ## tars df ------
   tars_df <- tibble::tibble(script = fs::dir_ls(regexp = "^\\d{3}_.*\\.R$")) |>
     dplyr::mutate(project = purrr::map_chr(script, \(x) gsub("\\d{3}_|\\.R", "", x))
+                  , order = readr::parse_number(script)
                   , store = envFunc::store_dir(set_list = c(settings_context))
                   , store = fs::path(store, project)
                   ) |>
-    dplyr::select(project, script, store) |>
-    dplyr::arrange(desc(project))
+    dplyr::arrange(order) |>
+    dplyr::select(project, script, store)
 
   ## _targets.yaml -------
-  fs::file_delete("_targets.yaml")
+  if(file.exists("_targets.yaml")) fs::file_delete("_targets.yaml")
 
   purrr::pmap(tars_df
               , targets::tar_config_set

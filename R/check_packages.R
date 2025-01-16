@@ -27,7 +27,7 @@ check_packages <- function(packages, update_env = FALSE) {
     env_packages <- packages[grepl("*env", packages)]
 
     purrr::walk(env_packages
-                , \(x) remotes::install_github(paste0("acanthiza/", x)
+                , \(x) remotes::install_github(paste0("dew-landscapes/", x)
                                                , dependencies = FALSE
                                                )
                 )

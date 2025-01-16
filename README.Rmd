@@ -32,7 +32,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Acanthiza/envFunc")
+devtools::install_github("dew-landscapes/envFunc")
 ```
 
 Load `envFunc`
@@ -67,7 +67,7 @@ library("envFunc")
 
 ## What else is in `envFunc`
 
-The following functions and data sets are provided in `envFunc`. See https://acanthiza.github.io/envFunc/ for more examples.
+The following functions and data sets are provided in `envFunc`. See https://dew-landscapes.github.io/envFunc/ for more examples.
 
 ```{r, echo = FALSE, warning = FALSE}
 

@@ -40,5 +40,5 @@ Imports:
     terra,
     tibble,
     tidyr
-URL: https://github.com/Acanthiza/envFunc
-BugReports: https://github.com/Acanthiza/envFunc/issues
+URL: https://github.com/dew-landscapes/envFunc
+BugReports: https://github.com/dew-landscapes/envFunc/issues

@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/Acanthiza/envFunc/" class="external-link">
+  <a href="https://github.com/dew-landscapes/envFunc/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
 
   </a>
@@ -41,7 +41,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generate a tibble of epochs.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/Acanthiza/envFunc/blob/HEAD/R/make_epochs.R" class="external-link"><code>R/make_epochs.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/dew-landscapes/envFunc/blob/HEAD/R/make_epochs.R" class="external-link"><code>R/make_epochs.R</code></a></small>
     <div class="hidden name"><code>make_epochs.Rd</code></div>
     </div>
 
@@ -109,17 +109,17 @@ e.g. 10-19.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   start_year end_year years      epoch epoch_now</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>       <span style="text-decoration: underline;">1</span>994     <span style="text-decoration: underline;">2</span>004 <span style="color: #949494;">&lt;int [11]&gt;</span> 94-04 FALSE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>       <span style="text-decoration: underline;">2</span>004     <span style="text-decoration: underline;">2</span>014 <span style="color: #949494;">&lt;int [11]&gt;</span> 04-14 FALSE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>       <span style="text-decoration: underline;">2</span>014     <span style="text-decoration: underline;">2</span>024 <span style="color: #949494;">&lt;int [11]&gt;</span> 14-24 TRUE     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>       <span style="text-decoration: underline;">1</span>995     <span style="text-decoration: underline;">2</span>005 <span style="color: #949494;">&lt;int [11]&gt;</span> 95-05 FALSE    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>       <span style="text-decoration: underline;">2</span>005     <span style="text-decoration: underline;">2</span>015 <span style="color: #949494;">&lt;int [11]&gt;</span> 05-15 FALSE    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>       <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">2</span>025 <span style="color: #949494;">&lt;int [11]&gt;</span> 15-25 TRUE     </span>
 <span class="r-in"><span><span class="fu">make_epochs</span><span class="op">(</span><span class="va">now</span> <span class="op">-</span> <span class="fl">30</span>, <span class="va">now</span>, <span class="fl">10</span>, <span class="cn">F</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   start_year end_year years      epoch epoch_now</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>       <span style="text-decoration: underline;">1</span>994     <span style="text-decoration: underline;">1</span>994 <span style="color: #949494;">&lt;int [1]&gt;</span>  94-94 FALSE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>       <span style="text-decoration: underline;">1</span>995     <span style="text-decoration: underline;">2</span>004 <span style="color: #949494;">&lt;int [10]&gt;</span> 95-04 FALSE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>       <span style="text-decoration: underline;">2</span>005     <span style="text-decoration: underline;">2</span>014 <span style="color: #949494;">&lt;int [10]&gt;</span> 05-14 FALSE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>       <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">2</span>024 <span style="color: #949494;">&lt;int [10]&gt;</span> 15-24 TRUE     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>       <span style="text-decoration: underline;">1</span>995     <span style="text-decoration: underline;">1</span>995 <span style="color: #949494;">&lt;int [1]&gt;</span>  95-95 FALSE    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>       <span style="text-decoration: underline;">1</span>996     <span style="text-decoration: underline;">2</span>005 <span style="color: #949494;">&lt;int [10]&gt;</span> 96-05 FALSE    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>       <span style="text-decoration: underline;">2</span>006     <span style="text-decoration: underline;">2</span>015 <span style="color: #949494;">&lt;int [10]&gt;</span> 06-15 FALSE    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>       <span style="text-decoration: underline;">2</span>016     <span style="text-decoration: underline;">2</span>025 <span style="color: #949494;">&lt;int [10]&gt;</span> 16-25 TRUE     </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

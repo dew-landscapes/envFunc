@@ -28,6 +28,8 @@
 #' different paths for the same `path` in the returned tibble.
 #' @param reg_exp Character. Combined with `path` in the returned tibble to
 #' search for files.
+#' @param remove_dots Logical. Should `.` be removed from elements within the
+#' list? e.g. `0.95` becomes `095`
 #' @param ... Passed to `fs::dir_ls()`. Arguments `path` and `regexp` are
 #' already provided, so providing them here will cause an error.
 #'
@@ -48,11 +50,12 @@ name_env_out <- function(set_list
                          , all_files = FALSE
                          , search_dir = if(is.null(base_dir)) here::here() else NULL
                          , reg_exp = NULL
+                         , remove_dots = TRUE
                          , ...
                          ) {
 
   df <- set_list %>%
-    purrr::modify_tree(leaf = \(x) paste0(x, collapse = "--")) %>%
+    purrr::modify_tree(leaf = \(x) paste0(if(remove_dots) gsub("\\.", "", x) else x, collapse = "--")) %>%
     purrr::map(\(x) paste0(x, collapse = "__")) %>%
     tibble::as_tibble() %>%
     {if(show_null) (.) else (.) %>% dplyr::mutate(dplyr::across(dplyr::where(is.character)

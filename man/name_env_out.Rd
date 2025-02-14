@@ -13,6 +13,7 @@ name_env_out(
   all_files = FALSE,
   search_dir = if (is.null(base_dir)) here::here() else NULL,
   reg_exp = NULL,
+  remove_dots = TRUE,
   ...
 )
 }
@@ -45,6 +46,9 @@ different paths for the same \code{path} in the returned tibble.}
 
 \item{reg_exp}{Character. Combined with \code{path} in the returned tibble to
 search for files.}
+
+\item{remove_dots}{Logical. Should \code{.} be removed from elements within the
+list? e.g. \code{0.95} becomes \code{095}}
 
 \item{...}{Passed to \code{fs::dir_ls()}. Arguments \code{path} and \code{regexp} are
 already provided, so providing them here will cause an error.}

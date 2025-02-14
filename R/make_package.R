@@ -7,7 +7,6 @@
 #'
 #' document, install, knit README.Rmd, build_site, commit
 #'
-#' WARNING. Runs rm(list = ls()), leaving only arguments to this function.
 #'
 #' @param do_commit Logical. Commit to github?
 #' @param m Character. Commit message to include
@@ -27,14 +26,6 @@ make_package <- function(do_commit = FALSE
   if(FALSE) {
 
     dots_list <- list(...)
-
-    rm(list = ls() %>%
-         grep("do_commit|m|dots_list"
-              , .
-              , value = TRUE
-              , invert = TRUE
-              )
-       )
 
     if(file.exists("data-raw/make_data.R")) source("data-raw/make_data.R")
 

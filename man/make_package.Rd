@@ -24,6 +24,4 @@ manually.
 }
 \details{
 document, install, knit README.Rmd, build_site, commit
-
-WARNING. Runs rm(list = ls()), leaving only arguments to this function.
 }

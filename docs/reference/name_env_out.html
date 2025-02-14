@@ -65,6 +65,7 @@ separated by "__".</p>
 <span>  all_files <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  search_dir <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">base_dir</span><span class="op">)</span><span class="op">)</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="op">)</span> <span class="kw">else</span> <span class="cn">NULL</span>,</span>
 <span>  reg_exp <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  remove_dots <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -116,6 +117,11 @@ different paths for the same <code>path</code> in the returned tibble.</p></dd>
 <dt id="arg-reg-exp">reg_exp<a class="anchor" aria-label="anchor" href="#arg-reg-exp"></a></dt>
 <dd><p>Character. Combined with <code>path</code> in the returned tibble to
 search for files.</p></dd>
+
+
+<dt id="arg-remove-dots">remove_dots<a class="anchor" aria-label="anchor" href="#arg-remove-dots"></a></dt>
+<dd><p>Logical. Should <code>.</code> be removed from elements within the
+list? e.g. <code>0.95</code> becomes <code>095</code></p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -192,7 +198,7 @@ already provided, so providing them here will cause an error.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(path, extent, grain, reliability, aoi)`</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">files</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 90 × 21</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 100 × 21</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    extent        extent_polygons extent_filt_col extent_filt_level extent_buffer</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> sa_ibrasub_x… sa_ibrasub_xn   <span style="color: #949494;">""</span>              <span style="color: #949494;">""</span>                0            </span>
@@ -205,7 +211,7 @@ already provided, so providing them here will cause an error.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> sa_ibrasub_x… sa_ibrasub_xn   <span style="color: #949494;">""</span>              <span style="color: #949494;">""</span>                0            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> sa_ibrasub_x… sa_ibrasub_xn   <span style="color: #949494;">""</span>              <span style="color: #949494;">""</span>                0            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> sa_ibrasub_x… sa_ibrasub_xn   <span style="color: #949494;">""</span>              <span style="color: #949494;">""</span>                0            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 80 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 90 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 16 more variables: extent_temp_ext &lt;chr&gt;, grain &lt;chr&gt;, grain_x &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   grain_y &lt;chr&gt;, grain_z &lt;chr&gt;, grain_taxonomic &lt;chr&gt;, reliability &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reliability_rel_geo &lt;chr&gt;, reliability_rel_temp &lt;chr&gt;, aoi &lt;chr&gt;,</span></span>

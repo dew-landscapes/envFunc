@@ -4,23 +4,28 @@
 \alias{check_packages}
 \title{Check packages}
 \usage{
-check_packages(packages, update_env = FALSE, lib = TRUE)
+check_packages(packages, update_env = FALSE, lib = FALSE, bib = FALSE, ...)
 }
 \arguments{
 \item{packages}{Character. Packages to check}
 
 \item{update_env}{Logical. Check for any updates to 'env' packages?}
 
-\item{lib}{Logical. Call \code{library()} for each \code{packages}?}
+\item{lib}{Logical. Call \code{base::library()} for each \code{packages}?}
+
+\item{bib}{Logical. Call \code{knitr::write_bib()} on \code{packages}?}
+
+\item{...}{Passed to the bib_file argument of \code{knitr::write_bib()}.}
 }
 \value{
-Unique, sorted vector of package names
+Unique, sorted vector of package names. Optionally, loads packages
+and/or writes bibliography.
 }
 \description{
 Check that packages are installed and install them if not. Optionally: make
 sure that the most recent version of 'env' packages is installed; load the
-packages.
+packages; and/or write a bibliography for the packages.
 }
 \examples{
-setup_packages(c("dplyr", "envFunc"))
+check_packages(c("dplyr", "envFunc"))
 }

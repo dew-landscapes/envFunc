@@ -2,19 +2,24 @@
 #'
 #' Check that packages are installed and install them if not. Optionally: make
 #' sure that the most recent version of 'env' packages is installed; load the
-#' packages.
+#' packages; and/or write a bibliography for the packages.
 #'
 #' @param packages Character. Packages to check
 #' @param update_env Logical. Check for any updates to 'env' packages?
-#' @param lib Logical. Call `library()` for each `packages`?
+#' @param lib Logical. Call `base::library()` for each `packages`?
+#' @param bib Logical. Call `knitr::write_bib()` on `packages`?
+#' @param ... Passed to the bib_file argument of `knitr::write_bib()`.
 #'
-#' @return Unique, sorted vector of package names
+#' @return Unique, sorted vector of package names. Optionally, loads packages
+#' and/or writes bibliography.
 #' @export
 #'
-#' @examples setup_packages(c("dplyr", "envFunc"))
+#' @examples check_packages(c("dplyr", "envFunc"))
 check_packages <- function(packages
                            , update_env = FALSE
                            , lib = FALSE
+                           , bib = FALSE
+                           , ...
                            ) {
 
   packages <- sort(unique(packages))
@@ -45,6 +50,14 @@ check_packages <- function(packages
                 , library
                 , character.only = TRUE
                 )
+
+  }
+
+  if(bib) {
+
+    knitr::write_bib(packages
+                     , file = bib_file
+                     )
 
   }
 

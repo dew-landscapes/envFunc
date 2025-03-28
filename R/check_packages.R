@@ -1,16 +1,21 @@
 #' Check packages
 #'
-#' Check that packages are installed and install them if not. Optionally, make
-#' sure that the most recent version of 'env' packages is installed.
+#' Check that packages are installed and install them if not. Optionally: make
+#' sure that the most recent version of 'env' packages is installed; load the
+#' packages.
 #'
 #' @param packages Character. Packages to check
 #' @param update_env Logical. Check for any updates to 'env' packages?
+#' @param lib Logical. Call `library()` for each `packages`?
 #'
 #' @return Unique, sorted vector of package names
 #' @export
 #'
 #' @examples setup_packages(c("dplyr", "envFunc"))
-check_packages <- function(packages, update_env = FALSE) {
+check_packages <- function(packages
+                           , update_env = FALSE
+                           , lib = TRUE
+                           ) {
 
   packages <- sort(unique(packages))
 
@@ -30,6 +35,15 @@ check_packages <- function(packages, update_env = FALSE) {
                 , \(x) remotes::install_github(paste0("dew-landscapes/", x)
                                                , dependencies = FALSE
                                                )
+                )
+
+  }
+
+  if(lib) {
+
+    purrr::walk(packages
+                , library
+                , character.only = TRUE
                 )
 
   }

@@ -4,19 +4,22 @@
 \alias{check_packages}
 \title{Check packages}
 \usage{
-check_packages(packages, update_env = FALSE)
+check_packages(packages, update_env = FALSE, lib = TRUE)
 }
 \arguments{
 \item{packages}{Character. Packages to check}
 
 \item{update_env}{Logical. Check for any updates to 'env' packages?}
+
+\item{lib}{Logical. Call \code{library()} for each \code{packages}?}
 }
 \value{
 Unique, sorted vector of package names
 }
 \description{
-Check that packages are installed and install them if not. Optionally, make
-sure that the most recent version of 'env' packages is installed.
+Check that packages are installed and install them if not. Optionally: make
+sure that the most recent version of 'env' packages is installed; load the
+packages.
 }
 \examples{
 setup_packages(c("dplyr", "envFunc"))

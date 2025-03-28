@@ -14,7 +14,7 @@
 #' @examples setup_packages(c("dplyr", "envFunc"))
 check_packages <- function(packages
                            , update_env = FALSE
-                           , lib = TRUE
+                           , lib = FALSE
                            ) {
 
   packages <- sort(unique(packages))

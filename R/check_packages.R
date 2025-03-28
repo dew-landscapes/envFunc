@@ -56,7 +56,7 @@ check_packages <- function(packages
   if(bib) {
 
     knitr::write_bib(packages
-                     , file = bib_file
+                     , ...
                      )
 
   }

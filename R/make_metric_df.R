@@ -40,6 +40,7 @@ make_metric_df <- function(df
                       ) {
 
   level <- level[1]
+  use_scale <- scale
 
   mets_df_use <- mets_df %>%
     dplyr::mutate(metric = forcats::fct_inorder(metric)) %>%
@@ -65,29 +66,21 @@ make_metric_df <- function(df
                         ) %>%
     dplyr::left_join(mets_df_use) %>%
     dplyr::group_by(across(any_of(names(mets_df_use)))) %>%
-    {if(scale) (.) %>%
-        dplyr::mutate(scale = dplyr::if_else(high_good
-                                             , scales::rescale(value
-                                                               , to = c(0.001
-                                                                        , 1
-                                                                        )
-                                                               )
-                                             , scales::rescale(desc(value)
-                                                               , to = c(0.001
-                                                                        , 1
-                                                                        )
-                                                               )
-                                             )
-                      ) else (.) %>%
-        dplyr::mutate(scale = value) %>%
-        dplyr::mutate(scale = dplyr::if_else(high_good
-                                             , scale
-                                             , 1 - scale
-                                             )
-                      )
-      } %>%
+    dplyr::mutate(scale = dplyr::if_else(high_good
+                                         , scales::rescale(value
+                                                           , to = c(0.001
+                                                                    , 1
+                                                                    )
+                                                           )
+                                         , scales::rescale(dplyr::desc(value)
+                                                           , to = c(0.001
+                                                                    , 1
+                                                                    )
+                                                           )
+                                         )
+                  ) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(combo_init = scale * !!rlang::ensym(mets_col)) %>%
+    dplyr::mutate(combo_init = (if(use_scale) scale else value) * !!rlang::ensym(mets_col)) %>%
     dplyr::group_by(dplyr::across(tidyselect::any_of(context))
                     , dplyr::across(!!rlang::ensym(mets_col))
                     ) %>%

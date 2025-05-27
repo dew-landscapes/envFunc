@@ -6,10 +6,7 @@ Authors@R:
            family = "Willoughby",
            role = c("aut", "cre"),
            email = "nigel.willoughby@sa.gov.au")
-Description: A collection of functions to help with creating ecosystems,
-    determining trends in individual taxa and other common environmental science
-    tasks. These are generic functions, those more specific to each task live in
-    appropriate `envBlah` packages.
+Description: Generic tools useful across `envBlah` packages.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

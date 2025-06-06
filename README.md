@@ -37,7 +37,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2025-02-14 11:26:48 ACDT"
+#> [1] "2025-06-06 11:22:40 ACST"
 ```
 
 ## Add a likelihood classification
@@ -52,16 +52,16 @@ library("envFunc")
 #> # A tibble: 10 × 8
 #>         x likelihood             maxVal range         loose very  extreme exceptional
 #>     <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.135  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  2 0.575  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  3 0.0786 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         
-#>  4 0.847  Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  5 0.321  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  6 0.496  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  7 0.281  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  8 0.499  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  9 0.144  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#> 10 0.760  Likely                  0.9   (0.667,0.9]   -     -     -       -
+#>  1 0.0321 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        
+#>  2 0.861  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  3 0.0404 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        
+#>  4 0.333  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  5 0.704  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  6 0.453  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  7 0.151  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  8 0.548  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  9 0.739  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#> 10 0.424  About as likely as not  0.667 (0.333,0.667] 0     0     0       0
 ```
 
 ## What else is in `envFunc`
@@ -77,6 +77,7 @@ The following functions and data sets are provided in `envFunc`. See
 | `envFunc::check_packages`   | function                   | Check packages                                                 |
 | `envFunc::clean_dir`        | function                   | Empty a directory                                              |
 | `envFunc::filter_test_func` | function                   | Test rows against a function                                   |
+| `envFunc::find_name`        | function                   | Return a named object from within another object               |
 | `envFunc::first_up`         | function                   | Change the first letter of a string to capital                 |
 | `envFunc::get_or_make`      | function                   | Make an object if it is not available from provided file       |
 | `envFunc::git_commit_env`   | function                   | Add, commit and push all current changes to github             |
@@ -89,7 +90,6 @@ The following functions and data sets are provided in `envFunc`. See
 | `envFunc::make_metric_plot` | function                   | Plot the results from code{make_metric_df}                     |
 | `envFunc::make_package`     | function                   | Make package workflow                                          |
 | `envFunc::make_seasons`     | function                   | Make a list of data frames for months and seasons              |
-| `envFunc::make_targets`     | function                   | Make targets                                                   |
 | `envFunc::mirror_directory` | function                   | Mirror a directory                                             |
 | `envFunc::monitor_system`   | function                   | Monitor system resources                                       |
 | `envFunc::name_env_out`     | function                   | Create and/or parse output directory paths                     |
@@ -99,7 +99,6 @@ The following functions and data sets are provided in `envFunc`. See
 | `envFunc::quibble`          | function                   | Make a wide, single row, data frame of quantiles (percentiles) |
 | `envFunc::run`              | function                   | Run the scrips in a project                                    |
 | `envFunc::sp_transform_df`  | function                   | Transform the coordinates in a dataframe                       |
-| `envFunc::store_dir`        | function                   | Generate a path to a storage directory                         |
 | `envFunc::taxa_label`       | function                   | Create a label for a species                                   |
 | `envFunc::timer`            | function                   | A (rough) timer                                                |
 | `envFunc::vec_to_sentence`  | function                   | Vector to phrase                                               |

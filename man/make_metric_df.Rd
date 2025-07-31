@@ -6,8 +6,8 @@
 \usage{
 make_metric_df(
   df,
-  mets_df = tibble::tibble(metric = "av_clust_size", high_good = TRUE, level =
-    "clustering"),
+  mets_df = tibble::tibble(metric = "av_clust_size", high_good = TRUE, summary_mets =
+    TRUE, weight = 1),
   context = c("method", "groups"),
   mets_col = "summary_mets",
   summarise_method = median,

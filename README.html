@@ -626,7 +626,7 @@ attribute.</p>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    envFunc<span class="sc">::</span><span class="fu">add_time_stamp</span>()</span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  <span class="fu">attr</span>(temp, <span class="st">&quot;ctime&quot;</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2025-06-06 11:22:40 ACST&quot;</span></span></code></pre></div>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2025-07-31 12:26:59 ACST&quot;</span></span></code></pre></div>
 <h2 id="add-a-likelihood-classification">Add a likelihood
 classification</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a></span>
@@ -636,18 +636,18 @@ classification</h2>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  </span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  x</span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 8</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt;         x likelihood             maxVal range         loose very  extreme exceptional</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;     &lt;dbl&gt; &lt;fct&gt;                   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;      </span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt;  1 0.0321 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        </span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt;  2 0.861  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt;  3 0.0404 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        </span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt;  4 0.333  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt;  5 0.704  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt;  6 0.453  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt;  7 0.151  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt;  8 0.548  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt;  9 0.739  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; 10 0.424  About as likely as not  0.667 (0.333,0.667] 0     0     0       0</span></span></code></pre></div>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt;        x likelihood             maxVal range         loose very  extreme exceptional</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;    &lt;dbl&gt; &lt;fct&gt;                   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;      </span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt;  1 0.553 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt;  2 0.334 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt;  3 0.863 Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt;  4 0.424 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt;  5 0.401 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt;  6 0.612 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt;  7 0.779 Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt;  8 0.902 Very likely             0.95  (0.9,0.95]    -     --    --      --         </span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt;  9 0.886 Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; 10 0.142 Unlikely                0.333 (0.1,0.333]   +     +     +       +</span></span></code></pre></div>
 <h2 id="what-else-is-in-envfunc">What else is in
 <code>envFunc</code></h2>
 <p>The following functions and data sets are provided in
@@ -655,168 +655,168 @@ classification</h2>
 for more examples.</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th align="left">object</th>
 <th align="left">class</th>
 <th align="left">description</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::add_freq_class</code></td>
 <td align="left">function</td>
 <td align="left">Convert percentages to frequency classes</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::add_likelihood</code></td>
 <td align="left">function</td>
 <td align="left">Add likelihood based on IPCC thresholds</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::add_time_stamp</code></td>
 <td align="left">function</td>
 <td align="left">Add time stamp</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::check_packages</code></td>
 <td align="left">function</td>
 <td align="left">Check packages</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::clean_dir</code></td>
 <td align="left">function</td>
 <td align="left">Empty a directory</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::filter_test_func</code></td>
 <td align="left">function</td>
 <td align="left">Test rows against a function</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::find_name</code></td>
 <td align="left">function</td>
 <td align="left">Return a named object from within another object</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::first_up</code></td>
 <td align="left">function</td>
 <td align="left">Change the first letter of a string to capital</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::get_or_make</code></td>
 <td align="left">function</td>
 <td align="left">Make an object if it is not available from provided
 file</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::git_commit_env</code></td>
 <td align="left">function</td>
 <td align="left">Add, commit and push all current changes to github</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::last_ctime</code></td>
 <td align="left">function</td>
 <td align="left">Object with the latest code{ctime} attribute</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::lulikelihood</code></td>
 <td align="left">tbl_df, tbl and data.frame</td>
 <td align="left">Dataframe of likelihood thresholds and definitions</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::lulsa</code></td>
 <td align="left">tbl_df, tbl and data.frame</td>
 <td align="left">Lookup for Landscapes South Australia regions</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::make_aoi</code></td>
 <td align="left">function</td>
 <td align="left">Make a region (area) of interest</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::make_epochs</code></td>
 <td align="left">function</td>
 <td align="left">Generate a tibble of epochs.</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::make_metric_df</code></td>
 <td align="left">function</td>
 <td align="left">Use a set of (continuous) columns to choose a good set
 of rows</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::make_metric_plot</code></td>
 <td align="left">function</td>
 <td align="left">Plot the results from code{make_metric_df}</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::make_package</code></td>
 <td align="left">function</td>
 <td align="left">Make package workflow</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::make_seasons</code></td>
 <td align="left">function</td>
 <td align="left">Make a list of data frames for months and seasons</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::mirror_directory</code></td>
 <td align="left">function</td>
 <td align="left">Mirror a directory</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::monitor_system</code></td>
 <td align="left">function</td>
 <td align="left">Monitor system resources</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::name_env_out</code></td>
 <td align="left">function</td>
 <td align="left">Create and/or parse output directory paths</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::numbers2words</code></td>
 <td align="left">function</td>
 <td align="left">Convert a numeric to its corresponding english
 character.</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::prop_cpu</code></td>
 <td align="left">function</td>
 <td align="left">Proportion of current CPU usage</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::prop_mem</code></td>
 <td align="left">function</td>
 <td align="left">Proportion of current memory usage</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::quibble</code></td>
 <td align="left">function</td>
 <td align="left">Make a wide, single row, data frame of quantiles
 (percentiles)</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::run</code></td>
 <td align="left">function</td>
 <td align="left">Run the scrips in a project</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::sp_transform_df</code></td>
 <td align="left">function</td>
 <td align="left">Transform the coordinates in a dataframe</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::taxa_label</code></td>
 <td align="left">function</td>
 <td align="left">Create a label for a species</td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left"><code>envFunc::timer</code></td>
 <td align="left">function</td>
 <td align="left">A (rough) timer</td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left"><code>envFunc::vec_to_sentence</code></td>
 <td align="left">function</td>
 <td align="left">Vector to phrase</td>

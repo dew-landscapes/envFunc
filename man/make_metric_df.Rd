@@ -6,15 +6,15 @@
 \usage{
 make_metric_df(
   df,
-  mets_df = tibble::tibble(metric = "av_clust_size", high_good = TRUE, clust_sum = TRUE,
-    level = "clustering"),
+  mets_df = tibble::tibble(metric = "av_clust_size", high_good = TRUE, level =
+    "clustering"),
   context = c("method", "groups"),
   mets_col = "summary_mets",
   summarise_method = median,
-  scale = FALSE,
   top_thresh = 0.25,
   best_thresh = 5,
-  level = c("across", "within")
+  scale = lifecycle::deprecated(),
+  level = lifecycle::deprecated()
 )
 }
 \arguments{
@@ -30,17 +30,10 @@ make_metric_df(
 \item{summarise_method}{Character. Name of method to use in summarising if
 there is more than one row per context.}
 
-\item{scale}{Logical. If true, all metrics will be rescale 0 ('worst') to 1
-('best').}
-
 \item{top_thresh}{Numeric specifying the proportion of rows considered 'top'.}
 
 \item{best_thresh}{Numeric specifying the absolute number of rows considered
 'best'.}
-
-\item{level}{Either 'across' or 'within'. If the latter, only metrics that
-are set up to work 'within' clusters (rather than 'across' clusterings) are
-used.}
 }
 \description{
 Use a set of (continuous) columns to choose a good set of rows

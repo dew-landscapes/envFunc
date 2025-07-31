@@ -18,21 +18,21 @@
 #'
 #' @examples
 make_metric_df <- function(df
-                      , mets_df = tibble::tibble(metric = "av_clust_size"
-                                                 , high_good = TRUE
-                                                 , summary_mets = TRUE
-                                                 , weight = 1
-                                                 )
-                      , context = c("method"
-                                    , "groups"
-                                    )
-                      , mets_col = "summary_mets"
-                      , summarise_method = median
-                      , top_thresh = 0.25
-                      , best_thresh = 5
-                      , scale = lifecycle::deprecated()
-                      , level = lifecycle::deprecated()
-                      ) {
+                           , mets_df = tibble::tibble(metric = "av_clust_size"
+                                                      , high_good = TRUE
+                                                      , summary_mets = TRUE
+                                                      , weight = 1
+                                                      )
+                           , context = c("method"
+                                         , "groups"
+                                         )
+                           , mets_col = "summary_mets"
+                           , summarise_method = median
+                           , top_thresh = 0.25
+                           , best_thresh = 5
+                           , scale = lifecycle::deprecated()
+                           , level = lifecycle::deprecated()
+                           ) {
 
   if(lifecycle::is_present(scale)) {
 
@@ -40,6 +40,10 @@ make_metric_df <- function(df
                               , "envFunc::make_metric_df(scale = )"
                               , details = "scale is now always calculated"
                               )
+
+  }
+
+  if(lifecycle::is_present(level)) {
 
     lifecycle::deprecate_warn(when = "2025-07-31"
                               , "envFunc::make_metric_df(level = )"

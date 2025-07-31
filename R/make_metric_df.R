@@ -20,7 +20,8 @@
 make_metric_df <- function(df
                       , mets_df = tibble::tibble(metric = "av_clust_size"
                                                  , high_good = TRUE
-                                                 , level = "clustering"
+                                                 , summary_mets = TRUE
+                                                 , weight = 1
                                                  )
                       , context = c("method"
                                     , "groups"
@@ -47,11 +48,13 @@ make_metric_df <- function(df
 
   }
 
-  mets_df_use <- mets_df %>%
-    dplyr::mutate(metric = forcats::fct_inorder(metric)) %>%
-    dplyr::filter(!base::is.na(!!rlang::ensym(mets_col))) %>%
-    dplyr::select(metric, high_good, within_mets, !!rlang::ensym(mets_col)) %>%
-    dplyr::mutate(weight = !!rlang::ensym(mets_col))
+  weight_col <- if("weight" %in% names(mets_df)) "weight" else mets_col
+
+  mets_df_use <- mets_df |>
+    dplyr::mutate(metric = forcats::fct_inorder(metric)) |>
+    dplyr::filter(!base::is.na(!!rlang::ensym(mets_col))) |>
+    dplyr::mutate(weight = !!rlang::ensym(weight_col)) |>
+    dplyr::select(metric, high_good, !!rlang::ensym(mets_col), weight)
 
   ret <- df %>%
     dplyr::select(any_of(context)
@@ -77,9 +80,10 @@ make_metric_df <- function(df
                   ) %>%
     dplyr::ungroup() %>%
     dplyr::group_by(dplyr::across(tidyselect::any_of(context))) %>%
-    dplyr::mutate(n_metrics = dplyr::n()
+    dplyr::mutate(n_metrics = sum(weight * !!rlang::ensym(mets_col) > 0)
                   , scale_weight = scale * weight
-                  , combo = sum(scale_weight) / n_metrics
+                  , combo = sum(scale_weight, na.rm = TRUE) / n_metrics
+                  , combo = dplyr::if_else(is.na(combo), 0, combo)
                   ) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(top_thresh = top_thresh

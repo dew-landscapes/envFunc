@@ -8,6 +8,7 @@ make_aoi(
   polygons,
   filt_col = NULL,
   filt_level = NULL,
+  is_regex = FALSE,
   simplify = TRUE,
   buffer = FALSE,
   bbox = FALSE,
@@ -23,7 +24,9 @@ make_aoi(
 \item{filt_col}{Character name of column in \code{polygons} to filter on (or \code{NULL}
 for no filter)}
 
-\item{filt_level}{Level(s) of \code{filt_col} to filter}
+\item{filt_level}{Character. Level(s) of \code{filt_col} to filter}
+
+\item{is_regex}{Logical. Use \code{filt_level} as a regex?}
 
 \item{buffer}{Numeric (or \code{FALSE}). Distance to buffer in units of \code{buf_crs}}
 

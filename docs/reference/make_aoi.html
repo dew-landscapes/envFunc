@@ -54,6 +54,7 @@
 <span>  <span class="va">polygons</span>,</span>
 <span>  filt_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filt_level <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  is_regex <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  simplify <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  buffer <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  bbox <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -78,7 +79,11 @@ for no filter)</p></dd>
 
 
 <dt id="arg-filt-level">filt_level<a class="anchor" aria-label="anchor" href="#arg-filt-level"></a></dt>
-<dd><p>Level(s) of <code>filt_col</code> to filter</p></dd>
+<dd><p>Character. Level(s) of <code>filt_col</code> to filter</p></dd>
+
+
+<dt id="arg-is-regex">is_regex<a class="anchor" aria-label="anchor" href="#arg-is-regex"></a></dt>
+<dd><p>Logical. Use <code>filt_level</code> as a regex?</p></dd>
 
 
 <dt id="arg-buffer">buffer<a class="anchor" aria-label="anchor" href="#arg-buffer"></a></dt>

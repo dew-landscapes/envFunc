@@ -5,7 +5,8 @@
 #' @param polygons sf
 #' @param filt_col Character name of column in `polygons` to filter on (or `NULL`
 #' for no filter)
-#' @param filt_level Level(s) of `filt_col` to filter
+#' @param filt_level Character. Level(s) of `filt_col` to filter
+#' @param is_regex Logical. Use `filt_level` as a regex?
 #' @param buffer Numeric (or `FALSE`). Distance to buffer in units of `buf_crs`
 #' @param bbox Logical. Return a bounding box around the result?
 #' @param clip sf. If not null, this will be used to clip back the original
@@ -22,6 +23,7 @@
   make_aoi <- function(polygons
                        , filt_col = NULL
                        , filt_level = NULL
+                       , is_regex = FALSE
                        , simplify = TRUE
                        , buffer = FALSE
                        , bbox = FALSE
@@ -43,9 +45,21 @@
 
     }
 
-    aoi <- if(!is.null(filt_col)) polygons %>%
+    if(is_regex) {
+
+      aoi <- if(!is.null(filt_col)) polygons %>%
         dplyr::filter(grepl(paste0(filt_level, collapse = "|"), !!rlang::ensym(filt_col))) %>%
         sf::st_make_valid() else polygons
+
+    }
+
+    if(! is_regex) {
+
+      aoi <- if(!is.null(filt_col)) polygons %>%
+        dplyr::filter(!!rlang::ensym(filt_col) == filt_level) %>%
+        sf::st_make_valid() else polygons
+
+    }
 
     if(simplify) aoi <- aoi %>%
         dplyr::summarise() %>%

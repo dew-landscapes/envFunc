@@ -69,8 +69,8 @@ separated by "__".
 }
 \examples{
 
-# a list of settings
-settings <- list(extent = list(polygons = "sa_ibrasub_xn"
+# a list of settings_temp
+settings_temp <- list(extent = list(polygons = "sa_ibrasub_xn"
                                , filt_col = NULL
                                , filt_level = NULL
                                , buffer = 0
@@ -91,25 +91,25 @@ settings <- list(extent = list(polygons = "sa_ibrasub_xn"
                               )
                  )
 
-# generate an 'out directory' based on those settings
-settings$out_dir <- name_env_out(set_list = settings#[1:4]
+# generate an 'out directory' based on those settings_temp
+settings_temp$out_dir <- name_env_out(set_list = settings_temp#[1:4]
                                  , base_dir = here::here("inst", "examples")
                                  , dir_with_context = TRUE
                                  )$path
 
-settings$out_dir
+settings_temp$out_dir
 
 # create the 'out directory'
-fs::dir_create(settings$out_dir)
+fs::dir_create(settings_temp$out_dir)
 
 # put some junk files in the 'out directory'
 purrr::map(1:10
-           , \(x) tempfile(tmpdir = settings$out_dir)
+           , \(x) tempfile(tmpdir = settings_temp$out_dir)
            ) \%>\%
   fs::file_create()
 
-# use name_env_out to return the list of files, based on the settings
-files <- name_env_out(set_list = settings[1:4]
+# use name_env_out to return the list of files, based on the settings_temp
+files <- name_env_out(set_list = settings_temp[1:4]
                       , base_dir = here::here("inst", "examples")
                       , dir_with_context = TRUE
                       , all_files = TRUE
@@ -123,8 +123,8 @@ files <- name_env_out(set_list = settings[1:4]
 files
 
 # clean up
-# fs::dir_delete(settings$out_dir) # only run this if you're sure it is safe
-rm(settings, files)
+fs::dir_delete(settings_temp$out_dir) # only run this if you're sure it is safe
+rm(settings_temp, files)
 
 
 }

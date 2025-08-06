@@ -50,7 +50,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_seasons</span><span class="op">(</span><span class="va">start_year</span>, <span class="va">end_year</span>, seasons <span class="op">=</span> <span class="cn">NULL</span>, dec_adjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_seasons</span><span class="op">(</span></span>
+<span>  <span class="va">start_year</span>,</span>
+<span>  <span class="va">end_year</span>,</span>
+<span>  seasons <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dec_adjust <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  include_all <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -72,6 +78,11 @@ use for that month)`</p></dd>
 <dd><p>Logical. Adjust the year in which December is used? If
 <code>TRUE</code> (default) December will be included in the following year's first
 season (i.e. December 1999 will be included in, say, summer 2000)</p></dd>
+
+
+<dt id="arg-include-all">include_all<a class="anchor" aria-label="anchor" href="#arg-include-all"></a></dt>
+<dd><p>Logical. Include a 'season' that is 'all' (and starts at
+calendar year).</p></dd>
 
 </dl></div>
     <div id="value">

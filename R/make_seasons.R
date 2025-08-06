@@ -11,6 +11,8 @@
 #' @param dec_adjust Logical. Adjust the year in which December is used? If
 #' `TRUE` (default) December will be included in the following year's first
 #' season (i.e. December 1999 will be included in, say, summer 2000)
+#' @param include_all Logical. Include a 'season' that is 'all' (and starts at
+#' calendar year).
 #'
 #' @return List with elements
 #'  item{luseasons}{Dataframe. Lookup used to translate months to seasons. Equal
@@ -26,6 +28,7 @@
                            , end_year
                            , seasons = NULL
                            , dec_adjust = 1
+                           , include_all = TRUE
                            ) {
 
     result <- list()
@@ -41,6 +44,17 @@
                                                 , month %in% c("September", "October", "November") ~ "spring"
                                                 )
                       )
+
+      if(include_all) {
+
+        result$luseasons <- result$luseasons |>
+          dplyr::bind_rows(tibble::tibble(mon = 1
+                                          , month = "all"
+                                          , season = "all"
+                                          )
+                           )
+
+      }
 
     } else result$luseasons <- seasons
 

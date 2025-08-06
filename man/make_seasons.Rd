@@ -4,7 +4,13 @@
 \alias{make_seasons}
 \title{Make a list of data frames for months and seasons}
 \usage{
-make_seasons(start_year, end_year, seasons = NULL, dec_adjust = 1)
+make_seasons(
+  start_year,
+  end_year,
+  seasons = NULL,
+  dec_adjust = 1,
+  include_all = TRUE
+)
 }
 \arguments{
 \item{start_year, end_year}{Numeric. Year of first and last season}
@@ -17,6 +23,9 @@ use for that month)`}
 \item{dec_adjust}{Logical. Adjust the year in which December is used? If
 \code{TRUE} (default) December will be included in the following year's first
 season (i.e. December 1999 will be included in, say, summer 2000)}
+
+\item{include_all}{Logical. Include a 'season' that is 'all' (and starts at
+calendar year).}
 }
 \value{
 List with elements

@@ -22,7 +22,7 @@ check_packages <- function(packages
                            , ...
                            ) {
 
-  packages <- sort(unique(packages))
+  packages <- unique(packages)
 
   # check for missing
   new_packages <- packages[!(packages %in% installed.packages()[,"Package"])]

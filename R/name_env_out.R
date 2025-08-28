@@ -1,68 +1,62 @@
 
 
-#' Create and/or parse output directory paths
+#' Name, create, parse and/or search output directories
 #'
-#' Either create directory path for saving outputs or parse the meta data from
-#' an output directory path. The first elements in the list will form
-#' directories. The second elements in the list form the name of each directory,
-#' separated by "__".
-#'
-#' @param set_list Nested list, with two levels, of critical settings (only) for
+#' @param env_out Nested list, with two levels, of critical settings (only) for
 #' use in output path names. The first elements of the list will return
 #' directories. Elements within each of the first elements of the list are
 #' concatenated to form the name of each directory (see examples).
 #' @param base_dir Character. Directory prefix to the output path.
-#' @param show_null Logical. Display "NULL" or "NA" in names
-#' (or gsub it out with "").
-#' @param return_contexts Logical. If TRUE (default) contexts, directories and
-#' path are returned, otherwise just directories and path.
 #' @param dir_with_context Logical. If FALSE (default) the first elements in
-#' `set_list` are used as prefix to each context, otherwise no prefix is added.
+#' `env_out` are used as prefix to each context, otherwise no prefix is added.
 #' Set to TRUE if there are contexts repeated across any elements of
-#' `set_list`.
+#' `env_out`.
 #' @param all_files Logical or numeric. Return files within the `path` column
 #' provided in the resulting dataframe? If numeric, passed to the `recurse`
 #' argument of `fs::dir_ls()`.
 #' @param search_dir Character. Path(s) to search for the `path` in the returned
 #' tibble. Ignored unless `base_dir` is null. Allows for searching several
 #' different paths for the same `path` in the returned tibble.
-#' @param reg_exp Character. Combined with `path` in the returned tibble to
-#' search for files.
-#' @param remove_dots Logical. Should `.` be removed from elements within the
+#' @param remove_stop Logical. Should `.` be removed from elements within the
 #' list? e.g. `0.95` becomes `095`
-#' @param ... Passed to `fs::dir_ls()`. Arguments `path` and `regexp` are
-#' already provided, so providing them here will cause an error.
+#' @param ret Character. Return a dataframe (`"df"`) or path (`"path"`)?
+#' @param create_path Logical. If `TRUE` the path is created via
+#' `fs::dir_create()`. This is independent of `ret == "path"`.
+#' @param ... Passed to `fs::dir_ls()`. Argument `path` is already provided, so
+#' providing here will cause an error.
 #'
 #'
-#' @return Tibble containing:
-#' * all contexts: named as per the second level elements of `set_list`
-#' * directories: a directory for each element in the first level of `set_list`
-#' * path: the output path, prepended with base_dir
+#' @return If `ret == "df"`, tibble containing:
+#' * all contexts: named as per the second level elements of `env_out`
+#' * directories: a directory for each element in the first level of `env_out`
+#' * path: the output path, prefixed with `base_dir`
+#'
+#' If `ret == "path"` a path.
+#'
+#' If `create_path` the path is created via `fs::dir_create()`.
 #'
 #' @export
 #'
 #' @example inst/examples/name_env_out_ex.R
-name_env_out <- function(set_list
+name_env_out <- function(env_out
                          , base_dir = NULL
-                         , show_null = FALSE
-                         , return_contexts = TRUE
                          , dir_with_context = FALSE
                          , all_files = FALSE
                          , search_dir = if(is.null(base_dir)) here::here() else NULL
-                         , reg_exp = NULL
-                         , remove_dots = TRUE
+                         , remove_stop = TRUE
+                         , ret = if(all_files) "df" else "path"
+                         , create_path = ret == "path"
                          , ...
                          ) {
 
-  df <- set_list %>%
-    purrr::modify_tree(leaf = \(x) paste0(if(remove_dots) gsub("\\.", "", x) else x, collapse = "--")) %>%
-    purrr::map(\(x) paste0(x, collapse = "__")) %>%
-    tibble::as_tibble() %>%
-    {if(show_null) (.) else (.) %>% dplyr::mutate(dplyr::across(dplyr::where(is.character)
-                                                                , \(x) gsub("NULL", "", x)
-                                                                )
-                                                  )
-      } %>%
+  df <- env_out %>%
+    purrr::modify_tree(leaf = \(x) paste0(if(remove_stop) gsub("\\.", "", x) else x, collapse = "--")) |>
+    purrr::map(\(x) paste0(x, collapse = "__")) |>
+    tibble::as_tibble() |>
+    dplyr::mutate(dplyr::across(dplyr::where(is.character)
+                                , \(x) gsub("NULL", "", x)
+                                )
+                  ) |>
     tidyr::unite(col = "path"
                  , tidyselect::everything()
                  , remove = FALSE
@@ -70,64 +64,81 @@ name_env_out <- function(set_list
                  ) %>%
     {if(!is.null(base_dir)) (.) %>% dplyr::mutate(path = fs::path(base_dir, path)) else (.)}
 
-  if(return_contexts) {
+  res <- purrr::map(names(env_out)
+                   , \(x) {
 
-    df <- purrr::map(names(set_list)
-                     , \(x) {
+                     use_names <- if(dir_with_context) {
 
-                       use_names <- if(dir_with_context) {
+                       paste0(x, "_", names(env_out[[x]]))
 
-                         paste0(x, "_", names(set_list[[x]]))
+                     } else {
 
-                       } else {
-
-                         names(set_list[[x]])
-
-                       }
-
-                       df %>%
-                         tidyr::separate(col = !!rlang::ensym(x)
-                                         , into = use_names
-                                         , remove = FALSE
-                                         , sep = "__"
-                                         )
+                       names(env_out[[x]])
 
                      }
-                     ) %>%
-      purrr::reduce(dplyr::left_join)
 
-  }
-
-  if(all_files) {
-
-    search_dir <- if(!is.null(base_dir)) unique(df$path) else search_dir
-
-    df <- df %>%
-      dplyr::mutate(files = purrr::map(path
-                                       , \(x) {
-
-                                         use_regex <- if(is.null(reg_exp)) x else paste(x, reg_exp, sep = ".*", collapse = "|")
-
-                                         fs::dir_ls(path = search_dir
-                                                    , regexp = use_regex
-                                                    , ...
-                                                    )
-
-                                       }
+                     df %>%
+                       tidyr::separate(col = !!rlang::ensym(x)
+                                       , into = use_names
+                                       , remove = FALSE
+                                       , sep = "__"
                                        )
-                    )
+
+                   }
+                   ) %>%
+    purrr::reduce(dplyr::left_join)
+
+  if(any(all_files, ret == "df")) {
+
+    search_dir <- if(!is.null(base_dir)) unique(res$path) else search_dir
+
+    if(dir.exists(search_dir)) {
+
+      res <- res %>%
+        dplyr::mutate(files = purrr::map(path
+                                         , \(x) {
+
+                                           fs::dir_ls(path = search_dir
+                                                      , ...
+                                                      )
+
+                                         }
+                                         )
+                      ) |>
+        dplyr::relocate(tidyselect::matches(names(env_out))
+                        , path
+                        , tidyselect::matches("\\bfiles\\b")
+                        , .after = everything()
+                        )
+
+    }
+
+  } else if(ret == "path") {
+
+    res <- res$path
 
   }
 
+  if(create_path) {
 
+    path_to_create <- if(is.character(res)) res else res$path
 
-  df <- df %>%
-    dplyr::relocate(tidyselect::matches(names(set_list))
-                    , path
-                    , tidyselect::matches("\\bfiles\\b")
-                    , .after = everything()
-                    )
+    fs::dir_create(path_to_create)
 
-  return(df)
+    purrr::walk(1:length(env_out)
+                , \(x) yaml::write_yaml(env_out[x]
+                                        , fs::path(base_dir
+                                                   , fs::path_join(df |>
+                                                                     dplyr::select(tidyselect::any_of(names(env_out[1:x]))) |>
+                                                                     unlist()
+                                                                   )
+                                                   , "metadata.yaml"
+                                                   )
+                                        )
+                )
+
+  }
+
+  return(res)
 
 }

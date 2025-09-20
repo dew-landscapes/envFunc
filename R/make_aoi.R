@@ -15,6 +15,8 @@
 #' @param buf_crs \href{https://epsg.io/}{EPSG} code to use when buffering
 #' @param out_crs \href{https://epsg.io/}{EPSG} code for coordinate system of
 #' result
+#' @param densify Numeric. `interval` argument to `terra::densify()` which is
+#' used before any polygon is transformed between coordinate reference systems.
 #'
 #' @return
 #' @export
@@ -31,15 +33,22 @@
                        , clip_buf = 100
                        , buf_crs = 7845
                        , out_crs = 4326 # WGS84
+                       , densify = 50000
                        ) {
 
     if(!is.null(clip)) {
 
       if(clip_buf > 0) clip <- clip %>%
-        sf::st_transform(crs = buf_crs) %>%
-        sf::st_buffer(clip_buf)
+          terra::vect() |>
+          terra::densify(50000) |>
+          sf::st_as_sf() |>
+          sf::st_transform(crs = buf_crs) %>%
+          sf::st_buffer(clip_buf)
 
       clip <- clip %>%
+        terra::vect() |>
+        terra::densify(50000) |>
+        sf::st_as_sf() |>
         sf::st_transform(crs = out_crs) %>%
         sf::st_make_valid()
 
@@ -66,20 +75,29 @@
         sf::st_make_valid()
 
     if(buffer > 0) aoi <- aoi %>%
+        terra::vect() |>
+        terra::densify(50000) |>
+        sf::st_as_sf() |>
         sf::st_transform(crs = buf_crs) %>%
         sf::st_buffer(buffer)
 
     aoi <- aoi %>%
+      terra::vect() |>
+      terra::densify(50000) |>
+      sf::st_as_sf() |>
       sf::st_transform(crs = out_crs)
 
     if(!is.null(clip)) aoi <- aoi %>%
-        sf::st_intersection(clip)
+      sf::st_intersection(clip)
 
     # bbox last to ensure
     if(bbox) aoi <- aoi %>%
-        sf::st_bbox() %>%
-        sf::st_as_sfc() %>%
-        sf::st_sf()
+      sf::st_bbox() %>%
+      sf::st_as_sfc() %>%
+      terra::vect() |>
+      terra::densify(50000) |>
+      sf::st_as_sf() |>
+      sf::st_sf()
 
     aoi <- aoi %>%
       sf::st_make_valid()

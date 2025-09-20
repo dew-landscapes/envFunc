@@ -2,39 +2,32 @@
 % Please edit documentation in R/name_env_out.R
 \name{name_env_out}
 \alias{name_env_out}
-\title{Create and/or parse output directory paths}
+\title{Name, create, parse and/or search output directories}
 \usage{
 name_env_out(
-  set_list,
+  env_out,
   base_dir = NULL,
-  show_null = FALSE,
-  return_contexts = TRUE,
   dir_with_context = FALSE,
   all_files = FALSE,
   search_dir = if (is.null(base_dir)) here::here() else NULL,
-  reg_exp = NULL,
-  remove_dots = TRUE,
+  remove_stop = TRUE,
+  ret = if (all_files) "df" else "path",
+  create_path = ret == "path",
   ...
 )
 }
 \arguments{
-\item{set_list}{Nested list, with two levels, of critical settings (only) for
+\item{env_out}{Nested list, with two levels, of critical settings (only) for
 use in output path names. The first elements of the list will return
 directories. Elements within each of the first elements of the list are
 concatenated to form the name of each directory (see examples).}
 
 \item{base_dir}{Character. Directory prefix to the output path.}
 
-\item{show_null}{Logical. Display "NULL" or "NA" in names
-(or gsub it out with "").}
-
-\item{return_contexts}{Logical. If TRUE (default) contexts, directories and
-path are returned, otherwise just directories and path.}
-
 \item{dir_with_context}{Logical. If FALSE (default) the first elements in
-\code{set_list} are used as prefix to each context, otherwise no prefix is added.
+\code{env_out} are used as prefix to each context, otherwise no prefix is added.
 Set to TRUE if there are contexts repeated across any elements of
-\code{set_list}.}
+\code{env_out}.}
 
 \item{all_files}{Logical or numeric. Return files within the \code{path} column
 provided in the resulting dataframe? If numeric, passed to the \code{recurse}
@@ -44,28 +37,31 @@ argument of \code{fs::dir_ls()}.}
 tibble. Ignored unless \code{base_dir} is null. Allows for searching several
 different paths for the same \code{path} in the returned tibble.}
 
-\item{reg_exp}{Character. Combined with \code{path} in the returned tibble to
-search for files.}
-
-\item{remove_dots}{Logical. Should \code{.} be removed from elements within the
+\item{remove_stop}{Logical. Should \code{.} be removed from elements within the
 list? e.g. \code{0.95} becomes \code{095}}
 
-\item{...}{Passed to \code{fs::dir_ls()}. Arguments \code{path} and \code{regexp} are
-already provided, so providing them here will cause an error.}
+\item{ret}{Character. Return a dataframe (\code{"df"}) or path (\code{"path"})?}
+
+\item{create_path}{Logical. If \code{TRUE} the path is created via
+\code{fs::dir_create()}. This is independent of \code{ret == "path"}.}
+
+\item{...}{Passed to \code{fs::dir_ls()}. Argument \code{path} is already provided, so
+providing here will cause an error.}
 }
 \value{
-Tibble containing:
+If \code{ret == "df"}, tibble containing:
 \itemize{
-\item all contexts: named as per the second level elements of \code{set_list}
-\item directories: a directory for each element in the first level of \code{set_list}
-\item path: the output path, prepended with base_dir
+\item all contexts: named as per the second level elements of \code{env_out}
+\item directories: a directory for each element in the first level of \code{env_out}
+\item path: the output path, prefixed with \code{base_dir}
 }
+
+If \code{ret == "path"} a path.
+
+If \code{create_path} the path is created via \code{fs::dir_create()}.
 }
 \description{
-Either create directory path for saving outputs or parse the meta data from
-an output directory path. The first elements in the list will form
-directories. The second elements in the list form the name of each directory,
-separated by "__".
+Name, create, parse and/or search output directories
 }
 \examples{
 

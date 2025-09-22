@@ -15,7 +15,8 @@ make_aoi(
   clip = NULL,
   clip_buf = 100,
   buf_crs = 7845,
-  out_crs = 4326
+  out_crs = 4326,
+  densify = 50000
 )
 }
 \arguments{
@@ -41,6 +42,9 @@ for no filter)}
 
 \item{out_crs}{\href{https://epsg.io/}{EPSG} code for coordinate system of
 result}
+
+\item{densify}{Numeric. \code{interval} argument to \code{terra::densify()} which is
+used before any polygon is transformed between coordinate reference systems.}
 }
 \description{
 Make a region (area) of interest

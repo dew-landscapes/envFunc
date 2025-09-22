@@ -4,7 +4,14 @@
 \alias{check_packages}
 \title{Check packages}
 \usage{
-check_packages(packages, update_env = FALSE, lib = FALSE, bib = FALSE, ...)
+check_packages(
+  packages,
+  update_env = FALSE,
+  env_deps = FALSE,
+  lib = FALSE,
+  bib = FALSE,
+  ...
+)
 }
 \arguments{
 \item{packages}{Character. Packages to check}

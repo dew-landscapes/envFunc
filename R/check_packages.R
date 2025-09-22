@@ -17,6 +17,7 @@
 #' @examples check_packages(c("dplyr", "envFunc"))
 check_packages <- function(packages
                            , update_env = FALSE
+                           , env_deps = FALSE
                            , lib = FALSE
                            , bib = FALSE
                            , ...
@@ -38,7 +39,7 @@ check_packages <- function(packages
 
     purrr::walk(env_packages
                 , \(x) remotes::install_github(paste0("dew-landscapes/", x)
-                                               , dependencies = FALSE
+                                               , dependencies = env_deps
                                                )
                 )
 

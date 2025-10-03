@@ -9,14 +9,14 @@ make_aoi(
   filt_col = NULL,
   filt_level = NULL,
   is_regex = FALSE,
-  simplify = TRUE,
+  dissolve = TRUE,
   buffer = FALSE,
   bbox = FALSE,
   clip = NULL,
   clip_buf = 100,
   buf_crs = 7845,
   out_crs = 4326,
-  densify = 50000
+  densify = NULL
 )
 }
 \arguments{
@@ -28,6 +28,8 @@ for no filter)}
 \item{filt_level}{Character. Level(s) of \code{filt_col} to filter}
 
 \item{is_regex}{Logical. Use \code{filt_level} as a regex?}
+
+\item{dissolve}{Logical. 'Dissolve' features using \code{dplyr::summarise}?}
 
 \item{buffer}{Numeric (or \code{FALSE}). Distance to buffer in units of \code{buf_crs}}
 

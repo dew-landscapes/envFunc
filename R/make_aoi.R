@@ -7,6 +7,7 @@
 #' for no filter)
 #' @param filt_level Character. Level(s) of `filt_col` to filter
 #' @param is_regex Logical. Use `filt_level` as a regex?
+#' @param dissolve Logical. 'Dissolve' features using `dplyr::summarise`?
 #' @param buffer Numeric (or `FALSE`). Distance to buffer in units of `buf_crs`
 #' @param bbox Logical. Return a bounding box around the result?
 #' @param clip sf. If not null, this will be used to clip back the original
@@ -26,28 +27,28 @@
                        , filt_col = NULL
                        , filt_level = NULL
                        , is_regex = FALSE
-                       , simplify = TRUE
+                       , dissolve = TRUE
                        , buffer = FALSE
                        , bbox = FALSE
                        , clip = NULL
                        , clip_buf = 100
                        , buf_crs = 7845
                        , out_crs = 4326 # WGS84
-                       , densify = 50000
+                       , densify = NULL
                        ) {
 
     if(!is.null(clip)) {
 
       if(clip_buf > 0) clip <- clip %>%
-          terra::vect() |>
-          terra::densify(50000) |>
+          {if(!is.null(densify)) {terra::vect(.) |>
+              terra::densify(densify)} else .} |>
           sf::st_as_sf() |>
           sf::st_transform(crs = buf_crs) %>%
           sf::st_buffer(clip_buf)
 
       clip <- clip %>%
-        terra::vect() |>
-        terra::densify(50000) |>
+        {if(!is.null(densify)) {terra::vect(.) |>
+            terra::densify(densify)} else .} |>
         sf::st_as_sf() |>
         sf::st_transform(crs = out_crs) %>%
         sf::st_make_valid()
@@ -70,20 +71,20 @@
 
     }
 
-    if(simplify) aoi <- aoi %>%
+    if(dissolve) aoi <- aoi %>%
         dplyr::summarise() %>%
         sf::st_make_valid()
 
     if(buffer > 0) aoi <- aoi %>%
-        terra::vect() |>
-        terra::densify(50000) |>
+        {if(!is.null(densify)) {terra::vect(.) |>
+            terra::densify(densify)} else .} |>
         sf::st_as_sf() |>
         sf::st_transform(crs = buf_crs) %>%
         sf::st_buffer(buffer)
 
     aoi <- aoi %>%
-      terra::vect() |>
-      terra::densify(50000) |>
+      {if(!is.null(densify)) {terra::vect(.) |>
+          terra::densify(densify)} else .} |>
       sf::st_as_sf() |>
       sf::st_transform(crs = out_crs)
 
@@ -94,8 +95,8 @@
     if(bbox) aoi <- aoi %>%
       sf::st_bbox() %>%
       sf::st_as_sfc() %>%
-      terra::vect() |>
-      terra::densify(50000) |>
+      {if(!is.null(densify)) {terra::vect() |>
+          terra::densify(densify)} else .} |>
       sf::st_as_sf() |>
       sf::st_sf()
 

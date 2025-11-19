@@ -7,6 +7,7 @@
 #' for no filter)
 #' @param filt_level Character. Level(s) of `filt_col` to filter
 #' @param is_regex Logical. Use `filt_level` as a regex?
+#' @param dissolve Logical. Dissolve polygons via `dplyr::summarise()`?
 #' @param buffer Numeric (or `FALSE`). Distance to buffer in units of `buf_crs`
 #' @param bbox Logical. Return a bounding box around the result?
 #' @param clip sf. If not null, this will be used to clip back the original
@@ -26,7 +27,7 @@
                        , filt_col = NULL
                        , filt_level = NULL
                        , is_regex = FALSE
-                       , simplify = TRUE
+                       , dissolve = TRUE
                        , buffer = FALSE
                        , bbox = FALSE
                        , clip = NULL
@@ -70,7 +71,7 @@
 
     }
 
-    if(simplify) aoi <- aoi %>%
+    if(dissolve) aoi <- aoi %>%
         dplyr::summarise() %>%
         sf::st_make_valid()
 

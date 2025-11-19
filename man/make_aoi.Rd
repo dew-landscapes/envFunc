@@ -9,7 +9,7 @@ make_aoi(
   filt_col = NULL,
   filt_level = NULL,
   is_regex = FALSE,
-  simplify = TRUE,
+  dissolve = TRUE,
   buffer = FALSE,
   bbox = FALSE,
   clip = NULL,
@@ -28,6 +28,8 @@ for no filter)}
 \item{filt_level}{Character. Level(s) of \code{filt_col} to filter}
 
 \item{is_regex}{Logical. Use \code{filt_level} as a regex?}
+
+\item{dissolve}{Logical. Dissolve polygons via \code{dplyr::summarise()}?}
 
 \item{buffer}{Numeric (or \code{FALSE}). Distance to buffer in units of \code{buf_crs}}
 

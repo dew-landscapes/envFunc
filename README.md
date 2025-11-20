@@ -38,7 +38,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2025-11-20 09:46:08 ACDT"
+#> [1] "2025-11-21 09:43:04 ACDT"
 ```
 
 ## Add a likelihood classification
@@ -51,18 +51,18 @@ library("envFunc")
   
   x
 #> # A tibble: 10 × 8
-#>        x likelihood             maxVal range         loose very  extreme exceptional
-#>    <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.473 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  2 0.666 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  3 0.938 Very likely             0.95  (0.9,0.95]    -     --    --      --         
-#>  4 0.546 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  5 0.242 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  6 0.802 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  7 0.338 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  8 0.115 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  9 0.668 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#> 10 0.178 Unlikely                0.333 (0.1,0.333]   +     +     +       +
+#>         x likelihood             maxVal range         loose very  extreme exceptional
+#>     <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
+#>  1 0.288  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  2 0.677  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  3 0.992  Virtually certain       1     (0.99,1]      -     --    ---     ----       
+#>  4 0.945  Very likely             0.95  (0.9,0.95]    -     --    --      --         
+#>  5 0.633  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  6 0.0478 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        
+#>  7 0.303  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  8 0.325  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  9 0.811  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#> 10 0.0253 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++
 ```
 
 ## What else is in `envFunc`
@@ -95,6 +95,7 @@ The following functions and data sets are provided in `envFunc`. See
 | `envFunc::monitor_system` | function | Monitor system resources |
 | `envFunc::name_env_out` | function | Create and/or parse output directory paths |
 | `envFunc::numbers2words` | function | Convert a numeric to its corresponding english character. |
+| `envFunc::project_df` | function | Transform the coordinate columns of a dataframe |
 | `envFunc::prop_cpu` | function | Proportion of current CPU usage |
 | `envFunc::prop_mem` | function | Proportion of current memory usage |
 | `envFunc::quibble` | function | Make a wide, single row, data frame of quantiles (percentiles) |

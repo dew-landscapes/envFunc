@@ -6,7 +6,6 @@
 \usage{
 project_df(
   df,
-  use_aoi,
   x = "long",
   y = "lat",
   new_x = "x",

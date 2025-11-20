@@ -13,7 +13,6 @@
 #'
 #' @examples
 project_df <- function(df
-                       , use_aoi
                        , x = "long"
                        , y = "lat"
                        , new_x = "x"

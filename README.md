@@ -38,7 +38,7 @@ library("envFunc")
     envFunc::add_time_stamp()
 
   attr(temp, "ctime")
-#> [1] "2025-11-21 09:43:04 ACDT"
+#> [1] "2025-11-24 10:46:37 ACDT"
 ```
 
 ## Add a likelihood classification
@@ -51,18 +51,18 @@ library("envFunc")
   
   x
 #> # A tibble: 10 × 8
-#>         x likelihood             maxVal range         loose very  extreme exceptional
-#>     <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.288  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  2 0.677  Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  3 0.992  Virtually certain       1     (0.99,1]      -     --    ---     ----       
-#>  4 0.945  Very likely             0.95  (0.9,0.95]    -     --    --      --         
-#>  5 0.633  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  6 0.0478 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        
-#>  7 0.303  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  8 0.325  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  9 0.811  Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#> 10 0.0253 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++
+#>        x likelihood             maxVal range         loose very  extreme exceptional
+#>    <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
+#>  1 0.291 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  2 0.800 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  3 0.700 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  4 0.203 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  5 0.865 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  6 0.965 Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        
+#>  7 0.840 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  8 0.519 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  9 0.882 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#> 10 0.420 About as likely as not  0.667 (0.333,0.667] 0     0     0       0
 ```
 
 ## What else is in `envFunc`
@@ -80,6 +80,7 @@ The following functions and data sets are provided in `envFunc`. See
 | `envFunc::filter_test_func` | function | Test rows against a function |
 | `envFunc::find_name` | function | Return a named object from within another object |
 | `envFunc::first_up` | function | Change the first letter of a string to capital |
+| `envFunc::get_env_dir` | function | Return operating system independent ‘env root’ directory |
 | `envFunc::get_or_make` | function | Make an object if it is not available from provided file |
 | `envFunc::git_commit_env` | function | Add, commit and push all current changes to github |
 | `envFunc::last_ctime` | function | Object with the latest code{ctime} attribute |

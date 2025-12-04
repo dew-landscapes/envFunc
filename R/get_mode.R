@@ -30,8 +30,6 @@ get_mode <- function(x
 
   tbl <- tbl[tbl > 0] # in case all elements are 0
 
-  if(is.null(names(tbl))) names(tbl) <- 1:length(tbl)
-
   mode_val <- names(which(tbl == max(tbl)))
 
   if(all(ties == "sample", length(mode_val) > 1)) {

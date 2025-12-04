@@ -27,7 +27,15 @@ make_package <- function(do_commit = FALSE
 
     dots_list <- list(...)
 
+    if(file.exists("data-raw/make_data.R")) source("data-raw/make_data.R")
+
     devtools::document()
+
+    if(FALSE) {
+
+      devtools::check() # optional. very, very detailed
+
+    }
 
     # devtools::install(dependencies = FALSE)
 
@@ -41,8 +49,6 @@ make_package <- function(do_commit = FALSE
 
     # restart R session between these steps
     .rs.restartR() # might not be enough - doesn't unload the packages
-
-    if(file.exists("data-raw/make_data.R")) source("data-raw/make_data.R")
 
     pkgdown::build_site()
 

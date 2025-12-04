@@ -30,13 +30,15 @@ get_mode <- function(x
 
   tbl <- tbl[tbl > 0] # in case all elements are 0
 
-  mode_val <- names(which(tbl == max(tbl)))
+  suppressWarnings(
+    mode_val <- names(which(tbl == max(tbl)))
+  )
 
   if(all(ties == "sample", length(mode_val) > 1)) {
     mode_val <- sample(mode_val, 1)
   }
 
-  mode_val <- if(is.null(mode_val)) NA else mode_val
+  mode_val <- if(is.null(mode_val) | length(mode_val) == 0) NA else mode_val
 
   if("factor" %in% class(x)) {
     mode_val <- factor(mode_val, levels = levels(x))

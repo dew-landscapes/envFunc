@@ -34,21 +34,21 @@
                        , clip_buf = 100
                        , buf_crs = 7845
                        , out_crs = 4326 # WGS84
-                       , densify = 50000
+                       , densify = NULL
                        ) {
 
     if(!is.null(clip)) {
 
       if(clip_buf > 0) clip <- clip %>%
-          terra::vect() |>
-          terra::densify(50000) |>
+          {if(!is.null(densify)) {terra::vect(.) |>
+              terra::densify(densify)} else .} |>
           sf::st_as_sf() |>
           sf::st_transform(crs = buf_crs) %>%
           sf::st_buffer(clip_buf)
 
       clip <- clip %>%
-        terra::vect() |>
-        terra::densify(50000) |>
+        {if(!is.null(densify)) {terra::vect(.) |>
+            terra::densify(densify)} else .} |>
         sf::st_as_sf() |>
         sf::st_transform(crs = out_crs) %>%
         sf::st_make_valid()
@@ -76,15 +76,15 @@
         sf::st_make_valid()
 
     if(buffer > 0) aoi <- aoi %>%
-        terra::vect() |>
-        terra::densify(50000) |>
+        {if(!is.null(densify)) {terra::vect(.) |>
+            terra::densify(densify)} else .} |>
         sf::st_as_sf() |>
         sf::st_transform(crs = buf_crs) %>%
         sf::st_buffer(buffer)
 
     aoi <- aoi %>%
-      terra::vect() |>
-      terra::densify(50000) |>
+      {if(!is.null(densify)) {terra::vect(.) |>
+          terra::densify(densify)} else .} |>
       sf::st_as_sf() |>
       sf::st_transform(crs = out_crs)
 
@@ -95,8 +95,8 @@
     if(bbox) aoi <- aoi %>%
       sf::st_bbox() %>%
       sf::st_as_sfc() %>%
-      terra::vect() |>
-      terra::densify(50000) |>
+      {if(!is.null(densify)) {terra::vect() |>
+          terra::densify(densify)} else .} |>
       sf::st_as_sf() |>
       sf::st_sf()
 

@@ -16,7 +16,7 @@ make_aoi(
   clip_buf = 100,
   buf_crs = 7845,
   out_crs = 4326,
-  densify = 50000
+  densify = NULL
 )
 }
 \arguments{

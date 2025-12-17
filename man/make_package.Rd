@@ -4,24 +4,19 @@
 \alias{make_package}
 \title{Make package workflow}
 \usage{
-make_package(do_commit = FALSE, m, ...)
+make_package(m = NULL, ...)
 }
 \arguments{
-\item{do_commit}{Logical. Commit to github?}
-
-\item{m}{Character. Commit message to include}
+\item{m}{Character. Commit message to include. If \code{NULL}, then no commit.}
 
 \item{...}{Passed to \code{pkgdown::build_site()}}
 }
 \value{
-Called for side effect of running \code{devtools::document()},
-\code{devtools::install()}, \code{knitr::knit()} "README.Rmd", \code{pkgdown::build_site()}
-and, optionally, \code{envFunc::git_commit_env()}.
+Called for side effect of: making any data in data-raw; and then
+running \code{devtools::document()}, \code{knitr::knit()},
+"README.Rmd", \code{pkgdown::clean_site()}, \code{pkgdown::build_site()}, and,
+optionally, \code{envFunc::git_commit_env()}.
 }
 \description{
-All now wrapped in if(FALSE) so doesn't do anything. Best run as line by line
-manually.
-}
-\details{
-document, install, knit README.Rmd, build_site, commit
+make any data-raw; document; knit README.Rmd; clean_site; build_site; commit
 }

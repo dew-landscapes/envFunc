@@ -1,62 +1,40 @@
 
-
 #' Make package workflow
 #'
-#' All now wrapped in if(FALSE) so doesn't do anything. Best run as line by line
-#' manually.
-#'
-#' document, install, knit README.Rmd, build_site, commit
+#' make any data-raw; document; knit README.Rmd; clean_site; build_site; commit
 #'
 #'
-#' @param do_commit Logical. Commit to github?
-#' @param m Character. Commit message to include
+#' @param m Character. Commit message to include. If `NULL`, then no commit.
 #' @param ... Passed to `pkgdown::build_site()`
 #'
-#' @return Called for side effect of running `devtools::document()`,
-#' `devtools::install()`, `knitr::knit()` "README.Rmd", `pkgdown::build_site()`
-#' and, optionally, `envFunc::git_commit_env()`.
+#' @return Called for side effect of: making any data in data-raw; and then
+#' running `devtools::document()`, `knitr::knit()`,
+#' "README.Rmd", `pkgdown::clean_site()`, `pkgdown::build_site()`, and,
+#' optionally, `envFunc::git_commit_env()`.
 #' @export
 #'
 #' @examples
-make_package <- function(do_commit = FALSE
-                         , m
+make_package <- function(m = NULL
                          , ...
                          ) {
 
-  if(FALSE) {
+  if(file.exists("data-raw/make_data.R")) source("data-raw/make_data.R")
 
-    dots_list <- list(...)
+  devtools::document()
 
-    if(file.exists("data-raw/make_data.R")) source("data-raw/make_data.R")
+  if(file.exists("README.Rmd")){
 
-    devtools::document()
+    rmarkdown::render("README.Rmd")
 
-    if(FALSE) {
+  }
 
-      devtools::check() # optional. very, very detailed
+  pkgdown::clean_site()
 
-    }
+  pkgdown::build_site(...)
 
-    # devtools::install(dependencies = FALSE)
+  if(!is.null(m)) {
 
-    if(file.exists("README.Rmd")){
-
-      rmarkdown::render("README.Rmd")
-
-    }
-
-    pkgdown::clean_site()
-
-    # restart R session between these steps
-    .rs.restartR() # might not be enough - doesn't unload the packages
-
-    pkgdown::build_site()
-
-    if(do_commit) {
-
-      envFunc::git_commit_env(m)
-
-    }
+    envFunc::git_commit_env(m)
 
   }
 

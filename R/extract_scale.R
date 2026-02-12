@@ -1,4 +1,4 @@
-#' Get env scales from a yaml
+#' Extract env scales from a yaml
 #'
 #' Requires a scale named 'default' in `scales`. All other elements describe
 #' change from 'default'. `NULL` values in default are maintained. Set a
@@ -17,12 +17,12 @@
 #' settings <- list(default = c(extent, grain))
 #' change <- list(change = list(extent = list(blah = NULL), grain = list(geo = "30")))
 #' settings <- c(settings, change)
-#' get_scale(scales = settings)
-#' get_scale(element = "change", scales = settings)
+#' extract_scale(scales = settings)
+#' extract_scale(element = "change", scales = settings)
 #'
-get_scale <- function(element = "default"
-                      , scales = "settings/scales.yaml"
-                      ) {
+extract_scale <- function(element = "default"
+                          , scales = "settings/scales.yaml"
+                          ) {
 
   if(is.character(scales)) scales <- yaml::read_yaml(scales)
 

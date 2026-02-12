@@ -626,7 +626,7 @@ attribute.</p>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    envFunc<span class="sc">::</span><span class="fu">add_time_stamp</span>()</span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  <span class="fu">attr</span>(temp, <span class="st">&quot;ctime&quot;</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2026-02-12 12:11:50 ACDT&quot;</span></span></code></pre></div>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2026-02-12 12:19:31 ACDT&quot;</span></span></code></pre></div>
 <h2 id="add-a-likelihood-classification">Add a likelihood
 classification</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a></span>
@@ -636,18 +636,18 @@ classification</h2>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  </span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  x</span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 8</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt;        x likelihood             maxVal range         loose very  extreme exceptional</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;    &lt;dbl&gt; &lt;fct&gt;                   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;      </span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt;  1 0.104 Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt;  2 0.218 Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt;  3 0.347 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt;  4 0.523 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt;  5 0.281 Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt;  6 0.167 Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt;  7 0.386 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt;  8 0.838 Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt;  9 0.442 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; 10 0.846 Likely                  0.9   (0.667,0.9]   -     -     -       -</span></span></code></pre></div>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt;         x likelihood             maxVal range         loose very  extreme exceptional</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;     &lt;dbl&gt; &lt;fct&gt;                   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;      </span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt;  1 0.0398 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        </span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt;  2 0.520  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt;  3 0.0252 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        </span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt;  4 0.775  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt;  5 0.205  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt;  6 0.410  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt;  7 0.0879 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         </span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt;  8 0.984  Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        </span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt;  9 0.964  Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        </span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; 10 0.414  About as likely as not  0.667 (0.333,0.667] 0     0     0       0</span></span></code></pre></div>
 <h2 id="what-else-is-in-envfunc">What else is in
 <code>envFunc</code></h2>
 <p>The following functions and data sets are provided in
@@ -688,6 +688,11 @@ for more examples.</p>
 <td align="left">Empty a directory</td>
 </tr>
 <tr>
+<td align="left"><code>envFunc::extract_scale</code></td>
+<td align="left">function</td>
+<td align="left">Extract env scales from a yaml</td>
+</tr>
+<tr>
 <td align="left"><code>envFunc::filter_test_func</code></td>
 <td align="left">function</td>
 <td align="left">Test rows against a function</td>
@@ -719,11 +724,6 @@ vector</td>
 <td align="left">function</td>
 <td align="left">Make an object if it is not available from provided
 file</td>
-</tr>
-<tr>
-<td align="left"><code>envFunc::get_scale</code></td>
-<td align="left">function</td>
-<td align="left">Get env scales from a yaml</td>
 </tr>
 <tr>
 <td align="left"><code>envFunc::git_commit_env</code></td>

@@ -9,6 +9,8 @@
 #' @param mets_col Character. Name of `mets_df` column to use in this instance.
 #' @param summarise_method Character. Name of method to use in summarising if
 #' there is more than one row per context.
+#' @param zs_na_remove Logical. When generating zscore for a metric, remove
+#' `NA` values?
 #' @param top_thresh Numeric specifying the proportion of rows considered 'top'.
 #' @param best_thresh Numeric specifying the absolute number of rows considered
 #' 'best'.
@@ -28,6 +30,7 @@ make_metric_df <- function(df
                                          )
                            , mets_col = "summary_mets"
                            , summarise_method = median
+                           , zs_na_remove = FALSE
                            , top_thresh = 0.25
                            , best_thresh = 5
                            , scale = lifecycle::deprecated()
@@ -76,7 +79,7 @@ make_metric_df <- function(df
                         ) %>%
     dplyr::left_join(mets_df_use) %>%
     dplyr::group_by(across(any_of(names(mets_df_use)))) %>%
-    dplyr::mutate(zscore = (value - mean(value)) / sd(value)
+    dplyr::mutate(zscore = (value - mean(value, na.rm = zs_na_remove)) / sd(value, na.rm = zs_na_remove)
                   , scale = dplyr::if_else(high_good
                                            , zscore
                                            , -1 * zscore

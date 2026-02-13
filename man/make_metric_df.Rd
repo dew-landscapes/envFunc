@@ -11,6 +11,7 @@ make_metric_df(
   context = c("method", "groups"),
   mets_col = "summary_mets",
   summarise_method = median,
+  zs_na_remove = FALSE,
   top_thresh = 0.25,
   best_thresh = 5,
   scale = lifecycle::deprecated(),
@@ -29,6 +30,9 @@ make_metric_df(
 
 \item{summarise_method}{Character. Name of method to use in summarising if
 there is more than one row per context.}
+
+\item{zs_na_remove}{Logical. When generating zscore for a metric, remove
+\code{NA} values?}
 
 \item{top_thresh}{Numeric specifying the proportion of rows considered 'top'.}
 

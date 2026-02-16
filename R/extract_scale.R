@@ -28,11 +28,11 @@ extract_scale <- function(element = 1
 
   if(is.character(scales)) scales <- yaml::read_yaml(scales)
 
-  # check that element is a name within scales
-  stopifnot(element %in% names(scales))
-
   # check that scales is now a list
   stopifnot(is.list(scales))
+
+  # check that element is a name within scales
+  if(is.character(element)) stopifnot(element %in% names(scales))
 
   use_element <- if(is.character(element)) which(names(scales) == element) else element
   use_default <- if(is.character(element_default)) which(names(scales) == element_default) else element_default

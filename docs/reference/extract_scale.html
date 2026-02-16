@@ -54,7 +54,11 @@ non-default list element to <code>NULL</code> to remove it from default.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extract_scale</span><span class="op">(</span>element <span class="op">=</span> <span class="st">"default"</span>, scales <span class="op">=</span> <span class="st">"settings/scales.yaml"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extract_scale</span><span class="op">(</span></span>
+<span>  element <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  scales <span class="op">=</span> <span class="st">"settings/scales.yaml"</span>,</span>
+<span>  element_default <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -62,12 +66,16 @@ non-default list element to <code>NULL</code> to remove it from default.</p>
 
 
 <dl><dt id="arg-element">element<a class="anchor" aria-label="anchor" href="#arg-element"></a></dt>
-<dd><p>Name of element in <code>scales</code> for which to extract the
-scale.</p></dd>
+<dd><p>Name (or index) of element in <code>scales</code> for which to extract
+the scale.</p></dd>
 
 
 <dt id="arg-scales">scales<a class="anchor" aria-label="anchor" href="#arg-scales"></a></dt>
 <dd><p>Path to yaml containing the scales relevant to a project.</p></dd>
+
+
+<dt id="arg-element-default">element_default<a class="anchor" aria-label="anchor" href="#arg-element-default"></a></dt>
+<dd><p>Name (or index) of default element in <code>scales</code>.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -83,25 +91,7 @@ scale.</p></dd>
 <span class="r-in"><span><span class="va">change</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>extent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>blah <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>, grain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>geo <span class="op">=</span> <span class="st">"30"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">settings</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">settings</span>, <span class="va">change</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">extract_scale</span><span class="op">(</span>scales <span class="op">=</span> <span class="va">settings</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $extent</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $extent$geo</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "sa_br_dissolve"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $extent$temp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "P10Y"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $extent$blah</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $grain</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $grain$geo</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "90"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $grain$temp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "P1Y"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in extract_scale(scales = settings):</span> element %in% names(scales) is not TRUE</span>
 <span class="r-in"><span><span class="fu">extract_scale</span><span class="op">(</span>element <span class="op">=</span> <span class="st">"change"</span>, scales <span class="op">=</span> <span class="va">settings</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $extent</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $extent$geo</span>

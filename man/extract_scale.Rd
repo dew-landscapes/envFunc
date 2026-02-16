@@ -4,13 +4,19 @@
 \alias{extract_scale}
 \title{Extract env scales from a yaml}
 \usage{
-extract_scale(element = "default", scales = "settings/scales.yaml")
+extract_scale(
+  element = 1,
+  scales = "settings/scales.yaml",
+  element_default = 1
+)
 }
 \arguments{
-\item{element}{Name of element in \code{scales} for which to extract the
-scale.}
+\item{element}{Name (or index) of element in \code{scales} for which to extract
+the scale.}
 
 \item{scales}{Path to yaml containing the scales relevant to a project.}
+
+\item{element_default}{Name (or index) of default element in \code{scales}.}
 }
 \value{
 Named, nested list describing \code{element}

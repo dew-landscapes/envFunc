@@ -24,6 +24,9 @@ project_df <- function(df
   points <- df |>
     dplyr::distinct(dplyr::across(tidyselect::any_of(c(x,y))))
 
+  use_new_x <- as.character(new_x)
+  use_new_y <- as.character(new_y)
+
   points |>
     dplyr::bind_cols(sf::sf_project(from = crs_from
                                     , to = crs_to
@@ -31,7 +34,7 @@ project_df <- function(df
                                     , keep = TRUE
                                     ) |>
                        tibble::as_tibble(.name_repair = "unique_quiet") |>
-                       dplyr::rename(!!rlang::ensym(new_x) := 1, !!rlang::ensym(new_y) := 2)
+                       dplyr::rename(!!rlang::ensym(use_new_x) := 1, !!rlang::ensym(use_new_y) := 2)
                      ) |>
     dplyr::inner_join(df)
 

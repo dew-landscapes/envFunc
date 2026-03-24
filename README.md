@@ -28,17 +28,14 @@ Load `envFunc`
 library("envFunc")
 ```
 
-## Add time stamp
+## `use_cores`
 
-`add_time_stamp` adds the creation time of an object as an attribute.
+`use_cores` suggests the number of cores to use.
 
 ``` r
 
-  temp <- cars %>%
-    envFunc::add_time_stamp()
-
-  attr(temp, "ctime")
-#> [1] "2026-02-16 12:40:23 ACDT"
+  use_cores()
+#> [1] 128
 ```
 
 ## Add a likelihood classification
@@ -51,18 +48,18 @@ library("envFunc")
   
   x
 #> # A tibble: 10 × 8
-#>        x likelihood             maxVal range         loose very  extreme exceptional
-#>    <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.492 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  2 0.460 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  3 0.143 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  4 0.380 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  5 0.958 Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        
-#>  6 0.185 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  7 0.730 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  8 0.739 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  9 0.821 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#> 10 0.831 Likely                  0.9   (0.667,0.9]   -     -     -       -
+#>         x likelihood             maxVal range         loose very  extreme exceptional
+#>     <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
+#>  1 0.473  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  2 0.118  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  3 0.0975 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         
+#>  4 0.933  Very likely             0.95  (0.9,0.95]    -     --    --      --         
+#>  5 0.752  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  6 0.326  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  7 0.0464 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        
+#>  8 0.309  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  9 0.524  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#> 10 0.887  Likely                  0.9   (0.667,0.9]   -     -     -       -
 ```
 
 ## What else is in `envFunc`
@@ -106,4 +103,5 @@ The following functions and data sets are provided in `envFunc`. See
 | `envFunc::sp_transform_df` | function | Transform the coordinates in a dataframe |
 | `envFunc::taxa_label` | function | Create a label for a species |
 | `envFunc::timer` | function | A (rough) timer |
+| `envFunc::use_cores` | function | Returns a suggested number of cores |
 | `envFunc::vec_to_sentence` | function | Vector to phrase |

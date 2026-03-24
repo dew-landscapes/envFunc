@@ -41,16 +41,13 @@ Load `envFunc`
 library("envFunc")
 ```
 
-## Add time stamp
+## `use_cores`
 
-`add_time_stamp` adds the creation time of an object as an attribute.
+`use_cores` suggests the number of cores to use.
 
 ```{r}
 
-  temp <- cars %>%
-    envFunc::add_time_stamp()
-
-  attr(temp, "ctime")
+  use_cores()
 
 ```
 

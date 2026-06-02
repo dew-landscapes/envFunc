@@ -50,16 +50,16 @@ library("envFunc")
 #> # A tibble: 10 × 8
 #>        x likelihood             maxVal range         loose very  extreme exceptional
 #>    <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.382 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  2 0.165 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  3 0.894 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  4 0.260 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  5 0.628 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  6 0.105 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  7 0.977 Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        
-#>  8 0.439 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  9 0.985 Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        
-#> 10 0.814 Likely                  0.9   (0.667,0.9]   -     -     -       -
+#>  1 0.299 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  2 0.897 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  3 0.696 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  4 0.518 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  5 0.710 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  6 0.408 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  7 0.870 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  8 0.775 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  9 0.727 Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#> 10 0.486 About as likely as not  0.667 (0.333,0.667] 0     0     0       0
 ```
 
 ## What else is in `envFunc`

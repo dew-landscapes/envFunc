@@ -48,18 +48,18 @@ library("envFunc")
   
   x
 #> # A tibble: 10 × 8
-#>        x likelihood             maxVal range         loose very  extreme exceptional
-#>    <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.889 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  2 0.394 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  3 0.158 Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  4 0.995 Virtually certain       1     (0.99,1]      -     --    ---     ----       
-#>  5 0.865 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  6 0.465 About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  7 0.982 Extremely likely        0.99  (0.95,0.99]   -     --    ---     ---        
-#>  8 0.906 Very likely             0.95  (0.9,0.95]    -     --    --      --         
-#>  9 0.874 Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#> 10 0.540 About as likely as not  0.667 (0.333,0.667] 0     0     0       0
+#>         x likelihood             maxVal range         loose very  extreme exceptional
+#>     <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
+#>  1 0.0118 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        
+#>  2 0.134  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  3 0.546  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  4 0.857  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  5 0.997  Virtually certain       1     (0.99,1]      -     --    ---     ----       
+#>  6 0.759  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  7 0.203  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  8 0.697  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  9 0.595  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#> 10 0.850  Likely                  0.9   (0.667,0.9]   -     -     -       -
 ```
 
 ## What else is in `envFunc`

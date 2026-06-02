@@ -26,6 +26,8 @@
 #' @returns Dataframe with BDBSA original names, common names, NSX codes, indigenous status ('ind' field) and
 #' standardised taxa names from ALA (if `standardise_taxonomy` or `taxonomy` is used).
 #'
+#' @export
+#'
 get_bdbsa_taxa <- function(source = "web"
                            , url = c("https://data.environment.sa.gov.au/Content/Publications/fauna-bdbsa-taxonomy.xlsx"
                                      , "https://data.environment.sa.gov.au/Content/Publications/vascular-plants-bdbsa-taxonomy.xlsx"

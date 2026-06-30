@@ -58,8 +58,8 @@ with \code{filt_ranks} = "species" would only return species level taxa.}
 \item{current}{Logical. Return only current BDBSA taxonomy? Applicable to \code{source} = "oracle" only.}
 }
 \value{
-Dataframe with BDBSA original names, common names, NSX codes, indigenous status ('ind' field) and
-standardised taxa names from ALA (if \code{standardise_taxonomy} or \code{taxonomy} is used).
+Dataframe with BDBSA original names, common names, NSX codes, indigenous status ('ind' field), and
+standardised taxa names and returned ranks from ALA (if \code{standardise_taxonomy} or \code{taxonomy} is used).
 }
 \description{
 Get taxa list from the Biological Database of South Australia (BDBSA)

@@ -50,16 +50,16 @@ library("envFunc")
 #> # A tibble: 10 × 8
 #>         x likelihood             maxVal range         loose very  extreme exceptional
 #>     <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.0118 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        
-#>  2 0.134  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  3 0.546  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  4 0.857  Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  5 0.997  Virtually certain       1     (0.99,1]      -     --    ---     ----       
-#>  6 0.759  Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  7 0.203  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  8 0.697  Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  9 0.595  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#> 10 0.850  Likely                  0.9   (0.667,0.9]   -     -     -       -
+#>  1 0.0232 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        
+#>  2 0.315  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  3 0.149  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  4 0.782  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  5 0.267  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  6 0.0769 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         
+#>  7 0.660  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  8 0.0918 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         
+#>  9 0.546  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#> 10 0.603  About as likely as not  0.667 (0.333,0.667] 0     0     0       0
 ```
 
 ## What else is in `envFunc`
@@ -102,6 +102,7 @@ The following functions and data sets are provided in `envFunc`. See
 | `envFunc::quibble` | function | Make a wide, single row, data frame of quantiles (percentiles) |
 | `envFunc::run` | function | Run the scrips in a project |
 | `envFunc::sp_transform_df` | function | Transform the coordinates in a dataframe |
+| `envFunc::summarise_long_df` | function | Summarise a long data frame with consistent set of summary functions |
 | `envFunc::taxa_label` | function | Create a label for a species |
 | `envFunc::timer` | function | A (rough) timer |
 | `envFunc::use_cores` | function | Returns a suggested number of cores |

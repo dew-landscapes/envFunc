@@ -23,8 +23,8 @@
 #' (e.g. as opposed to species name in ALA which can be different)?
 #' @param current Logical. Return only current BDBSA taxonomy? Applicable to `source` = "oracle" only.
 #'
-#' @returns Dataframe with BDBSA original names, common names, NSX codes, indigenous status ('ind' field) and
-#' standardised taxa names from ALA (if `standardise_taxonomy` or `taxonomy` is used).
+#' @returns Dataframe with BDBSA original names, common names, NSX codes, indigenous status ('ind' field), and
+#' standardised taxa names and returned ranks from ALA (if `standardise_taxonomy` or `taxonomy` is used).
 #'
 #' @export
 #'
@@ -167,13 +167,13 @@ get_bdbsa_taxa <- function(source = "web"
                    dplyr::filter(!is.na(taxa)) |>
                    dplyr::left_join(taxonomy[[x]]$taxonomy) %>%
                    {if(!is.null(filt_ranks)) dplyr::filter(., returned_rank %in% filt_ranks) else .} %>%
-                   {if(return_scientific) dplyr::distinct(., taxa, original_name, common) |>
+                   {if(return_scientific) dplyr::distinct(., taxa, original_name, common, returned_rank) |>
                        dplyr::left_join(taxonomy$raw |>
                                           dplyr::filter(rank_adj == x) |>
                                           dplyr::select(original_name, x, scientific_name)
                                         , by = "original_name") %>%
-                       dplyr::distinct(taxa, scientific_name, original_name, common) |>
-                       dplyr::filter(!is.na(scientific_name)) else dplyr::distinct(., taxa, original_name, common)}
+                       dplyr::distinct(taxa, scientific_name, original_name, common, returned_rank) |>
+                       dplyr::filter(!is.na(scientific_name)) else dplyr::distinct(., taxa, original_name, common, returned_rank)}
       ) |>
       dplyr::bind_rows() |>
       dplyr::distinct()

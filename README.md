@@ -50,16 +50,16 @@ library("envFunc")
 #> # A tibble: 10 × 8
 #>         x likelihood             maxVal range         loose very  extreme exceptional
 #>     <dbl> <fct>                   <dbl> <fct>         <fct> <fct> <fct>   <fct>      
-#>  1 0.0232 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        
-#>  2 0.315  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  3 0.149  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  4 0.782  Likely                  0.9   (0.667,0.9]   -     -     -       -          
-#>  5 0.267  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
-#>  6 0.0769 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         
-#>  7 0.660  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#>  8 0.0918 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         
-#>  9 0.546  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
-#> 10 0.603  About as likely as not  0.667 (0.333,0.667] 0     0     0       0
+#>  1 0.943  Very likely             0.95  (0.9,0.95]    -     --    --      --         
+#>  2 0.0236 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        
+#>  3 0.886  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  4 0.712  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  5 0.821  Likely                  0.9   (0.667,0.9]   -     -     -       -          
+#>  6 0.613  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#>  7 0.184  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  8 0.198  Unlikely                0.333 (0.1,0.333]   +     +     +       +          
+#>  9 0.521  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          
+#> 10 0.108  Unlikely                0.333 (0.1,0.333]   +     +     +       +
 ```
 
 ## What else is in `envFunc`
@@ -74,7 +74,9 @@ The following functions and data sets are provided in `envFunc`. See
 | `envFunc::add_time_stamp` | function | Add time stamp |
 | `envFunc::check_packages` | function | Check packages |
 | `envFunc::clean_dir` | function | Empty a directory |
+| `envFunc::extract_min_date` | function | Extract a minimum date to use in the project, based on the settings |
 | `envFunc::extract_scale` | function | Extract env scales from a yaml |
+| `envFunc::extract_temporal_grain` | function | Get the temporal grain from settings |
 | `envFunc::filter_test_func` | function | Test rows against a function |
 | `envFunc::find_name` | function | Return a named object from within another object |
 | `envFunc::first_up` | function | Change the first letter of a string to capital |
@@ -83,6 +85,7 @@ The following functions and data sets are provided in `envFunc`. See
 | `envFunc::get_mode` | function | Return the most frequently occurring element of a vector |
 | `envFunc::get_or_make` | function | Make an object if it is not available from provided file |
 | `envFunc::git_commit_env` | function | Add, commit and push all current changes to github |
+| `envFunc::grain_to_bin` | function | Extract bin information from the grain element of a scales yaml |
 | `envFunc::last_ctime` | function | Object with the latest code{ctime} attribute |
 | `envFunc::lulikelihood` | tbl_df, tbl and data.frame | Dataframe of likelihood thresholds and definitions |
 | `envFunc::lulsa` | tbl_df, tbl and data.frame | Lookup for Landscapes South Australia regions |

@@ -104,16 +104,16 @@
 <span><span class="co">#&gt; # A tibble: 10 × 8</span></span>
 <span><span class="co">#&gt;         x likelihood             maxVal range         loose very  extreme exceptional</span></span>
 <span><span class="co">#&gt;     &lt;dbl&gt; &lt;fct&gt;                   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;      </span></span>
-<span><span class="co">#&gt;  1 0.0232 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        </span></span>
-<span><span class="co">#&gt;  2 0.315  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span><span class="co">#&gt;  3 0.149  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span><span class="co">#&gt;  4 0.782  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
-<span><span class="co">#&gt;  5 0.267  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
-<span><span class="co">#&gt;  6 0.0769 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         </span></span>
-<span><span class="co">#&gt;  7 0.660  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
-<span><span class="co">#&gt;  8 0.0918 Very unlikely           0.1   (0.05,0.1]    +     ++    ++      ++         </span></span>
-<span><span class="co">#&gt;  9 0.546  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
-<span><span class="co">#&gt; 10 0.603  About as likely as not  0.667 (0.333,0.667] 0     0     0       0</span></span></code></pre></div>
+<span><span class="co">#&gt;  1 0.943  Very likely             0.95  (0.9,0.95]    -     --    --      --         </span></span>
+<span><span class="co">#&gt;  2 0.0236 Extremely unlikely      0.05  (0.01,0.05]   +     ++    +++     +++        </span></span>
+<span><span class="co">#&gt;  3 0.886  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
+<span><span class="co">#&gt;  4 0.712  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
+<span><span class="co">#&gt;  5 0.821  Likely                  0.9   (0.667,0.9]   -     -     -       -          </span></span>
+<span><span class="co">#&gt;  6 0.613  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span><span class="co">#&gt;  7 0.184  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
+<span><span class="co">#&gt;  8 0.198  Unlikely                0.333 (0.1,0.333]   +     +     +       +          </span></span>
+<span><span class="co">#&gt;  9 0.521  About as likely as not  0.667 (0.333,0.667] 0     0     0       0          </span></span>
+<span><span class="co">#&gt; 10 0.108  Unlikely                0.333 (0.1,0.333]   +     +     +       +</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="what-else-is-in-envfunc">What else is in <code>envFunc</code>
@@ -158,9 +158,19 @@
 <td align="left">Empty a directory</td>
 </tr>
 <tr>
+<td align="left"><code><a href="reference/extract_min_date.html">envFunc::extract_min_date</a></code></td>
+<td align="left">function</td>
+<td align="left">Extract a minimum date to use in the project, based on the settings</td>
+</tr>
+<tr>
 <td align="left"><code><a href="reference/extract_scale.html">envFunc::extract_scale</a></code></td>
 <td align="left">function</td>
 <td align="left">Extract env scales from a yaml</td>
+</tr>
+<tr>
+<td align="left"><code><a href="reference/extract_temporal_grain.html">envFunc::extract_temporal_grain</a></code></td>
+<td align="left">function</td>
+<td align="left">Get the temporal grain from settings</td>
 </tr>
 <tr>
 <td align="left"><code><a href="reference/filter_test_func.html">envFunc::filter_test_func</a></code></td>
@@ -201,6 +211,11 @@
 <td align="left"><code><a href="reference/git_commit_env.html">envFunc::git_commit_env</a></code></td>
 <td align="left">function</td>
 <td align="left">Add, commit and push all current changes to github</td>
+</tr>
+<tr>
+<td align="left"><code><a href="reference/grain_to_bin.html">envFunc::grain_to_bin</a></code></td>
+<td align="left">function</td>
+<td align="left">Extract bin information from the grain element of a scales yaml</td>
 </tr>
 <tr>
 <td align="left"><code><a href="reference/last_ctime.html">envFunc::last_ctime</a></code></td>

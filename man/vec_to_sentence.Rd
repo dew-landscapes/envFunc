@@ -4,7 +4,14 @@
 \alias{vec_to_sentence}
 \title{Vector to phrase}
 \usage{
-vec_to_sentence(x, sep = ",", end = "and", na_rm = TRUE)
+vec_to_sentence(
+  x,
+  sep = ",",
+  end = "and",
+  add_spaces = TRUE,
+  final_sep = FALSE,
+  na_rm = TRUE
+)
 }
 \arguments{
 \item{x}{Character. Vector to collapse to phrase}
@@ -12,6 +19,10 @@ vec_to_sentence(x, sep = ",", end = "and", na_rm = TRUE)
 \item{sep}{Character. Separator between all except last}
 
 \item{end}{Character. Last separator}
+
+\item{add_spaces}{Logical. Add a space after \code{sep} and \code{end} values (default TRUE for continuity from previous version)}
+
+\item{final_sep}{Logical. Add \code{sep} to start of \code{end}, for example to control use of Oxford commas (default FALSE for continuity from previous version)}
 
 \item{na_rm}{Logical. Remove \code{NA}?}
 }
@@ -23,7 +34,7 @@ Turn a vector into a phrase with a final 'and' (or other separator). If \code{se
 is ";" the final is \code{sep} plus \code{end}.
 }
 \examples{
-x <- c("apples", "bannanas", "pears", NA, "grapes")
+x <- c("apples", "bananas", "pears", NA, "grapes")
 vec_to_sentence(x)
 vec_to_sentence(x, end = "&")
 vec_to_sentence(x, ";")

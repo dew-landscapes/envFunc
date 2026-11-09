@@ -52,7 +52,14 @@ is ";" the final is <code>sep</code> plus <code>end</code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">vec_to_sentence</span><span class="op">(</span><span class="va">x</span>, sep <span class="op">=</span> <span class="st">","</span>, end <span class="op">=</span> <span class="st">"and"</span>, na_rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">vec_to_sentence</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">","</span>,</span>
+<span>  end <span class="op">=</span> <span class="st">"and"</span>,</span>
+<span>  add_spaces <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  final_sep <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na_rm <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -71,6 +78,14 @@ is ";" the final is <code>sep</code> plus <code>end</code>.</p>
 <dd><p>Character. Last separator</p></dd>
 
 
+<dt id="arg-add-spaces">add_spaces<a class="anchor" aria-label="anchor" href="#arg-add-spaces"></a></dt>
+<dd><p>Logical. Add a space after <code>sep</code> and <code>end</code> values (default TRUE for continuity from previous version)</p></dd>
+
+
+<dt id="arg-final-sep">final_sep<a class="anchor" aria-label="anchor" href="#arg-final-sep"></a></dt>
+<dd><p>Logical. Add <code>sep</code> to start of <code>end</code>, for example to control use of Oxford commas (default FALSE for continuity from previous version)</p></dd>
+
+
 <dt id="arg-na-rm">na_rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
 <dd><p>Logical. Remove <code>NA</code>?</p></dd>
 
@@ -82,15 +97,15 @@ is ";" the final is <code>sep</code> plus <code>end</code>.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"apples"</span>, <span class="st">"bannanas"</span>, <span class="st">"pears"</span>, <span class="cn">NA</span>, <span class="st">"grapes"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"apples"</span>, <span class="st">"bananas"</span>, <span class="st">"pears"</span>, <span class="cn">NA</span>, <span class="st">"grapes"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">vec_to_sentence</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "apples, bannanas, pears and grapes"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "apples, bananas, pears and grapes"</span>
 <span class="r-in"><span><span class="fu">vec_to_sentence</span><span class="op">(</span><span class="va">x</span>, end <span class="op">=</span> <span class="st">"&amp;"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "apples, bannanas, pears &amp; grapes"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "apples, bananas, pears &amp; grapes"</span>
 <span class="r-in"><span><span class="fu">vec_to_sentence</span><span class="op">(</span><span class="va">x</span>, <span class="st">";"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "apples; bannanas; pears; and grapes"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "apples; bananas; pears; and grapes"</span>
 <span class="r-in"><span><span class="fu">vec_to_sentence</span><span class="op">(</span><span class="va">x</span>, na_rm <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "apples, bannanas, pears, NA and grapes"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "apples, bananas, pears, NA and grapes"</span>
 </code></pre></div>
     </div>
   </div>

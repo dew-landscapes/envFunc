@@ -45,13 +45,15 @@
 #' @param x Character. Vector to collapse to phrase
 #' @param sep Character. Separator between all except last
 #' @param end Character. Last separator
+#' @param add_spaces Logical. Add a space after `sep` and `end` values (default TRUE for continuity from previous version)
+#' @param final_sep Logical. Add `sep` to start of `end`, for example to control use of Oxford commas (default FALSE for continuity from previous version)
 #' @param na_rm Logical. Remove `NA`?
 #'
 #' @return Character.
 #' @export
 #'
 #' @examples
-#' x <- c("apples", "bannanas", "pears", NA, "grapes")
+#' x <- c("apples", "bananas", "pears", NA, "grapes")
 #' vec_to_sentence(x)
 #' vec_to_sentence(x, end = "&")
 #' vec_to_sentence(x, ";")
@@ -59,18 +61,22 @@
   vec_to_sentence <- function(x
                               , sep = ","
                               , end = "and"
+                              , add_spaces = TRUE
+                              , final_sep = FALSE
                               , na_rm = TRUE
                               ) {
 
-    sep <- paste0(sep, " ")
-    end <- paste0(end, " ")
+    if(add_spaces) {
+      sep <- paste0(sep, " ")
+      end <- paste0(end, " ")
+    }
 
     if(na_rm) x <- x[!is.na(x)]
 
     x %>%
       paste(collapse = "join_goes_here") %>%
       stringi::stri_replace_last_regex("join_goes_here"
-                                       , if(sep == "; ") {
+                                       , if(sep == "; " || final_sep) {
 
                                          paste0(sep
                                                 , end
@@ -78,7 +84,7 @@
 
                                        } else {
 
-                                         paste0(" "
+                                         paste0(if(add_spaces) " "
                                                 , end
                                                 )
 
